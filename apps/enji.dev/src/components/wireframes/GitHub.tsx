@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { GitHubIcon } from '../Icons';
+import { GitHubIcon, LicenseIcon, StarIcon, ForkIcon } from '../Icons';
 
 import { SkeletonSm } from '@/components/wireframes/Skeletons';
 
@@ -57,7 +57,7 @@ function GitHubWireframe({
       </div>
       <div className={clsx('mt-6 flex flex-col gap-3')}>
         <div className={clsx('flex items-center gap-2')}>
-          <SkeletonSm />
+          <LicenseIcon className={clsx('h-5 w-5')} />
           {license ? (
             <div className={clsx('')}>
               <p>{license} license</p>
@@ -85,8 +85,8 @@ function GitHubWireframe({
           )}
         >
           <div className={clsx('flex items-center gap-1')}>
-            <SkeletonSm />
-            <SkeletonSm w={48} />
+            <ForkIcon className={clsx('h-5 w-5')} />
+            <div>Fork</div>
           </div>
         </div>
         <div
@@ -96,8 +96,8 @@ function GitHubWireframe({
           )}
         >
           <div className={clsx('flex items-center gap-1')}>
-            <SkeletonSm />
-            <SkeletonSm w={64} />
+            <StarIcon className={clsx('h-5 w-5')} />
+            <div>Star</div>
           </div>
         </div>
       </div>
