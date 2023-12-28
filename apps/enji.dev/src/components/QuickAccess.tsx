@@ -71,12 +71,12 @@ function QuickAccess() {
             <div className={clsx('')}>
               <ActionCenter />
             </div>
-            <div className={clsx('')}>
+            {/* <div className={clsx('')}>
               <NewPosts onItemClick={() => setQuickAccessOpen(false)} />
             </div>
             <div className={clsx('flex flex-1 flex-col')}>
               <Activity onItemClick={() => setQuickAccessOpen(false)} />
-            </div>
+            </div> */}
             <div
               className={clsx(
                 'fixed left-8 bottom-10 hidden w-[320px]',

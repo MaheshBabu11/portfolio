@@ -24,8 +24,8 @@ function FeaturedCardSection() {
               <SparklesIcon className={clsx('h-5 w-5 text-white')} />
             </div>
           }
-          title="Clean & Intuitive"
-          desc="Keep the UI clean with a modern touch without compromising UX."
+          title="Scalable System Design"
+          desc="Create scalable systems to ensure robustness for growing demands."
         />
         <FeaturedCard
           icon={
@@ -39,7 +39,7 @@ function FeaturedCardSection() {
             </div>
           }
           title="Detail Oriented"
-          desc="Awareness to ease of access, UI consistency, and improved UX."
+          desc="Precise and meticulous, ensuring attention to every aspect for refined outcomes."
         />
         <FeaturedCard
           icon={
@@ -80,7 +80,7 @@ function IndexContents() {
       <div className={clsx('-mt-12 mb-12', 'md:mt-0 md:mb-24')}>
         <QuoteSection />
       </div>
-      <section className={clsx('mb-12', 'lg:mb-24')}>
+      {/* <section className={clsx('mb-12', 'lg:mb-24')}>
         <CleanIntuitive />
       </section>
       <section className={clsx('mb-12', 'lg:mb-24')}>
@@ -88,7 +88,7 @@ function IndexContents() {
       </section>
       <section className={clsx('mb-12', 'lg:mb-24')}>
         <PrettyOptimized />
-      </section>
+      </section> */}
     </>
   );
 }

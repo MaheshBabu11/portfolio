@@ -1,5 +1,4 @@
 import clsx from 'clsx';
-import { GitHubIcon } from '../Icons';
 
 import { SkeletonSm } from '@/components/wireframes/Skeletons';
 
@@ -25,7 +24,7 @@ function GitHubWireframe({
     >
       <div className={clsx('flex items-center gap-1')}>
         <div className={clsx('mr-1')}>
-          <GitHubIcon className={clsx('h-5 w-5')} />
+          <SkeletonSm />
         </div>
         {author ? (
           <div className={clsx('-mt-0.5 text-blue-700', 'dark:text-blue-500')}>

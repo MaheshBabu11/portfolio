@@ -53,7 +53,7 @@ function HeaderImage() {
             animate={controlsHeaderImage}
           >
             <Image
-              alt="Enji Kusnadi Illustration"
+              alt="Me in an alternate reality :smile:"
               src="/assets/images/me.png"
               width={457}
               height={526}

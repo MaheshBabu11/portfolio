@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import { useState } from 'react';
 
-import { GitHubIcon, NpmIcon } from '@/components/Icons';
+import { GitHubIcon, NpmIcon, MavenIcon } from '@/components/Icons';
 import { SectionButton } from '@/components/sections/SectionButton';
 import SectionContent from '@/components/sections/SectionContent';
 import SectionTitle from '@/components/sections/SectionTitle';
@@ -10,17 +10,19 @@ import GitHubWireframe from '@/components/wireframes/GitHub';
 import NpmWireframe from '@/components/wireframes/Npm';
 
 function ProjectsContents() {
-  const [currentState, setCurrentState] = useState<'npm' | 'github'>('github');
+  const [currentState, setCurrentState] = useState<'npm' | 'github' | 'maven'>(
+    'github'
+  );
 
   return (
     <>
       <SectionTitle
-        title="The dynamic accent colors."
-        caption="tailwindcss-accent"
-        description="Add accent colors for dynamic, flexible color use in your Tailwind CSS project."
+        title="Ntfy-Java"
+        caption="Java"
+        description="This is a java client that is used for publishing notifications using NTFY."
         button={{
           title: 'learn more',
-          href: '/docs/tailwindcss-accent',
+          href: 'https://github.com/MaheshBabu11/ntfy-java',
         }}
       />
       <SectionContent>
@@ -35,11 +37,11 @@ function ProjectsContents() {
                 onClick={() => setCurrentState('github')}
               />
               <SectionButton
-                title="npm package"
-                icon={<NpmIcon className={clsx('my-2 h-16 w-16')} />}
+                title="maven package"
+                icon={<MavenIcon className={clsx('my-2 h-16 w-16')} />}
                 description="Install and use the package with ease thanks to its typed options."
-                active={currentState === 'npm'}
-                onClick={() => setCurrentState('npm')}
+                active={currentState === 'maven'}
+                onClick={() => setCurrentState('maven')}
               />
             </div>
           </div>
@@ -51,25 +53,25 @@ function ProjectsContents() {
                   browserTabs={[
                     {
                       icon: <GitHubIcon className="h-4 w-4" />,
-                      title: 'enjidev/tailwindcss-accent - GitHub',
+                      title: 'MaheshBabu11/ntfy-java - GitHub',
                       isActive: currentState === 'github',
                     },
                     {
-                      icon: <NpmIcon className="h-4 w-4" />,
-                      title: 'tailwindcss-accent - npm',
-                      isActive: currentState === 'npm',
+                      icon: <MavenIcon className="h-4 w-4" />,
+                      title: 'github package - Maven',
+                      isActive: currentState === 'maven',
                     },
                   ]}
                 >
                   {currentState === 'github' && (
                     <GitHubWireframe
-                      author="enjidev"
-                      license="MIT"
-                      repository="tailwindcss-accent"
-                      description="Adds accent colors for more dynamic and flexible color utilization."
+                      author="MaheshBabu11"
+                      license="Apache-2.0 license"
+                      repository="ntfy-java"
+                      description="This is a java client that is used for publishing notifications using NTFY."
                     />
                   )}
-                  {currentState === 'npm' && (
+                  {currentState === 'maven' && (
                     <NpmWireframe
                       packageName="tailwindcss-accent"
                       description="Adds accent colors for more dynamic and flexible color utilization."
