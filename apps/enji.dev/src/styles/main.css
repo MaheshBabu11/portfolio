@@ -8,3 +8,8 @@
 @import './mdx-components.css';
 
 @import 'tailwindcss/utilities';
+
+.margin-size {
+  margin-left: 7rem;
+  margin-right: 7Accrem;
+}

@@ -1,19 +1,40 @@
-function Accordion({ title, children, isOpen, onClick, index, icon }) {
+import { FaChevronDown } from 'react-icons/fa';
+import ProgressBar from './ProgressBar';
+
+function Accordion({
+  title,
+  children,
+  isOpen,
+  onClick,
+  index,
+  icons,
+  progress,
+}) {
   return (
     <div
       className={` ${
-        isOpen ? 'mx-0' : 'mx-10 border'
-      } mt-2 rounded-xl p-2 px-5 ${
+        isOpen
+          ? 'mx-0'
+          : 'margin-size mx-20 border border-gray-300 dark:border-gray-700'
+      } mt-6 rounded-xl p-4 px-5 ${
         isOpen ? 'transition-all duration-500 ease-in-out' : ''
       }`}
     >
       <div className="cursor-pointer" onClick={onClick}>
-        <h2 className="flex items-center">
-          <span>
-            {index}. {title}
-            <span className="ml-2">{icon} </span>
-          </span>
-        </h2>
+        {!isOpen && (
+          <h2 className="flex items-center ">
+            <span className="text-xl font-bold">
+              {index}. {title}
+            </span>
+            {icons.map((Icon, i) => (
+              <span key={i} className={`ml-${i === 0 ? '10' : '2'}`}>
+                {Icon}
+              </span>
+            ))}
+            <ProgressBar progress={progress} className="ml-auto" />
+            <span className="ml-10">{isOpen ? '' : <FaChevronDown />}</span>
+          </h2>
+        )}
       </div>
       <div
         className={`overflow-hidden ${

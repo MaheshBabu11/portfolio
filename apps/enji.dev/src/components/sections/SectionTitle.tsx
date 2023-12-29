@@ -5,15 +5,17 @@ import { ChevronRightIcon } from '@/components/Icons';
 
 import type { ReactNode } from 'react';
 
+interface Button {
+  title: string;
+  href: string;
+}
+
 interface SectionTitleProps {
   as?: 'h2' | 'h3';
   title: string;
   caption: string;
   description: string | ReactNode;
-  button?: {
-    title: string;
-    href: string;
-  } | null;
+  buttons?: Button[];
 }
 
 function SectionTitle({
@@ -21,7 +23,7 @@ function SectionTitle({
   title,
   caption,
   description,
-  button = null,
+  buttons,
 }: SectionTitleProps) {
   const Heading = as;
 
@@ -48,14 +50,17 @@ function SectionTitle({
       <p className={clsx('max-w-lg text-slate-600', 'dark:text-slate-400')}>
         {description}
       </p>
-      {button && (
-        <div className={clsx('mt-4', 'md:mt-6')}>
-          <Link href={button.href} className={clsx('button button--soft')}>
-            {button.title}
-            <ChevronRightIcon className="mt-0.5 h-3 w-3" />
-          </Link>
-        </div>
-      )}
+      <div className="flex space-x-4">
+        {buttons &&
+          buttons.map((button, index) => (
+            <div key={index} className={clsx('mt-4', 'md:mt-6')}>
+              <Link href={button.href} className={clsx('button button--soft')}>
+                {button.title}
+                <ChevronRightIcon className="mt-0.5 h-3 w-3" />
+              </Link>
+            </div>
+          ))}
+      </div>
     </div>
   );
 }
