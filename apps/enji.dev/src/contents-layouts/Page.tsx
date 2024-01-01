@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 
-import Head from '@/components/meta/Head';
+import Head from '@/meta/Head';
 import SkipNavigation from '@/components/navigations/SkipNavigation';
 import PageHeader from '@/components/PageHeader';
 

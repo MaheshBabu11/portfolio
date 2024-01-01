@@ -1,5 +1,5 @@
 import WithTableOfContents from '@/components/layouts/WithTableOfContents';
-import Head from '@/components/meta/Head';
+import Head from '@/meta/Head';
 import SkipNavigation from '@/components/navigations/SkipNavigation';
 import PageHeader from '@/components/PageHeader';
 

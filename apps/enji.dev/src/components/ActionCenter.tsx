@@ -2,9 +2,7 @@ import clsx from 'clsx';
 import { m } from 'framer-motion';
 import { useTheme } from 'next-themes';
 
-import { DarkIcon, EyeIcon, EyeSlash, LightIcon } from '@/components/Icons';
-
-import useFocusMode from '@/hooks/useFocusMode';
+import { DarkIcon, LightIcon } from '@/components/Icons';
 
 import type { PropsWithChildren, ReactElement } from 'react';
 
@@ -58,7 +56,6 @@ function ActionCenterButton({
 
 function ActionCenter() {
   const { theme, setTheme } = useTheme();
-  const { focusMode, setFocusMode } = useFocusMode();
 
   const handleThemeChange = () => {
     setTheme(theme === 'dark' ? 'light' : 'dark');
@@ -88,7 +85,7 @@ function ActionCenter() {
                     : { rotate: [90.01, 0] }
                 }
                 transition={{ ease: 'easeOut', duration: 0.8 }}
-                className={clsx('absolute top-4 left-4 h-36 w-36 rounded-full')}
+                className={clsx('absolute left-4 top-4 h-36 w-36 rounded-full')}
               >
                 <m.div
                   animate={
@@ -121,23 +118,6 @@ function ActionCenter() {
                   )}
                 </m.div>
               </m.div>
-            }
-          />
-          <ActionCenterButton
-            title={focusMode ? 'Focus: On' : 'Focus: Off'}
-            onClick={() => {
-              setFocusMode(!focusMode);
-            }}
-            active={focusMode}
-            icon={
-              <>
-                <div className={clsx('hidden', 'fm:block')}>
-                  <EyeIcon className={clsx('h-5 w-5')} />
-                </div>
-                <div className={clsx('fm:hidden')}>
-                  <EyeSlash className={clsx('h-5 w-5')} />
-                </div>
-              </>
             }
           />
         </m.div>

@@ -1,105 +1,13 @@
 import clsx from 'clsx';
-import Link from 'next/link';
 
 import {
   ExternalLink,
-  FigmaIcon,
   GitHubIcon,
   LinkedInIcon,
   TwitterIcon,
 } from '@/components/Icons';
 
 import dayjs from '@/utils/dayjs';
-
-function LastUpdate() {
-  return (
-    <a
-      href="https://github.com/enjidev/enji.dev"
-      target="_blank"
-      rel="noreferrer nofollow"
-      className={clsx('hover:underline')}
-    >
-      <span>see the recent update on GitHub</span>
-    </a>
-  );
-}
-
-interface FooterLinkProps {
-  title: string;
-  href: string;
-  label?: 'new' | 'soon';
-  isInternal?: boolean;
-}
-
-function FooterLink({
-  title,
-  href,
-  label = undefined,
-  isInternal = true,
-}: FooterLinkProps) {
-  if (label === 'soon') {
-    return (
-      <span className={clsx('footer-link footer-link--soon')}>
-        {title}
-        <span className={clsx('footer-link__label')}>{label}</span>
-      </span>
-    );
-  }
-
-  if (isInternal) {
-    return (
-      <Link href={href} className={clsx('footer-link')}>
-        {title}
-        {label && <span className={clsx('footer-link__label')}>{label}</span>}
-      </Link>
-    );
-  }
-
-  return (
-    <a
-      href={href}
-      target="_blank"
-      rel="noreferrer nofollow"
-      className={clsx('footer-link')}
-    >
-      {title}
-      <ExternalLink className={clsx('h-3.5 w-3.5')} />
-      {label && <span className={clsx('footer-link__label')}>{label}</span>}
-    </a>
-  );
-}
-
-interface FooterGroupProps {
-  title: string;
-  links: Array<FooterLinkProps>;
-}
-
-function FooterGroup({ title, links }: FooterGroupProps) {
-  return (
-    <div className={clsx('flex-1')}>
-      <div
-        className={clsx(
-          'mb-2 px-2 text-[13px] text-slate-600',
-          'dark:text-slate-400'
-        )}
-      >
-        {title}
-      </div>
-      <ul className={clsx('flex flex-col')}>
-        {links.map(({ title: linkTitle, href, label, isInternal }) => (
-          <li key={href}>
-            <FooterLink
-              title={linkTitle}
-              href={href}
-              label={label}
-              isInternal={isInternal}
-            />
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
-}
 
 function FooterDescription() {
   return (
@@ -176,10 +84,12 @@ function Footer() {
             <div className={clsx('flex flex-1')}>
               <img
                 className="h-30 w-60"
+                alt="Github Stats"
                 src="http://github-profile-summary-cards.vercel.app/api/cards/stats?username=maheshbabu11&theme=transparent"
               />
               <img
                 className="h-50 w-80"
+                alt="Github Profile Summary"
                 src="http://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=maheshbabu11&theme=transparent"
               />
             </div>

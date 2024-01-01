@@ -1,6 +1,6 @@
 import { ImageResponse } from '@vercel/og';
 
-import { PageOgImage } from '@/components/meta/OgImages';
+import { PageOgImage } from '@/meta/OgImages';
 
 import type { NextRequest } from 'next/server';
 

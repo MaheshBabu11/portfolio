@@ -1,5 +1,5 @@
 {
-  "name": "enji.dev",
+  "name": "maheshbabu11",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -11,8 +11,7 @@
     "lint:types": "tsc --noEmit",
     "lint:style": "prettier --check .",
     "analyze": "cross-env ANALYZE=true yarn build",
-    "postbuild": "next-sitemap",
-    "db:generate": "prisma generate"
+    "postbuild": "next-sitemap"
   },
   "dependencies": {
     "@headlessui/react": "^1.7.7",
@@ -40,10 +39,10 @@
     "rehype-plugins": "workspace:*",
     "remark-plugins": "workspace:*",
     "slug": "^8.2.2",
-    "swr": "^2.0.0",
     "tailwindcss-accent": "^2.1.2",
     "use-local-storage-state": "^18.1.2",
-    "zod": "^3.20.2"
+    "zod": "^3.20.2",
+    "react-icons": "^4.12.0"
   },
   "devDependencies": {
     "@types/lodash": "^4.14.191",
@@ -63,7 +62,8 @@
     "prisma": "^4.8.1",
     "tailwindcss": "^3.2.4",
     "tsconfig": "workspace:*",
-    "typescript": "^4.9.4"
+    "typescript": "^4.9.4",
+    "react-icons": "^4.12.0"
   },
   "engines": {
     "node": "20.10.0"

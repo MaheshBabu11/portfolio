@@ -5,8 +5,8 @@ import Toast from '@/components/Toast';
 
 import useFocusMode from '@/hooks/useFocusMode';
 import useGlobal from '@/hooks/useGlobal';
-import useShortcut from '@/hooks/useShortcut';
 import useTheme from '@/hooks/useTheme';
+import useShortcut from '@/hooks/useShortcut';
 
 const focusToast = {
   title: 'Focus Turned {STATUS}',

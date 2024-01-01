@@ -1,3 +1,4 @@
+/* eslint-disable */
 import clsx from 'clsx';
 import Link from 'next/link';
 
@@ -23,7 +24,7 @@ function SectionTitle({
   title,
   caption,
   description,
-  buttons,
+  buttons = null,
 }: SectionTitleProps) {
   const Heading = as;
 

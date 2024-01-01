@@ -1,4 +1,4 @@
-import Head from '@/components/meta/Head';
+import Head from '@/meta/Head';
 
 import { getBaseUrl } from '@/helpers/url';
 
