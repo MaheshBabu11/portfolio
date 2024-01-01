@@ -8,13 +8,16 @@
     "format": "prettier --write ."
   },
   "devDependencies": {
-    "eslint": "^8.31.0",
-    "prettier": "^2.8.1",
-    "prettier-plugin-tailwindcss": "^0.2.1",
+    "eslint": "^8.56.0",
+    "prettier": "^2.8.8",
+    "prettier-plugin-tailwindcss": "^0.2.8",
     "turbo": "latest"
   },
   "packageManager": "pnpm@7.22.0",
   "dependencies": {
     "react-icons": "^4.12.0"
+  },
+  "engines": {
+    "node": "21.5.0"
   }
 }
