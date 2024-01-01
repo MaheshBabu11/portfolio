@@ -5,6 +5,7 @@ import {
   ExternalLink,
   FigmaIcon,
   GitHubIcon,
+  LinkedInIcon,
   TwitterIcon,
 } from '@/components/Icons';
 
@@ -112,13 +113,14 @@ function FooterDescription() {
         About Me
       </div>
       <p className={clsx('mb-4 font-normal leading-relaxed')}>
-        I&apos;m Enji, a <strong>front-end developer</strong> who loves
-        intuitive, clean and modern UI design.
+        I&apos;m Mahesh, a <strong>back-end developer</strong> who loves to
+        tinker with new technologies and build cool stuff. I&apos;m currently
+        woking with Java and Spring Boot.
       </p>
       <ul className={clsx('-ml-2 flex gap-1')}>
         <li>
           <a
-            href="https://twitter.com/enjidev"
+            href="https://twitter.com/MaheshBabu11_/"
             target="_blank"
             rel="noreferrer nofollow"
             className={clsx('flex h-9 w-9 items-center justify-center')}
@@ -130,7 +132,7 @@ function FooterDescription() {
         </li>
         <li>
           <a
-            href="https://github.com/enjidev"
+            href="https://github.com/maheshbabu11/"
             target="_blank"
             rel="noreferrer nofollow"
             className={clsx('flex h-9 w-9 items-center justify-center')}
@@ -142,14 +144,14 @@ function FooterDescription() {
         </li>
         <li>
           <a
-            href="https://figma.com/@enjidev"
+            href="https://www.linkedin.com/in/maheshbabu11/"
             target="_blank"
             rel="noreferrer nofollow"
             className={clsx('flex h-9 w-9 items-center justify-center')}
-            aria-label="My Figma profile"
-            title="My Figma profile"
+            aria-label="My LinkedIn profile"
+            title="My LinkedIn profile"
           >
-            <FigmaIcon className={clsx('h-5 w-5')} />
+            <LinkedInIcon className={clsx('h-5 w-5')} />
           </a>
         </li>
       </ul>
@@ -167,74 +169,19 @@ function Footer() {
     >
       <div className={clsx('content-wrapper')}>
         <div className={clsx('py-10 font-semibold')}>
-          <div className={clsx('flex flex-col-reverse gap-16', 'lg:flex-row')}>
+          <div className={clsx('flex flex-col-reverse', 'lg:flex-row')}>
             <div className={clsx('flex-1')}>
               <FooterDescription />
             </div>
-            <div
-              className={clsx(
-                '-mx-2 flex flex-1 flex-col gap-8',
-                'sm:flex-row sm:gap-16 lg:mx-0'
-              )}
-            >
-              <div className={clsx('flex', 'sm:gap-16')}>
-                <FooterGroup
-                  title="Work"
-                  links={[
-                    { title: 'Contact', href: '/work/contact' },
-                    { title: 'Experience', href: '/work/experience' },
-                    {
-                      title: 'Services',
-                      href: '/work/services',
-                      label: 'soon',
-                    },
-                    {
-                      title: 'Skills and Tools',
-                      href: '/work/skills-and-tools',
-                    },
-                    { title: 'Studio', href: '/work/studio' },
-                  ]}
-                />
-                <FooterGroup
-                  title="Learn"
-                  links={[
-                    {
-                      title: 'Docs',
-                      href: '/docs',
-                    },
-                    {
-                      title: 'Personal Blog',
-                      href: '/blog',
-                    },
-                    {
-                      title: 'T.I.L',
-                      href: '/today-i-learned',
-                      label: 'new',
-                    },
-                  ]}
-                />
-              </div>
-              <div className={clsx('flex', 'sm:gap-16')}>
-                <FooterGroup
-                  title="This Site"
-                  links={[
-                    {
-                      title: 'Design Concept',
-                      href: 'https://www.figma.com/community/file/1176392613303840973',
-                      isInternal: false,
-                    },
-                    {
-                      title: 'Source Code',
-                      href: 'https://github.com/enjidev/enji.dev',
-                      isInternal: false,
-                    },
-                    {
-                      title: 'Credits',
-                      href: '/credits',
-                    },
-                  ]}
-                />
-              </div>
+            <div className={clsx('flex flex-1')}>
+              <img
+                className="h-30 w-60"
+                src="http://github-profile-summary-cards.vercel.app/api/cards/stats?username=maheshbabu11&theme=transparent"
+              />
+              <img
+                className="h-50 w-80"
+                src="http://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=maheshbabu11&theme=transparent"
+              />
             </div>
           </div>
         </div>
@@ -245,10 +192,7 @@ function Footer() {
           )}
         >
           <div className={clsx('font-semibold')}>
-            &copy; {dayjs().format('YYYY')}, Enji Kusnadi
-          </div>
-          <div className={clsx('text-slate-500', 'dark:text-slate-400')}>
-            <LastUpdate />
+            &copy; {dayjs().format('YYYY')}, Mahesh Babu
           </div>
         </div>
       </div>
