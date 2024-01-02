@@ -28,11 +28,11 @@ function Accordion({
               {index}. {title}
             </span>
             {icons.map((Icon, i) => (
-              <span key={i} className={`ml-${i === 0 ? '10' : '2'}`}>
+              <span key={i} className={`ml-${i === 0 ? '10' : '2'} `}>
                 {Icon}
               </span>
             ))}
-            <ProgressBar progress={progress} className="ml-auto" />
+            <ProgressBar progress={progress} className="ml-auto " />
             <span className="ml-10">{isOpen ? '' : <FaChevronDown />}</span>
           </h2>
         )}

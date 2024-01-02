@@ -81,7 +81,7 @@ function Footer() {
             <div className={clsx('flex-1')}>
               <FooterDescription />
             </div>
-            <div className={clsx('flex flex-1')}>
+            <div className={clsx('flex flex-1 flex-col sm:flex-row')}>
               <img
                 className="h-30 w-60"
                 alt="Github Stats"
