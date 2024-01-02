@@ -16,8 +16,8 @@ function Accordion({
       className={` ${
         isOpen
           ? 'mx-0'
-          : 'margin-size mx-20 border border-gray-300 dark:border-gray-700'
-      } mt-6 rounded-xl p-4 px-5 ${
+          : 'border  border-gray-300 lg:ml-20 lg:mr-20  dark:border-gray-700'
+      } mt-6 rounded-xl p-4 ${
         isOpen ? 'transition-all duration-500 ease-in-out' : ''
       }`}
     >
@@ -28,12 +28,19 @@ function Accordion({
               {index}. {title}
             </span>
             {icons.map((Icon, i) => (
-              <span key={i} className={`ml-${i === 0 ? '10' : '2'} `}>
+              <span
+                key={i}
+                className={`ml-${i === 0 ? '10' : '2'}  hidden lg:flex`}
+              >
                 {Icon}
               </span>
             ))}
-            <ProgressBar progress={progress} className="ml-auto " />
-            <span className="ml-10">{isOpen ? '' : <FaChevronDown />}</span>
+            <ProgressBar
+              progress={progress}
+              className="ml-auto  hidden lg:flex
+              "
+            />
+            <span className="ml-10 ">{isOpen ? '' : <FaChevronDown />}</span>
           </h2>
         )}
       </div>
