@@ -71,7 +71,7 @@ function Footer() {
   return (
     <footer
       className={clsx(
-        'background-grid background-grid--fade-in border-divider-light mt-24 pt-16 text-sm text-slate-900',
+        'background-grid background-grid--fade-in border-divider-light mt-5 pt-16 text-sm text-slate-900',
         'dark:border-divider-dark dark:text-slate-200'
       )}
     >

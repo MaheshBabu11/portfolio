@@ -5,6 +5,7 @@ import { CodeIcon, HeartIcon, SparklesIcon } from '@/components/Icons';
 import FeaturedCard from '@/contents/index/FeaturedCard';
 import Header from '@/contents/index/Header';
 import Quote from '@/contents/index/Quote';
+import SkillsAndTech from './SkillsAndTech';
 
 function FeaturedCardSection() {
   return (
@@ -76,6 +77,9 @@ function IndexContents() {
       </div>
       <div className={clsx('-mt-12 mb-12', 'md:mb-24 md:mt-0')}>
         <QuoteSection />
+      </div>
+      <div className={clsx('mb-2 mt-12', 'md:mb-4 md:mt-0')}>
+        <SkillsAndTech />
       </div>
     </>
   );

@@ -43,7 +43,7 @@ function ProjectsContents() {
   };
 
   return (
-    <>
+    <div className="content-wrapper">
       <Accordion
         title="Ntfy-Java"
         isOpen={openAccordion === 0}
@@ -315,7 +315,7 @@ function ProjectsContents() {
           </div>
         </SectionContent>
       </Accordion>
-    </>
+    </div>
   );
 }
 

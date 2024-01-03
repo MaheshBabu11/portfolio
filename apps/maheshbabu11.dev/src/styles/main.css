@@ -13,3 +13,13 @@
   margin-left: 7rem;
   margin-right: 7Accrem;
 }
+
+.image-container img {
+  width: 50px;
+}
+
+@media (max-width: 640px) {
+  .image-container img {
+    width: 30px;
+  }
+}
