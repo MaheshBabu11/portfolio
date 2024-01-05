@@ -23,4 +23,4 @@ https://user-images.githubusercontent.com/95107212/210668021-fd49431f-85a3-4bd7-
 - 🍃 Tailwind CSS
 - ✍ MDX
 
-[FIND OUT MORE →](apps/enji.dev)
+[FIND OUT MORE →](apps/maheshbabu11.dev/)
