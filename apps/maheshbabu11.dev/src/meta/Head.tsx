@@ -1,6 +1,7 @@
 import NextHead from 'next/head';
 
 import useCurrentUrl from '@/hooks/useCurrentUrl';
+import Script from 'next/script';
 
 interface HeadProps {
   title: string;
@@ -28,16 +29,14 @@ function Head({
       <title>{htmlTitle}</title>
       <meta name="description" content={description} />
       <link rel="icon" href="/favicon.ico" />
-
+      <link rel="manifest" href="/manifest.json" />
       {/* seo */}
       <link rel="canonical" href={currentUrl} />
-
       {/* og image */}
       <meta property="og:image" content={ogImage} />
       <meta property="og:image:width" content="1200" />
       <meta property="og:image:height" content="630" />
       <meta property="og:image:alt" content={`Image with "${title}" text.`} />
-
       {/* twitter card */}
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:site" content="@MaheshBabu11_" />
@@ -46,11 +45,11 @@ function Head({
       <meta name="twitter:description" content={description} />
       <meta name="twitter:image" content={ogImage} />
       <meta name="twitter:image:alt" content={`Image with "${title}" text.`} />
-
       {/* structured data */}
       {structuredData && (
         <script type="application/ld+json">{structuredData}</script>
       )}
+      ,
       <script
         defer
         src="https://eu.umami.is/script.js"
