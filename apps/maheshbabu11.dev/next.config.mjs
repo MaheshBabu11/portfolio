@@ -1,5 +1,6 @@
 import bundeAnalyzer from '@next/bundle-analyzer';
 import nextMDX from '@next/mdx';
+import withPWA from 'next-pwa';
 import rehypePlugins from 'rehype-plugins';
 import remarkPlugins from 'remark-plugins';
 
@@ -19,6 +20,7 @@ const nextConfig = {
   ],
   pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx'],
   reactStrictMode: true,
+  swcMinify: true,
 };
 
 const withBundleAnalyzer = bundeAnalyzer({
@@ -34,4 +36,11 @@ const withMDX = nextMDX({
   },
 });
 
-export default withBundleAnalyzer(withMDX(nextConfig));
+// Configuration object tells the next-pwa plugin
+const withPWAConfig = withPWA({
+  dest: 'public', // Destination directory for the PWA files
+  register: true, // Register the PWA service worker
+  skipWaiting: true, // Skip waiting for service worker activation
+});
+
+export default withPWAConfig(withBundleAnalyzer(withMDX(nextConfig)));
