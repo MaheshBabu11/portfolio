@@ -1,6 +1,5 @@
 // import WithReactions from '@/components/layouts/WithReactions';
 import WithTableOfContents from '@/components/layouts/WithTableOfContents';
-import Head from '@/meta/Head';
 import SkipNavigation from '@/components/navigations/SkipNavigation';
 import PageHeader from '@/components/PageHeader';
 
@@ -8,6 +7,7 @@ import { getPageOgImageUrl } from '@/helpers/page';
 
 import ProjectFooter from '@/contents-layouts/Project/ProjectFooter';
 import ProjectMeta from '@/contents-layouts/Project/ProjectMeta';
+import Head from '@/meta/Head';
 
 import type { TProjectFrontMatter, TTableOfContents } from '@/types';
 import type { PropsWithChildren } from 'react';

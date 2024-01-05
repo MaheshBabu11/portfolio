@@ -1,11 +1,6 @@
 import clsx from 'clsx';
 
-import {
-  ExternalLink,
-  GitHubIcon,
-  LinkedInIcon,
-  TwitterIcon,
-} from '@/components/Icons';
+import { GitHubIcon, LinkedInIcon, TwitterIcon } from '@/components/Icons';
 
 import dayjs from '@/utils/dayjs';
 
@@ -85,12 +80,12 @@ function Footer() {
               <img
                 className="h-30 w-60"
                 alt="Github Stats"
-                src="http://github-profile-summary-cards.vercel.app/api/cards/stats?username=maheshbabu11&theme=transparent"
+                src="https://github-profile-summary-cards.vercel.app/api/cards/stats?username=maheshbabu11&theme=transparent"
               />
               <img
                 className="h-50 w-80"
                 alt="Github Profile Summary"
-                src="http://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=maheshbabu11&theme=transparent"
+                src="https://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=maheshbabu11&theme=transparent"
               />
             </div>
           </div>

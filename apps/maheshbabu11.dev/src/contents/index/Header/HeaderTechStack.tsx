@@ -2,14 +2,14 @@ import clsx from 'clsx';
 import { m } from 'framer-motion';
 
 import {
-  JavaIcon,
-  SpringBootIcon,
+  GitIcon,
   HibernateIcon,
+  IntellijIdeaIcon,
+  JavaIcon,
   MavenIcon,
   PostgresIcon,
+  SpringBootIcon,
   SqlServerIcon,
-  IntellijIdeaIcon,
-  GitIcon,
 } from '@/components/Icons';
 
 const animation = {

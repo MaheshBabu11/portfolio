@@ -1,7 +1,8 @@
 import clsx from 'clsx';
-import { GitHubIcon, LicenseIcon, StarIcon, ForkIcon } from '../Icons';
 
 import { SkeletonSm } from '@/components/wireframes/Skeletons';
+
+import { ForkIcon,GitHubIcon, LicenseIcon, StarIcon } from '../Icons';
 
 interface GithubWireframeProps {
   author?: string;

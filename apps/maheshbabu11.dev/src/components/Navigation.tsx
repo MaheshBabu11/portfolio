@@ -2,9 +2,9 @@ import clsx from 'clsx';
 
 import {
   GitHubIcon,
-  TwitterIcon,
   InstagramIcon,
   LinkedInIcon,
+  TwitterIcon,
 } from '@/components/Icons';
 import NavIcon from '@/components/navigations/NavIcon';
 import NavIconQuickAccess from '@/components/navigations/NavIconQuickAccess';
@@ -18,7 +18,6 @@ import useOnScroll from '@/hooks/useOnScroll';
 const workLinks = [
   { title: 'Skills & Tools', href: '/work/skills-and-tools' },
   { title: 'Experience', href: '/work/experience' },
-  // { title: 'Studio', href: '/work/studio' },
   { title: 'Contact', href: '/work/contact' },
 ];
 

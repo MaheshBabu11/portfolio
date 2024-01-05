@@ -1,10 +1,11 @@
 import clsx from 'clsx';
 
-import Head from '@/meta/Head';
 import SkipNavigation from '@/components/navigations/SkipNavigation';
 import PageHeader from '@/components/PageHeader';
 
 import { getPageOgImageUrl } from '@/helpers/page';
+
+import Head from '@/meta/Head';
 
 import type { TPageFrontMatter } from '@/types';
 import type { PropsWithChildren, ReactNode } from 'react';

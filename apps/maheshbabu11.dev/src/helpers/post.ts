@@ -72,31 +72,3 @@ export const getPostOgImageUrl = (data: TPostOgImage) => {
     '1/1': getUrl('1/1'),
   };
 };
-
-export const getPostStructuredData = ({
-  title,
-  dateModified,
-  datePublished,
-  images,
-}: {
-  title: string;
-  images: Array<string>;
-  datePublished: string;
-  dateModified: string;
-}) =>
-  JSON.stringify({
-    '@context': 'https://schema.org',
-    '@type': 'BlogPosting',
-    headline: title,
-    image: images,
-    datePublished: formatDateISO(datePublished),
-    dateModified: formatDateISO(dateModified),
-    author: [
-      {
-        '@type': 'Person',
-        name: 'Enji Kusnadi',
-        jobTitle: 'Front-End Developer',
-        url: 'https://www.enji.dev/about',
-      },
-    ],
-  });

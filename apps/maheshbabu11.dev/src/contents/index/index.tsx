@@ -5,6 +5,7 @@ import { CodeIcon, HeartIcon, SparklesIcon } from '@/components/Icons';
 import FeaturedCard from '@/contents/index/FeaturedCard';
 import Header from '@/contents/index/Header';
 import Quote from '@/contents/index/Quote';
+
 import SkillsAndTech from './SkillsAndTech';
 
 function FeaturedCardSection() {

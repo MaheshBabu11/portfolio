@@ -1,6 +1,8 @@
 import clsx from 'clsx';
-import { MavenIcon, InstallIcon, XMLCodeIcon } from '../Icons';
+
 import { SkeletonSm } from '@/components/wireframes/Skeletons';
+
+import { InstallIcon, MavenIcon, XMLCodeIcon } from '../Icons';
 
 interface GithubPackageWireframeProps {
   packageName?: string;

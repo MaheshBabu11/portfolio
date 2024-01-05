@@ -1,8 +1,7 @@
-import Head from '@/meta/Head';
-
 import { getBaseUrl } from '@/helpers/url';
 
 import IndexContents from '@/contents/index';
+import Head from '@/meta/Head';
 
 function Index() {
   return (
