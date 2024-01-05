@@ -14,7 +14,9 @@ A monorepo for my personal website and projects, built with Turborepo and pnpm.
 
 A personal website with a blog, project showcase, and work information.
 
-https://user-images.githubusercontent.com/95107212/210668021-fd49431f-85a3-4bd7-bf9e-09639cb38922.mp4
+https://github.com/MaheshBabu11/portfolio/assets/43287976/f4912e8d-61b5-4bbb-952d-a3bef56c4f81
+
+
 
 ### Tech Stack
 
