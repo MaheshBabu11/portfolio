@@ -2,7 +2,7 @@
   "name": "Mahesh Babu's Portfolio",
   "short_name": "Mahesh Babu",
   "theme_color": "#0c1222",
-  "background_color": "#2196f3",
+  "background_color": "#ffffff",
   "display": "standalone",
   "orientation": "portrait",
   "scope": "/",
