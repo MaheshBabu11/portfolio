@@ -17,7 +17,6 @@
   },
   "packageManager": "pnpm@7.33.6",
   "dependencies": {
-    "next-pwa": "^5.6.0",
     "react-icons": "^4.12.0"
   }
 }

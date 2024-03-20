@@ -55,11 +55,6 @@ function Head({
         src="https://umami.maheshbabu11.dev/umami.js"
         data-website-id="e83d9698-6a36-4184-aa25-a3d8c9675b92"
       />
-      {/* <script
-        defer
-        src="https://eu.umami.is/script.js"
-        data-website-id="e83d9698-6a36-4184-aa25-a3d8c9675b92"
-      /> */}
     </NextHead>
   );
 }
