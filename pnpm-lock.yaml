@@ -48,9 +48,6 @@ importers:
       '@next/bundle-analyzer':
         specifier: ^13.1.1
         version: 13.1.2
-      '@next/font':
-        specifier: ^13.1.1
-        version: 13.1.2
       '@next/mdx':
         specifier: ^13.1.1
         version: 13.1.2(@mdx-js/loader@2.2.1)(@mdx-js/react@2.2.1)
@@ -1730,10 +1727,6 @@ packages:
     resolution: {integrity: sha512-WGaNVvIYphdriesP6r7jq/8l7u38tzotnVQuxc1RYKLqYYApSsrebti3OCPoT3Gx0pw2smPIFHH98RzcsgW5GQ==}
     dependencies:
       glob: 7.1.7
-    dev: false
-
-  /@next/font@13.1.2:
-    resolution: {integrity: sha512-NXGXGFGiOKEnvBIHq9cdFTKbHO2/4B3Zd9K27M7j1DioIQVar7oVRqZMYs0h3XMVEZLwjjkdAtqRPCzzd3RtXg==}
     dev: false
 
   /@next/mdx@13.1.2(@mdx-js/loader@2.2.1)(@mdx-js/react@2.2.1):
