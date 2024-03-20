@@ -3,6 +3,7 @@ import nextMDX from '@next/mdx';
 import withPWA from 'next-pwa';
 import rehypePlugins from 'rehype-plugins';
 import remarkPlugins from 'remark-plugins';
+import withPWAInit from '@ducanh2912/next-pwa';
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -36,11 +37,17 @@ const withMDX = nextMDX({
   },
 });
 
-// Configuration object tells the next-pwa plugin
-const withPWAConfig = withPWA({
-  dest: 'public', // Destination directory for the PWA files
-  register: true, // Register the PWA service worker
-  skipWaiting: true, // Skip waiting for service worker activation
+// // Configuration object tells the next-pwa plugin
+// const withPWAConfig = withPWA({
+//   dest: 'public', // Destination directory for the PWA files
+//   register: true, // Register the PWA service worker
+//   skipWaiting: true, // Skip waiting for service worker activation
+// });
+
+const withPWAConfig = withPWAInit({
+  dest: 'public',
+  register: true,
+  skipWaiting: true,
 });
 
 export default withPWAConfig(withBundleAnalyzer(withMDX(nextConfig)));
