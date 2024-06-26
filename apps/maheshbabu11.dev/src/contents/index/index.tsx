@@ -5,6 +5,7 @@ import { CodeIcon, HeartIcon, SparklesIcon } from '@/components/Icons';
 import FeaturedCard from '@/contents/index/FeaturedCard';
 import Header from '@/contents/index/Header';
 import Quote from '@/contents/index/Quote';
+import GithubContribCard from '@/contents/index/GithubContrib';
 
 import SkillsAndTech from './SkillsAndTech';
 
@@ -62,9 +63,17 @@ function FeaturedCardSection() {
 function QuoteSection() {
   return (
     <div className={clsx('content-wrapper')}>
-      <div className={clsx('flex items-center justify-center py-8')}>
+      <div className={clsx('flex items-center justify-center py-4')}>
         <Quote />
       </div>
+    </div>
+  );
+}
+
+function GithubContrib() {
+  return (
+    <div className={clsx('content-wrapper')}>
+      <GithubContribCard />
     </div>
   );
 }
@@ -76,8 +85,22 @@ function IndexContents() {
       <div className={clsx('hidden', 'lg:-mt-16 lg:mb-24 lg:block')}>
         <FeaturedCardSection />
       </div>
-      <div className={clsx('-mt-12 mb-12', 'md:mb-24 md:mt-0')}>
+      <div className={clsx('-mt-12 mb-2', 'md:mb-1 md:mt-0')}>
         <QuoteSection />
+      </div>
+      <div className="flex items-center justify-center">
+        <span className="h-2 w-2 rounded-full bg-slate-400 dark:bg-slate-600"></span>
+        <div
+          className={clsx(
+            'mx-1 w-1/2 border-t-4 border-dashed border-slate-400',
+            'lg:border-t-4',
+            'dark:border-slate-600'
+          )}
+        ></div>
+        <span className="h-2 w-2 rounded-full bg-slate-400 dark:bg-slate-600"></span>
+      </div>
+      <div className={clsx('mb-2 mt-4', 'md:mb-4 md:mt-2')}>
+        <GithubContrib />
       </div>
       <div className={clsx('mb-2 mt-12', 'md:mb-4 md:mt-0')}>
         <SkillsAndTech />
