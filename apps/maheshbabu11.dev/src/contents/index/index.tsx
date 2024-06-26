@@ -89,15 +89,15 @@ function IndexContents() {
         <QuoteSection />
       </div>
       <div className="flex items-center justify-center">
-        <span className="h-2 w-2 rounded-full bg-slate-400 dark:bg-slate-600"></span>
+        <span className="h-2 w-2 rounded-full bg-slate-400 dark:bg-slate-600" />
         <div
           className={clsx(
             'mx-1 w-1/2 border-t-4 border-dashed border-slate-400',
             'lg:border-t-4',
             'dark:border-slate-600'
           )}
-        ></div>
-        <span className="h-2 w-2 rounded-full bg-slate-400 dark:bg-slate-600"></span>
+        />
+        <span className="h-2 w-2 rounded-full bg-slate-400 dark:bg-slate-600" />
       </div>
       <div className={clsx('mb-2 mt-4', 'md:mb-4 md:mt-2')}>
         <GithubContrib />
