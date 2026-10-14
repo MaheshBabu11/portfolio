@@ -1,11 +1,19 @@
 {
-  "name": "Hamish Williams",
-  "role": "Designer",
-  "disciplines": ["Developer", "Prototyper", "Animator", "Illustrator", "Modder"],
-  "url": "https://hamishw.com",
+  "name": "Mahesh Babu",
+  "role": "Software Developer",
+  "disciplines": [
+    "Java",
+    "Spring Boot",
+    "Hibernate",
+    "Microservices",
+    "PostgreSQL"
+  ],
+  "url": "https://maheshbabu11.dev",
   "bluesky": "hamishw.com",
   "figma": "@Hamish",
-  "github": "HamishMW",
-  "repo": "https://github.com/HamishMW/portfolio",
+  "github": "MaheshBabu11",
+  "linkedin": "maheshbabu11",
+  "instagram": "m_r.coder",
+  "repo": "https://github.com/MaheshBabu11/portfolio-new",
   "ascii": "__  __  __\n\u005C \u005C \u005C \u005C \u005C\u2215\n \u005C \u005C\u2215\u005C \u005C\n  \u005C\u2215  \u005C\u2215\n"
 }

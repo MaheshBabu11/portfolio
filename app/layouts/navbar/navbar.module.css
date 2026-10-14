@@ -49,11 +49,11 @@
   }
 
   .navList {
-    transform: rotate(180deg);
+    --transform: rotate(180deg);
     display: flex;
-    flex-direction: row-reverse;
+    flex-direction: column;
     position: relative;
-    writing-mode: vertical-lr;
+    --writing-mode: vertical-lr;
   }
 
   .navLink {

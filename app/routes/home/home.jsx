@@ -10,6 +10,12 @@ import sliceTexture from '~/assets/slice-app.jpg';
 import sprTextureLarge from '~/assets/spr-lesson-builder-dark-large.jpg';
 import sprTexturePlaceholder from '~/assets/spr-lesson-builder-dark-placeholder.jpg';
 import sprTexture from '~/assets/spr-lesson-builder-dark.jpg';
+import httpClientScreenshot from '~/assets/http-client-plus.png';
+import httpClientScreenshotLarge from '~/assets/http-client-plus-large.png';
+import httpClientScreenshotPlaceholder from '~/assets/http-client-plus-placeholder.png';
+import ntfyScreenshot from '~/assets/ntfy-java.png';
+import ntfyScreenshotLarge from '~/assets/ntfy-java-large.png';
+import ntfyScreenshotPlaceholder from '~/assets/ntfy-java-placeholder.png';
 import { Footer } from '~/components/footer';
 import { baseMeta } from '~/utils/meta';
 import { Intro } from './intro';
@@ -69,14 +75,14 @@ export const Home = () => {
           }
         });
       },
-      { rootMargin: '0px 0px -10% 0px', threshold: 0.1 }
+      { rootMargin: '0px 0px -10% 0px', threshold: 0.1 },
     );
 
     const indicatorObserver = new IntersectionObserver(
       ([entry]) => {
         setScrollIndicatorHidden(!entry.isIntersecting);
       },
-      { rootMargin: '-100% 0px 0px 0px' }
+      { rootMargin: '-100% 0px 0px 0px' },
     );
 
     sections.forEach(section => {
@@ -103,17 +109,17 @@ export const Home = () => {
         sectionRef={projectOne}
         visible={visibleSections.includes(projectOne.current)}
         index={1}
-        title="Designing the future of education"
-        description="Designing a platform to help educators build better online courseware"
-        buttonText="View project"
-        buttonLink="/projects/smart-sparrow"
+        title="HTTP Client Plus"
+        description="An IntelliJ IDEA plugin for composing and executing HTTP requests, with support for request configuration, .http file persistence, and JavaScript scripting."
+        buttonText="Download plugin"
+        buttonLink="https://plugins.jetbrains.com/plugin/28340-http-client-plus"
         model={{
           type: 'laptop',
-          alt: 'Smart Sparrow lesson builder',
+          alt: 'HTTP Client Plus plugin for IntelliJ IDEA',
           textures: [
             {
-              srcSet: `${sprTexture} 1280w, ${sprTextureLarge} 2560w`,
-              placeholder: sprTexturePlaceholder,
+              srcSet: `${httpClientScreenshot} 800w, ${httpClientScreenshotLarge} 1920w`,
+              placeholder: httpClientScreenshotPlaceholder,
             },
           ],
         }}
@@ -148,17 +154,17 @@ export const Home = () => {
         sectionRef={projectThree}
         visible={visibleSections.includes(projectThree.current)}
         index={3}
-        title="Biomedical image collaboration"
-        description="Increasing the amount of collaboration in Slice, an app for biomedical imaging"
-        buttonText="View project"
-        buttonLink="/projects/slice"
+        title="NTFY Java"
+        description="A lightweight Java library for publishing notifications to ntfy servers and receiving messages in real time over a WebSocket-like stream."
+        buttonText="View on GitHub"
+        buttonLink="https://github.com/MaheshBabu11/ntfy-java/packages/1957376"
         model={{
           type: 'laptop',
-          alt: 'Annotating a biomedical image in the Slice app',
+          alt: 'NTFY Java library for publishing notifications to ntfy servers',
           textures: [
             {
-              srcSet: `${sliceTexture} 800w, ${sliceTextureLarge} 1920w`,
-              placeholder: sliceTexturePlaceholder,
+              srcSet: `${ntfyScreenshot} 800w, ${ntfyScreenshotLarge} 1920w`,
+              placeholder: ntfyScreenshotPlaceholder,
             },
           ],
         }}
