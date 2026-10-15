@@ -29,11 +29,17 @@ npm run dev:storybook
 
 ## Deployment
 
-I've set up the site using Cloudflare for hosting. Deploy the site to Cloudflare Pages:
+Deploy the site to Cloudflare Pages:
 
 ```bash
 npm run deploy
 ```
+
+To deploy to Vercel, import the repository in Vercel or run `npx vercel --prod`.
+The build automatically selects Vercel's Remix preset on Vercel. Configure
+`SESSION_SECRET`, `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, `EMAIL`, and
+`FROM_EMAIL` in the Vercel project settings to enable sessions and the contact
+form.
 
 ## Permissions
 

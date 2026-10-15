@@ -15,6 +15,7 @@ import GothamBook from '~/assets/fonts/gotham-book.woff2';
 import GothamMedium from '~/assets/fonts/gotham-medium.woff2';
 import { useEffect } from 'react';
 import { Error } from '~/layouts/error';
+import { getServerEnv } from '~/utils/env';
 import { VisuallyHidden } from '~/components/visually-hidden';
 import { Navbar } from '~/layouts/navbar';
 import { Progress } from '~/components/progress';
@@ -47,6 +48,7 @@ export const links = () => [
 ];
 
 export const loader = async ({ request, context }) => {
+  const env = getServerEnv(context);
   const { url } = request;
   const { pathname } = new URL(url);
   const pathnameSliced = pathname.endsWith('/') ? pathname.slice(0, -1) : url;
@@ -59,7 +61,7 @@ export const loader = async ({ request, context }) => {
       maxAge: 604_800,
       path: '/',
       sameSite: 'lax',
-      secrets: [context.cloudflare.env.SESSION_SECRET || ' '],
+      secrets: [env.SESSION_SECRET || ' '],
       secure: true,
     },
   });

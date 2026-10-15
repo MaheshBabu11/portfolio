@@ -81,6 +81,7 @@ export function Intro({ id, sectionRef, scrollIndicatorHidden, ...rest }) {
                 <span aria-hidden className={styles.row}>
                   <span
                     className={styles.word}
+                    data-role
                     data-status={status}
                     style={cssProps({ delay: tokens.base.durationXS })}
                   >

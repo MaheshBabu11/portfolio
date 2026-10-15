@@ -17,19 +17,21 @@ const getCondition = code => {
 
 export const Weather = props => {
   const [weather, setWeather] = useState(null);
+  const [now, setNow] = useState(() => new Date());
   const { city, latitude, longitude } = config.location;
 
   useEffect(() => {
     const controller = new AbortController();
 
     fetch(
-      `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current=temperature_2m,weather_code`,
+      `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current=temperature_2m,weather_code&timezone=auto`,
       { signal: controller.signal }
     )
       .then(res => res.json())
-      .then(({ current }) =>
+      .then(({ current, timezone }) =>
         setWeather({
           temp: Math.round(current.temperature_2m),
+          timezone,
           ...getCondition(current.weather_code),
         })
       )
@@ -38,14 +40,26 @@ export const Weather = props => {
     return () => controller.abort();
   }, [latitude, longitude]);
 
+  useEffect(() => {
+    const interval = setInterval(() => setNow(new Date()), 60_000);
+    return () => clearInterval(interval);
+  }, []);
+
   if (!weather) return null;
 
   return (
     <div className={styles.weather} title={weather.label} {...props}>
       <span aria-hidden>{weather.icon}</span>
       <span>
-        {weather.temp}°C in {city}
+        {weather.temp}°C in {city} -
       </span>
+      <time className={styles.time} dateTime={now.toISOString()}>
+        {new Intl.DateTimeFormat(undefined, {
+          hour: 'numeric',
+          minute: '2-digit',
+          timeZone: weather.timezone,
+        }).format(now)}
+      </time>
     </div>
   );
 };

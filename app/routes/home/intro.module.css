@@ -133,6 +133,15 @@
     will-change: transform;
   }
 
+  &[data-role] {
+    @media (--mediaMobile) {
+      display: block;
+      flex-shrink: 1;
+      min-width: 0;
+      line-height: 1.1;
+    }
+  }
+
   &[data-plus='true']::before {
     content: '+';
     margin-right: 10px;
