@@ -1,0 +1,7 @@
+.weather {
+  display: flex;
+  align-items: center;
+  gap: var(--spaceS);
+  margin-bottom: var(--spaceL);
+  color: var(--textLight);
+}

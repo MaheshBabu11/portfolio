@@ -1,0 +1,95 @@
+---
+title: "Pushing to Github/GitLab/GitBucket using SSH Keys"
+date: '2021-09-14'
+abstract:  "Are you confused why you are not able to push code to your repo, here's your answer on how to push properly using SSH keys"
+banner: https://cdn-images-1.medium.com/max/7000/1*JZlWD5qcVBWUIwE6JpkHCA.jpeg
+---
+## Pushing to Github/GitLab/GitBucket using SSH Keys
+
+![Photo by [Michael Dziedzic](https://unsplash.com/@lazycreekimages?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on [Unsplash](https://unsplash.com/s/photos/key?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)](https://cdn-images-1.medium.com/max/7000/1*JZlWD5qcVBWUIwE6JpkHCA.jpeg)
+
+As the days of the username and password authentication for pushing to GitHub repositories have depreciated, there is a need for a new method to authenticate users using git while pushing data. The use of SSH keys can come to the rescue in this situation. In this article, I will show you how to do this.
+
+## Steps to setup authentication using SSH key :
+
+## 1. Check GIT.
+
+Make sure that you have git installed on your computer.
+
+## 2. Create a repo.
+
+Make sure there is at least one file in it (even just the README.md)
+
+## 3. Generate an SSH key pair (private/public):
+
+You can do this by using the following command.
+```bash
+    ssh-keygen -t rsa -C "your_email@example.com"
+```
+or by using an even better method.
+```bash
+    ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
+```
+## 4. Copy the contents of the public SSH key
+
+In order to copy the content of the SSH key file that you have created. Do the following steps :
+
+In macOS:
+```bash
+    pbcopy < ~/.ssh/id_rsa.pub
+```
+GNU/Linux (requires the xclip package):
+```bash
+    xclip -sel clip < ~/.ssh/id_rsa.pub
+```
+Windows Command Line:
+```bash
+    type %userprofile%\.ssh\id_rsa.pub | clip
+```
+Git Bash on Windows / Windows PowerShell:
+```bash
+    cat ~/.ssh/id_rsa.pub | clip
+```
+or of course copy it via your favorite editor, cat, or whatever suits your needs :)
+
+Here id_rsa.pub is the file that stores your public key. You can rename it if you want.
+
+## 5. Copy the public SSH key to GitHub
+
+Copy the contents of your SSH keys to your GitHub account settings ([https://github.com/settings/keys](https://github.com/settings/keys)).
+
+1. Go to settings from your account.
+
+![](https://cdn-images-1.medium.com/max/2000/1*7LEYvQwdbpJVs-INBRXGmA.png)
+
+2. Click on SSH and GPG keys.
+
+![](https://cdn-images-1.medium.com/max/2000/1*jW6r-8T04LVSRIolR1KP8g.png)
+
+3. Click on add new SSH key.
+
+![](https://cdn-images-1.medium.com/max/2000/1*I1kx47mSwXqBeOlfeKhtdA.png)
+
+4. Copy the contents of the file id_rsa.pub(in this case) that you have created and paste it into the key box and also insert a suitable title. Then click add SSH key.
+
+![](https://cdn-images-1.medium.com/max/2000/1*V07trtNn1y_hPKO4Wp9EXw.png)
+
+## 5. Test the SSH key:
+
+To tesh, the SSH key that you have generated is valid perform the command as below.
+```bash
+    ssh -T git@github.com
+```
+Change directory into the local clone of your repository (if you’re not already there) and run:
+```bash
+    git remote set-url origin git@github.com:username/your-repository.git
+```
+Now try editing a file (try the README) and then do:
+```bash
+    git add -A
+    git commit -am "Update README.md"
+    git push
+```
+You should not be asked for a username or password. If it works, your SSH key is correctly configured.
+
+I hope that this article has helped you solve your authentication problems. Please do consider clapping for me if you find this article useful. Subscribe for more helpful articles.

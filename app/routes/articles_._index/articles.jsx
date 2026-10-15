@@ -86,7 +86,7 @@ function ArticlesPost({ slug, frontmatter, timecode, index }) {
       </RouterLink>
       {featured && (
         <Text aria-hidden className={styles.postTag} size="s">
-          477
+          999
         </Text>
       )}
     </article>
@@ -154,11 +154,11 @@ export function Articles() {
       {posts.map(({ slug, ...post }, index) => (
         <ArticlesPost key={slug} slug={slug} index={index} {...post} />
       ))}
-      {Array(2)
-        .fill()
-        .map((skeleton, index) => (
-          <SkeletonPost key={index} index={index} />
-        ))}
+      {/*{Array(2)*/}
+      {/*  .fill()*/}
+      {/*  .map((skeleton, index) => (*/}
+      {/*    <SkeletonPost key={index} index={index} />*/}
+      {/*  ))}*/}
     </div>
   );
 

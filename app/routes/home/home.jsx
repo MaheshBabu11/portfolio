@@ -1,21 +1,12 @@
-import gamestackTexture2Large from '~/assets/gamestack-list-large.jpg';
-import gamestackTexture2Placeholder from '~/assets/gamestack-list-placeholder.jpg';
-import gamestackTexture2 from '~/assets/gamestack-list.jpg';
-import gamestackTextureLarge from '~/assets/gamestack-login-large.jpg';
-import gamestackTexturePlaceholder from '~/assets/gamestack-login-placeholder.jpg';
-import gamestackTexture from '~/assets/gamestack-login.jpg';
-import sliceTextureLarge from '~/assets/slice-app-large.jpg';
-import sliceTexturePlaceholder from '~/assets/slice-app-placeholder.jpg';
-import sliceTexture from '~/assets/slice-app.jpg';
-import sprTextureLarge from '~/assets/spr-lesson-builder-dark-large.jpg';
-import sprTexturePlaceholder from '~/assets/spr-lesson-builder-dark-placeholder.jpg';
-import sprTexture from '~/assets/spr-lesson-builder-dark.jpg';
 import httpClientScreenshot from '~/assets/http-client-plus.png';
 import httpClientScreenshotLarge from '~/assets/http-client-plus-large.png';
 import httpClientScreenshotPlaceholder from '~/assets/http-client-plus-placeholder.png';
 import ntfyScreenshot from '~/assets/ntfy-java.png';
 import ntfyScreenshotLarge from '~/assets/ntfy-java-large.png';
 import ntfyScreenshotPlaceholder from '~/assets/ntfy-java-placeholder.png';
+import asciiArtScreenshot from '~/assets/ascii-art-generator.png';
+import asciiArtScreenshotLarge from '~/assets/ascii-art-generator-large.png';
+import asciiArtScreenshotPlaceholder from '~/assets/ascii-art-generator-placeholder.png';
 import { Footer } from '~/components/footer';
 import { baseMeta } from '~/utils/meta';
 import { Intro } from './intro';
@@ -47,8 +38,8 @@ export const links = () => {
 
 export const meta = () => {
   return baseMeta({
-    title: 'Designer + Developer',
-    description: `Design portfolio of ${config.name} — a product designer working on web & mobile apps with a focus on motion, experience design, and accessibility.`,
+    title: 'Software Developer',
+    description: `Designer and developer of web and desktop applications, with a focus on user experience, performance, and accessibility. ${config.disciplines.join(', ')}`,
   });
 };
 
@@ -130,21 +121,17 @@ export const Home = () => {
         sectionRef={projectTwo}
         visible={visibleSections.includes(projectTwo.current)}
         index={2}
-        title="Video game progress tracking"
-        description="Design and development for a video game tracking app built in React Native"
+        title="ASCII Art Generator"
+        description="A web app that converts images into ASCII art, with support for custom character sets and file downloads."
         buttonText="View website"
-        buttonLink="https://gamestack.hamishw.com"
+        buttonLink="https://ascii-art-generator.maheshbabu11.dev/"
         model={{
           type: 'phone',
           alt: 'App login screen',
           textures: [
             {
-              srcSet: `${gamestackTexture} 375w, ${gamestackTextureLarge} 750w`,
-              placeholder: gamestackTexturePlaceholder,
-            },
-            {
-              srcSet: `${gamestackTexture2} 375w, ${gamestackTexture2Large} 750w`,
-              placeholder: gamestackTexture2Placeholder,
+              srcSet: `${asciiArtScreenshot} 375w, ${asciiArtScreenshotLarge} 750w`,
+              placeholder: asciiArtScreenshotPlaceholder,
             },
           ],
         }}

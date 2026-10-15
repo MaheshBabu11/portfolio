@@ -1,0 +1,307 @@
+---
+title: Synchronizing Scheduled Tasks Across Spring Boot Instances with ShedLock
+date: '2024-04-21'
+abstract: ShedLock brings order to the chaos, ensuring that scheduled tasks run smoothly across all instances, no matter how many you’ve got. In this article, we’ll break down the magic of ShedLock and show you how to wield its power in your Spring Boot projects.
+banner: https://cdn-images-1.medium.com/max/12000/0*s6WUBiIwOi1w2Ip1
+---
+
+## Synchronizing Scheduled Tasks Across Spring Boot Instances with ShedLock
+
+![Photo by [airfocus](https://unsplash.com/@airfocus?utm_source=medium&utm_medium=referral) on [Unsplash](https://unsplash.com?utm_source=medium&utm_medium=referral)](https://cdn-images-1.medium.com/max/12000/0*s6WUBiIwOi1w2Ip1)
+
+Ever found yourself in a Spring Boot project, jazzed up with scheduling features, only to hit a snag when scaling up?
+Picture this: as your app gains traction and you scale it across multiple instances, suddenly your schedulers start
+running amok, triggering tasks in a frenzy.
+
+Enter ShedLock, your trusty sidekick in the battle against chaotic task execution. ShedLock brings order to the chaos,
+ensuring that scheduled tasks run smoothly across all instances, no matter how many you’ve got. In this article, we’ll
+break down the magic of ShedLock and show you how to wield its power in your Spring Boot projects. Say goodbye to
+scheduling headaches and hello to seamless task management — let’s dive in together!
+
+[ShedLock](https://github.com/lukas-krecan/ShedLock) serves as a guardian for your scheduled tasks, ensuring they’re
+executed at most once simultaneously. When a task kicks off on one node, ShedLock steps in by acquiring a lock. This
+lock acts as a barrier, preventing the same task from running on another node (or thread). It’s worth noting that if a
+task is already underway on one node, ShedLock doesn’t make other nodes wait; instead, it gracefully skips execution on
+those nodes.
+
+Let’s kick things off by crafting a straightforward Spring Boot application to illustrate the issue firsthand. We’ll
+showcase the problem as it arises naturally, and then we’ll employ ShedLock to swiftly resolve it.
+
+In our Spring Boot app, we’ll have a scheduler that retrieves post details
+from [https://jsonplaceholder.typicode.com/](https://jsonplaceholder.typicode.com/) every 5 minutes and inserts them
+into the post table. The code for the scheduler would look something like this:
+
+```java
+package dev.maheshbabu11.shedlockdemo.Scheduler;
+
+import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Component;
+
+@Component
+class PostFetchScheduler {
+
+    final PostFetchService postFetchService;
+
+    PostFetchScheduler(PostFetchService postFetchService) {
+        this.postFetchService = postFetchService;
+    }
+
+    @Scheduled(cron = "0 */5 * ? * *")
+    void fetchPosts() {
+        postFetchService.fetchPosts();
+    }
+}
+```
+
+```java
+package dev.maheshbabu11.shedlockdemo.Scheduler;
+
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestClient;
+
+import java.util.List;
+
+@Service
+class PostFetchService {
+
+    final PostRepository postRepository;
+
+    PostFetchService(PostRepository postRepository) {
+        this.postRepository = postRepository;
+    }
+
+    record Post(Long userId, Long id, String title, String body) {
+    }
+
+
+    void fetchPosts() {
+        RestClient client = RestClient.create();
+        Post response = client.get().uri("https://jsonplaceholder.typicode.com/posts/1").retrieve().body(
+                Post.class);
+        if (null != response) {
+            Posts posts = new Posts();
+            posts.setPostUid(response.id());
+            posts.setPostTitle(response.title());
+            posts.setPostContent(response.body());
+            postRepository.save(posts);
+        }
+    }
+}
+```
+
+```java
+package dev.maheshbabu11.shedlockdemo.Scheduler;
+
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
+
+@Entity
+@Table(name = "posts")
+@Getter
+@Setter
+public class Posts {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "post_id")
+    private Long postId;
+
+    @Column(name = "post_title")
+    private String postTitle;
+
+    @Column(name = "post_content")
+    private String postContent;
+
+    @Column(name = "post_uid")
+    private Long postUid;
+
+}
+```
+
+The code speaks for itself; upon running the application, the scheduler fetches post data from jsonplaceholder.com every
+5 minutes and inserts it into our posts table. When running this application as a standalone instance, everything
+functions smoothly. However, upon running five instances of the application, we observe that every 5 minutes, there are
+five entries instead of just one.
+
+![Posts entries when running a single instance](https://cdn-images-1.medium.com/max/2538/1*IBxDkhzsnDRuuGVZDejUbA.png)
+
+![Posts entries when running 5 instances](https://cdn-images-1.medium.com/max/2400/1*NABcCrh0tr-lBN0gYAefXA.png)
+
+This clearly shows the problem we’re aiming to fix. _Note: Data was cleared from the table after each run._
+
+Now let's add shedlock to our application and see if it solves our issue.
+
+## **Step 1: Add maven dependency**
+
+Let's add the latest [shedlock-spring](https://mvnrepository.com/artifact/net.javacrumbs.shedlock/shedlock-spring)
+dependency to our project.
+
+```xml
+    <dependency>
+        <groupId>net.javacrumbs.shedlock</groupId>
+        <artifactId>shedlock-spring</artifactId>
+        <version>5.13.0</version>
+    </dependency>
+```
+
+## Step 2: Configuring Shedlock
+
+ShedLock operates effectively in environments with a shared database by specifying an appropriate LockProvider. It
+establishes a table or document within the database to store details about the ongoing locks.
+
+Presently, ShedLock is compatible with Mongo, Redis, Hazelcast, ZooKeeper, and any platform supported by a JDBC driver.
+
+For our use case, we rely on a Postgres DB as our database. When configuring the lock provider, there are various
+approaches available. In our case, we’ll utilize the JdbcTemplate. To achieve this, let’s add
+the [shedlock-provider-jdbc-template](https://mvnrepository.com/artifact/net.javacrumbs.shedlock/shedlock-provider-jdbc-template)
+dependency.
+
+```xml
+    <dependency>
+        <groupId>net.javacrumbs.shedlock</groupId>
+        <artifactId>shedlock-provider-jdbc-template</artifactId>
+        <version>5.13.0</version>
+    </dependency>
+```
+
+Create the lock data table using the query below:
+
+```sql
+    CREATE TABLE shedlock(name VARCHAR(64) NOT NULL, lock_until TIMESTAMP NOT NULL,
+        locked_at TIMESTAMP NOT NULL, locked_by VARCHAR(255) NOT NULL, PRIMARY KEY (name));
+
+```
+
+You can now configure the Lock Provider in your application as below:
+
+```java
+package dev.maheshbabu11.shedlockdemo;
+
+import net.javacrumbs.shedlock.core.LockProvider;
+import net.javacrumbs.shedlock.provider.jdbctemplate.JdbcTemplateLockProvider;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.jdbc.core.JdbcTemplate;
+
+import javax.sql.DataSource;
+
+@Configuration
+public class LockConfig {
+
+    @Bean
+    public LockProvider lockProvider(DataSource dataSource) {
+        return new JdbcTemplateLockProvider(
+                JdbcTemplateLockProvider.Configuration.builder()
+                        .withJdbcTemplate(new JdbcTemplate(dataSource))
+                        .usingDbTime()
+                        .build()
+        );
+    }
+}
+```
+
+```java
+package dev.maheshbabu11.shedlockdemo;
+
+import net.javacrumbs.shedlock.spring.annotation.EnableSchedulerLock;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.scheduling.annotation.EnableScheduling;
+
+@SpringBootApplication
+@EnableScheduling
+@EnableSchedulerLock(defaultLockAtMostFor = "PT4M")
+public class ShedlockDemoApplication {
+
+    public static void main(String[] args) {
+        SpringApplication.run(ShedlockDemoApplication.class, args);
+    }
+
+}
+```
+
+If you need to specify a schema, you can set it in the table name using the usual dot notation new
+JdbcTemplateLockProvider(datasource, "my_schema.shedlock").
+
+## **Step 3: Adding ShedLock to our Scheduler**
+
+Scheduler lock can be added to our application as simple as below:
+
+```java
+package dev.maheshbabu11.shedlockdemo.Scheduler;
+
+import net.javacrumbs.shedlock.spring.annotation.SchedulerLock;
+import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Component;
+
+@Component
+class PostFetchScheduler {
+
+    final PostFetchService postFetchService;
+
+    PostFetchScheduler(PostFetchService postFetchService) {
+        this.postFetchService = postFetchService;
+    }
+
+    @Scheduled(cron = "0 */5* ? * *")
+    @SchedulerLock(name = "fetchPosts", lockAtMostFor = "PT4M", lockAtLeastFor = "PT4M")
+    void fetchPosts() {
+        postFetchService.fetchPosts();
+    }
+}
+```
+
+The @SchedulerLock annotation serves multiple purposes. Firstly, only methods annotated with @SchedulerLockare locked;
+the library disregards all other scheduled tasks. Additionally, you must specify a name for the lock, ensuring that only
+one task with the same name can execute simultaneously.
+
+You can also define the lockAtMostFor attribute, determining how long the lock should persist if the executing node
+becomes inactive. However, this is a fallback; ordinarily, the lock is released once the task finishes (unless
+lockAtLeastFor specified, as explained below). It’s crucial to set lockAtMostFor to a duration significantly longer than
+the normal execution time. Otherwise, if the task exceeds lockAtMostFor, the behaviour may become unpredictable, with
+multiple processes effectively holding the lock.
+
+If lockAtMostFor isn’t specified in the @SchedulerLock annotation, the default value from @EnableSchedulerLockwill be
+applied.
+
+Finally, you can set the lockAtLeastFor attribute, determining the minimum duration for which the lock should persist.
+Its primary role is to prevent execution from multiple nodes in cases of extremely short tasks and clock discrepancies
+between nodes.
+
+Now that ShedLock has been incorporated into our scheduler, let’s run some tests to confirm if it has indeed addressed
+our problem. Upon running the application again, we observe that only one scheduler is executed instead of the previous
+five.
+
+![Posts entries when running with Shedlock](https://cdn-images-1.medium.com/max/2538/1*IBxDkhzsnDRuuGVZDejUbA.png)
+
+We can also observe that ShedLock has included the lock information in the ShedLock table.
+
+![Shedlock lock info](https://cdn-images-1.medium.com/max/2288/1*hcKE1gxulDIeWhEogxVd2Q.png)
+
+You can check out the Shedlock GitHub repo for more info on configuring and extending Shedlock features and
+functionalities.
+[GitHub - lukas-krecan/ShedLock: Distributed lock for your scheduled tasks
+](https://github.com/lukas-krecan/ShedLock)
+
+In case you want to check out the code:
+[GitHub - MaheshBabu11/shedlock-demo: This is a simple project to demonstrate how to use Shedlock to…
+](https://github.com/MaheshBabu11/shedlock-demo)
+
+In conclusion, ShedLock proves to be a valuable tool for managing scheduled tasks in distributed Spring Boot
+applications. By ensuring that tasks are executed only once, regardless of the number of application instances, ShedLock
+helps maintain data consistency and prevents duplicate executions. Throughout this journey, we’ve witnessed the seamless
+integration of ShedLock into our scheduler, effectively resolving the issue of concurrent task execution across multiple
+instances. By adding the necessary configuration and annotations, we’ve experienced firsthand how ShedLock orchestrates
+task synchronization and prevents overlapping executions.
+
+Furthermore, ShedLock’s compatibility with various database systems and its support for Spring Expression Language (
+SpEL) provide flexibility and ease of use. With ShedLock in place, developers can confidently scale their applications
+without worrying about task consistency or redundant executions.
+
+Overall, ShedLock empowers developers to streamline task management in distributed environments, ensuring reliable and
+efficient execution of scheduled tasks. As we’ve demonstrated, integrating ShedLock into our Spring Boot application has
+not only addressed our initial problem but has also enhanced the reliability and robustness of our scheduler.
+
+Happy Coding 😊!!! Leave a 👏 if you enjoyed reading it.

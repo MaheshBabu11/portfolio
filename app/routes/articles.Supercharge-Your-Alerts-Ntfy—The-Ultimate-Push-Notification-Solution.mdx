@@ -1,0 +1,71 @@
+---
+title: "Supercharge Your Alerts: Ntfy — The Ultimate Push Notification Solution"
+date: '2023-09-17'
+abstract:  "Ntfy is the ultimate push notification solution for your scripts and command-line tools. It allows you to execute commands and send notifications to your phone, desktopt. It’s a simple yet powerful tool that can be used to automate your workflow and make your life easier. In this article, we’ll show you how to set up Ntfy on your machine and use it to send notifications from your scripts."
+banner: https://cdn-images-1.medium.com/max/10368/0*AFlq-or99e5ysqJy
+---
+
+## Supercharge Your Alerts: Ntfy — The Ultimate Push Notification Solution
+
+![Photo by [Jamie Street](https://unsplash.com/@jamie452?utm_source=medium&utm_medium=referral) on [Unsplash](https://unsplash.com?utm_source=medium&utm_medium=referral)](https://cdn-images-1.medium.com/max/10368/0*AFlq-or99e5ysqJy)
+
+Scripts and command-line tools have evolved into essential tools for developers, sysadmins, and tech aficionados in today’s fast-paced world of technology and automation. These lines of code have tremendous power because they can automate processes, manage data, and plan intricate workflows. Nevertheless, despite their usefulness, scripts occasionally behave as the silent characters in our online dramas, toiling away silently in the background.
+
+But what if your scripts could talk for themselves and let you know when they needed to say something? What if they could notify you when they made a mistake or finished a task successfully? Enter ntfy, the unseen hero who uses push notifications to bring your scripts to life.
+
+We’ll introduce you to ntfy (pronounced “notify”), a clever HTTP-based notification system, in this article. We’ll introduce you to ntfy (pronounced “notify”), a clever HTTP-based notification system, in this article. Now, let’s delve into the setup process. There are various approaches to setting up ntfy; you have the option to utilize the hosted services offered by ntfy.sh, both in free and paid versions, or you can opt to establish your very own ntfy server. Additionally, ntfy extends its functionality through dedicated Android and iOS applications, as well as a web application, enabling you to send and receive notifications seamlessly.
+
+In this example, we’ll set up our own notification server on AWS and utilize it to send notifications to the Android app. Let’s get this party started.
+
+Firstly let's set up the ntfy service using the docker container. We’ll assume you have docker installed on your local machine/AWS Virtual Machine for this example.
+
+Now let's start a docker container containing the latest ntfy image. The server exposes its web UI and the API on port 80, so you need to expose that in Docker. Let's run the command below to start the server.
+
+    sudo docker run -p 80:80 -itd binwiederhier/ntfy serve
+
+This command will pull the image and start the container.
+
+![](https://cdn-images-1.medium.com/max/2114/1*jLetXpk52NaO1aL-NyWelw.png)
+
+Now let's see if it's running using the command:
+
+    sudo docker ps
+
+We can see that it's running successfully.
+
+![](https://cdn-images-1.medium.com/max/3314/1*W2XO6wKNahT0npgqfWP99g.png)
+
+If you open your DNS address on a new tab you can see that the web app for ntfy is running.
+
+![ntfy web server](https://cdn-images-1.medium.com/max/3802/1*-ijkJViIS6jhHAxigRgEtQ.png)
+
+Now let’s download the Android app for ntfy from the Play Store.
+
+![](https://cdn-images-1.medium.com/max/2160/1*S-mDY2zLkEVMwVZcVZzl9Q.jpeg)
+
+Once you have the app set up on your phone, you need to change the ntfy server from the default server to the DNS of your server as shown below.
+
+![](https://cdn-images-1.medium.com/max/6466/1*3Xsmc2YPHNPT_T_dzwh_Ew.png)
+
+Ok before jumping in let's understand the concept of topics. In the context of ntfy, a “topic” typically refers to a category or channel to which notifications can be sent. It allows you to organize and group notifications based on their content or purpose. Users can subscribe to specific topics to receive relevant notifications, and senders can target their messages to specific topics for a more focused communication approach. Topics provide a way to streamline and manage notifications within the ntfy system.
+
+Now we know what a topic is let's send our first notification, for this I am using a terminal, u can use the web app/Android app to do the same.
+
+We can use the below curl command, here ***“Hello World!”*** is the message ***ec2–13–126–200–147.ap-south-1.compute.amazonaws.com ***is the DNS of our notification server and ***hello ***is our topic. So whoever subscribes to the topic ***hello ***on this server gets the notification.
+
+    curl -d "Hello World!" ec2-13-126-200-147.ap-south-1.compute.amazonaws.com/hello
+
+![](https://cdn-images-1.medium.com/max/2000/1*_Lz8JEXOkny5MpUHXvtgSA.jpeg)
+
+We can see that we are getting the notification. Now let's do something more interesting like sending a notification if a service is down or if it's up etc. In this example I am going to do a ping to see if my website is up if it's up it will send me it’s up else it will send me it’s down. Use the command below :
+
+    ping maheshbabu11.dev -c 3 && curl -d "Its up!" ec2-13-126-200-147.ap-south-1.compute.amazonaws.com/hello || curl -d "Its down!" ec2-13-126-200-14
+    7.ap-south-1.compute.amazonaws.com/hello
+
+This will return it's up because my website is up. You can use it to set up any type of notification for processes, cron jobs, downloads etc.
+
+This is just a fraction of what it can do, there are lots of customization options, configurations, and security features offered by ntfy. The official website [https://ntfy.sh/](https://ntfy.sh/) contains all the details needed to get started. You can also check out [https://docs.ntfy.sh/](https://docs.ntfy.sh/) for the official documentation.
+
+*Look out for some related stuff I am currently workin on.*
+
+Happy coding 😇.
