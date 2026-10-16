@@ -219,12 +219,20 @@ export const About = () => (
             <div className={styles.actions}>
               <Button
                 secondary
+                icon="download"
                 href="https://drive.google.com/file/d/14irMx950--x5lixuP-Z_wbnJTYMbdRRG/view?usp=sharing"
               >
                 Download résumé
               </Button>
-              <Button secondary href="https://cal.com/maheshbabu11">
+              <Button secondary icon="phone" href="https://cal.com/maheshbabu11">
                 Schedule a call
+              </Button>
+              <Button
+                secondary
+                icon="coffee"
+                href="https://www.buymeacoffee.com/maheshbabu11"
+              >
+                Buy me a coffee
               </Button>
             </div>
           </div>

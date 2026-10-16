@@ -41,6 +41,13 @@ The build automatically selects Vercel's Remix preset on Vercel. Configure
 `FROM_EMAIL` in the Vercel project settings to enable sessions and the contact
 form.
 
+Add source photos to `app/assets/gallery/`. The `predev` and `prebuild` scripts
+generate aspect-ratio-preserving WebP thumbnails (up to 640px) and display-size
+images (up to 1800px) in `public/gallery-optimized/`; the gallery grid loads only
+thumbnails, and clicking one opens its display-size version. Generated images and the manifest are
+ignored by Git, while source photos remain in the assets folder. Run
+`npm run gallery:optimize` after adding photos to an already-running dev server.
+
 ## Permissions
 
 I'm cool with anyone using the code or parts of the code for their own site, it is open source so people can learn from it and adapt it. However, I would encourage you to modify the theme and components it to make it your own. If you are using the site's design largely unmodified, I'd appreciate being credited as the designer of the website.

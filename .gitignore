@@ -3,6 +3,9 @@ node_modules
 /.cache
 /build
 .env
+.env.local
+/public/gallery-optimized/
+/app/routes/gallery/gallery-images.json
 
 .wrangler
 .dev.vars
@@ -10,3 +13,4 @@ node_modules
 public/draco
 storybook-static
 .vercel
+.env*

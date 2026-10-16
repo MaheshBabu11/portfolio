@@ -66,5 +66,17 @@
   "instagram": {
     "width": 24,
     "height": 24
+  },
+  "download": {
+    "width": 24,
+    "height": 24
+  },
+  "coffee": {
+    "width": 24,
+    "height": 24
+  },
+  "phone": {
+    "width": 24,
+    "height": 24
   }
 }

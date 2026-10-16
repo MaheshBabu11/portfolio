@@ -1,0 +1,154 @@
+.gallery {
+  --cyber-cyan: #5cf4ff;
+
+  position: relative;
+  isolation: isolate;
+
+  &::before {
+    position: absolute;
+    z-index: -1;
+    inset: 0;
+    background-image: radial-gradient(
+      circle,
+      color-mix(in lab, var(--cyber-cyan) 42%, transparent) 1px,
+      transparent 1.5px
+    );
+    background-size: 32px 32px;
+    content: '';
+    opacity: 0.22;
+    pointer-events: none;
+  }
+}
+
+.galleryHeader {
+  padding-top: var(--space3XL);
+  padding-bottom: 0;
+
+  @media (--mediaTablet) {
+    padding-top: var(--space2XL);
+  }
+}
+
+.gallerySection {
+  padding-top: var(--spaceM);
+  padding-bottom: var(--space4XL);
+}
+
+.galleryContent {
+  max-width: 100%;
+  gap: 0;
+}
+
+.photoGrid {
+  column-count: 5;
+  column-gap: var(--spaceM);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.photoCard {
+  display: inline-block;
+  width: 100%;
+  margin: 0 0 var(--spaceM);
+  break-inside: avoid;
+  overflow: hidden;
+  border-radius: 10px;
+  background: var(--backgroundLight);
+  transition:
+    box-shadow var(--durationM) ease,
+    transform var(--durationM) ease;
+
+  &:hover,
+  &:focus-within {
+    box-shadow: 0 0 20px color-mix(in lab, var(--cyber-cyan) 18%, transparent);
+    transform: translateY(-3px);
+  }
+}
+
+.photoFigure {
+  margin: 0;
+}
+
+.photoLink {
+  display: block;
+  overflow: hidden;
+  border-radius: inherit;
+  background: var(--backgroundLight);
+
+  &:focus-visible {
+    outline: 2px solid var(--cyber-cyan);
+    outline-offset: -2px;
+  }
+}
+
+.photo {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: inherit;
+  transition: transform var(--durationL) ease;
+
+  .photoCard:hover & {
+    transform: scale(1.035);
+  }
+}
+
+.emptyState {
+  display: grid;
+  justify-items: center;
+  gap: var(--spaceM);
+  padding: var(--space4XL) var(--spaceXL);
+  border: 1px dashed color-mix(in lab, var(--cyber-cyan) 38%, transparent);
+  background: color-mix(in lab, var(--cyber-cyan) 4%, var(--backgroundLight));
+  text-align: center;
+
+  p {
+    max-width: 48ch;
+    margin: 0;
+  }
+
+  code {
+    color: var(--cyber-cyan);
+  }
+}
+
+@media (--mediaLaptop) {
+  .photoGrid {
+    column-count: 4;
+  }
+}
+
+@media (--mediaTablet) {
+  .photoGrid {
+    column-count: 3;
+  }
+}
+
+@media (--mediaMobile) {
+  .photoGrid {
+    column-count: 2;
+  }
+}
+
+@media (max-width: 420px) {
+  .photoGrid {
+    column-count: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .photoCard,
+  .photo {
+    transition: none;
+  }
+
+  .photoCard:hover,
+  .photoCard:focus-within {
+    transform: none;
+  }
+
+  .photoCard:hover .photo {
+    transform: none;
+  }
+}
