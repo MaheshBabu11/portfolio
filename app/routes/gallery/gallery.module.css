@@ -27,6 +27,10 @@
   @media (--mediaTablet) {
     padding-top: var(--space2XL);
   }
+
+  @media (--mediaMobile), (--mediaMobileLS) {
+    padding-top: var(--space5XL);
+  }
 }
 
 .gallerySection {
