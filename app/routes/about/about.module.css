@@ -1,0 +1,393 @@
+.about {
+  --cyber-cyan: #5cf4ff;
+  --cyber-magenta: #ff4fd8;
+
+  position: relative;
+  isolation: isolate;
+
+  &::before {
+    position: absolute;
+    z-index: -1;
+    inset: 0;
+    background-image:
+      radial-gradient(
+        ellipse at 82% 0%,
+        color-mix(in lab, var(--cyber-magenta) 14%, transparent),
+        transparent 34rem
+      ),
+      linear-gradient(
+        to right,
+        color-mix(in lab, var(--cyber-cyan) 9%, transparent) 1px,
+        transparent 1px
+      ),
+      linear-gradient(
+        to bottom,
+        color-mix(in lab, var(--cyber-cyan) 9%, transparent) 1px,
+        transparent 1px
+      );
+    background-repeat: no-repeat, repeat, repeat;
+    background-size: 100% 680px, 48px 48px, 48px 48px;
+    content: '';
+    opacity: 0.32;
+    pointer-events: none;
+  }
+}
+
+.section {
+  padding-top: var(--spaceXL);
+  padding-bottom: var(--spaceXL);
+}
+
+.headerSection {
+  padding-bottom: var(--space2XL);
+}
+
+.profileHeader {
+  grid-template-columns: minmax(160px, 220px) minmax(0, 1fr);
+  align-items: center;
+  gap: var(--space2XL);
+}
+
+.portrait {
+  width: 100%;
+  max-width: 220px;
+  aspect-ratio: 1;
+  overflow: hidden;
+  border: 2px solid var(--cyber-cyan);
+  border-radius: 50%;
+  box-shadow:
+    0 0 0 5px color-mix(in lab, var(--cyber-magenta) 14%, transparent),
+    0 0 24px color-mix(in lab, var(--cyber-cyan) 42%, transparent);
+
+  & img {
+    object-fit: cover;
+  }
+}
+
+.profileContent {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.profileMeta,
+.sectionMeta {
+  display: grid;
+  grid-template-columns: 100px minmax(0, 1fr);
+  align-items: center;
+  gap: var(--spaceM);
+}
+
+.profileMeta {
+  margin-bottom: var(--spaceS);
+}
+
+.neonDivider > div {
+  background-color: var(--cyber-cyan);
+  box-shadow: 0 0 8px color-mix(in lab, var(--cyber-cyan) 70%, transparent);
+}
+
+.kicker {
+  color: var(--cyber-magenta);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.name {
+  color: var(--cyber-cyan);
+  margin-top: var(--spaceXS);
+  margin-bottom: var(--spaceXS);
+  text-shadow: 0 0 18px color-mix(in lab, var(--cyber-cyan) 32%, transparent);
+}
+
+.sectionTitle {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spaceM);
+  width: 100%;
+  margin-bottom: var(--spaceL);
+}
+
+.sectionTitle > h2 {
+  text-shadow: 0 0 14px color-mix(in lab, var(--cyber-cyan) 16%, transparent);
+}
+
+.sectionMeta {
+  max-width: 360px;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spaceM);
+  margin-top: var(--spaceL);
+}
+
+.timeline {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spaceL);
+  width: 100%;
+  margin-left: var(--spaceS);
+  padding-left: var(--spaceL);
+  border-left: 1px solid color-mix(in lab, var(--cyber-cyan) 32%, transparent);
+}
+
+.entry {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spaceM);
+  padding: var(--spaceL);
+  border: 1px solid color-mix(in lab, var(--cyber-cyan) 22%, transparent);
+  border-radius: 12px;
+  background: color-mix(in lab, var(--cyber-cyan) 4%, var(--backgroundLight));
+  transition: border-color var(--durationM) ease;
+
+  &::after {
+    position: absolute;
+    z-index: 0;
+    inset: 0;
+    transform: scaleX(0);
+    transform-origin: right;
+    border-radius: 11px;
+    background: color-mix(in lab, var(--cyber-cyan) 12%, var(--backgroundLight));
+    content: '';
+    transition: transform var(--durationM) var(--bezierFastoutSlowin);
+  }
+
+  &::before {
+    position: absolute;
+    z-index: 2;
+    top: var(--spaceL);
+    left: -31px;
+    width: 12px;
+    height: 12px;
+    border: 2px solid var(--background);
+    border-radius: 50%;
+    background: var(--cyber-cyan);
+    box-shadow: 0 0 12px color-mix(in lab, var(--cyber-cyan) 60%, transparent);
+    content: '';
+  }
+}
+
+.entry > * {
+  position: relative;
+  z-index: 1;
+}
+
+.entryInfo,
+.certificationInfo {
+  display: flex;
+  align-items: center;
+  gap: var(--spaceM);
+  min-width: 0;
+}
+
+.entryLogo,
+.certificationLogo {
+  flex: 0 0 auto;
+  object-fit: contain;
+  padding: var(--spaceXS);
+  background: var(--white);
+  border-radius: 8px;
+}
+
+.entryLogo {
+  width: 48px;
+  height: 48px;
+}
+
+.certificationLogo {
+  width: 40px;
+  height: 40px;
+}
+
+.entryHeader,
+.certification {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--spaceL);
+}
+
+.entryHeader > div,
+.certificationInfo > div {
+  min-width: 0;
+}
+
+.timeframe {
+  flex-shrink: 0;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.skills {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--spaceM);
+  width: 100%;
+}
+
+.skillGroup {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spaceM);
+  min-width: 0;
+  padding: var(--spaceL);
+  border: 1px solid color-mix(in lab, var(--cyber-cyan) 20%, transparent);
+  border-radius: 12px;
+  background: color-mix(in lab, var(--cyber-cyan) 4%, var(--backgroundLight));
+}
+
+.skillList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spaceS);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  width: 100%;
+}
+
+.skill {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spaceS);
+  padding: var(--spaceXS) var(--spaceM);
+  border: 1px solid color-mix(in lab, var(--cyber-cyan) 30%, transparent);
+  border-radius: 4px;
+  background: color-mix(in lab, var(--cyber-cyan) 5%, var(--backgroundLight));
+  color: var(--text);
+  font-size: var(--fontSizeBodyS);
+}
+
+.skillIcon {
+  width: 18px;
+  height: 18px;
+  flex: 0 0 auto;
+  color: var(--cyber-cyan);
+}
+
+.certificationList {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--spaceM);
+  width: 100%;
+}
+
+.certification {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  min-width: 0;
+  min-height: 100%;
+  padding: var(--spaceM);
+  border: 1px solid color-mix(in lab, var(--cyber-magenta) 25%, transparent);
+  border-left-width: 2px;
+  border-radius: 12px;
+  background: color-mix(in lab, var(--cyber-magenta) 4%, var(--backgroundLight));
+  transition: border-color var(--durationM) ease;
+
+  &::after {
+    position: absolute;
+    z-index: 0;
+    inset: 0;
+    transform: scaleX(0);
+    transform-origin: right;
+    background: color-mix(in lab, var(--cyber-magenta) 12%, var(--backgroundLight));
+    content: '';
+    transition: transform var(--durationM) var(--bezierFastoutSlowin);
+  }
+}
+
+.certification > * {
+  position: relative;
+  z-index: 1;
+}
+
+.certificationInfo {
+  flex: 1;
+}
+
+.certificationLink {
+  display: flex;
+  justify-content: flex-start;
+  margin-top: var(--spaceL);
+}
+
+.actions a {
+  border-color: color-mix(in lab, var(--cyber-cyan) 35%, transparent);
+}
+
+.actions a:hover {
+  box-shadow: 0 0 16px color-mix(in lab, var(--cyber-cyan) 28%, transparent);
+}
+
+@media (--mediaTablet) {
+  .profileHeader {
+    grid-template-columns: minmax(140px, 180px) minmax(0, 1fr);
+    gap: var(--space2XL);
+  }
+
+  .skills {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (--mediaMobile) {
+  .section {
+    padding-top: var(--spaceL);
+    padding-bottom: var(--spaceL);
+  }
+
+  .profileHeader {
+    grid-template-columns: 1fr;
+    gap: var(--spaceXL);
+  }
+
+  .profileMeta,
+  .sectionMeta {
+    grid-template-columns: 64px minmax(0, 1fr);
+    gap: var(--spaceS);
+  }
+
+  .portrait {
+    max-width: 180px;
+    justify-self: center;
+  }
+
+  .entryHeader,
+  .certification {
+    flex-direction: column;
+    gap: var(--spaceXS);
+  }
+
+  .timeframe {
+    text-align: left;
+  }
+
+  .skills,
+  .certificationList {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (--mediaUseMotion) {
+  .entry:hover {
+    border-color: color-mix(in lab, var(--cyber-cyan) 58%, transparent);
+    box-shadow: 0 0 22px color-mix(in lab, var(--cyber-cyan) 16%, transparent);
+  }
+
+  .certification:hover {
+    border-color: color-mix(in lab, var(--cyber-magenta) 58%, transparent);
+    box-shadow: 0 0 22px color-mix(in lab, var(--cyber-magenta) 16%, transparent);
+  }
+
+  .entry:hover::after,
+  .certification:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+}
