@@ -1,3 +1,4 @@
+import { useBackgroundAnimation } from '~/components/background-animation/background-animation-provider';
 import { DecoderText } from '~/components/decoder-text';
 import { Heading } from '~/components/heading';
 import { Section } from '~/components/section';
@@ -14,12 +15,13 @@ import config from '~/config.json';
 import { useHydrated } from '~/hooks/useHydrated';
 import styles from './intro.module.css';
 
-const DisplacementSphere = lazy(() =>
-  import('./displacement-sphere').then(module => ({ default: module.DisplacementSphere }))
+const BackgroundAnimation = lazy(() =>
+  import('./background-animation').then(module => ({ default: module.BackgroundAnimation }))
 );
 
 export function Intro({ id, sectionRef, scrollIndicatorHidden, ...rest }) {
   const { theme } = useTheme();
+  const { mode: backgroundMode } = useBackgroundAnimation();
   const { disciplines } = config;
   const [disciplineIndex, setDisciplineIndex] = useState(0);
   const prevTheme = usePrevious(theme);
@@ -66,7 +68,7 @@ export function Intro({ id, sectionRef, scrollIndicatorHidden, ...rest }) {
           <>
             {isHydrated && (
               <Suspense>
-                <DisplacementSphere />
+                <BackgroundAnimation variant={backgroundMode} />
               </Suspense>
             )}
             <header className={styles.text}>

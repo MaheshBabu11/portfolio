@@ -13,7 +13,7 @@ import {
   WebGLRenderer,
 } from 'three';
 import { cleanRenderer } from '~/utils/three';
-import styles from './displacement-sphere.module.css';
+import styles from './background-animation.module.css';
 
 const vertexShader = `
   varying vec2 vUv;
@@ -88,18 +88,18 @@ const fragmentShader = `
     armLight *= 0.3 + clouds * 1.4;
     armLight *= 1.0 - smoothstep(0.42, 0.76, dust) * 0.5;
 
-    float redClouds = smoothstep(0.52, 0.78, clouds) * armLight;
+    float pinkClouds = smoothstep(0.52, 0.78, clouds) * armLight;
     float nebula = smoothstep(0.42, 0.78, clouds) * diskFade;
     float bulge = exp(-radius * 4.5) * diskFade;
     float core = exp(-radius * 21.0);
 
-    vec3 blueArm = mix(vec3(0.035, 0.12, 0.3), vec3(0.1, 0.16, 0.28), uLightMode);
-    vec3 redArm = mix(vec3(0.38, 0.045, 0.1), vec3(0.35, 0.11, 0.18), uLightMode);
+    vec3 mainArm = mix(vec3(0.035, 0.12, 0.3), vec3(0.1, 0.16, 0.28), uLightMode);
+    vec3 pinkArm = mix(vec3(0.95, 0.12, 0.55), vec3(0.48, 0.2, 0.34), uLightMode);
     vec3 color = vec3(0.004, 0.006, 0.016);
-    color += blueArm * (armLight + nebula * 0.3);
-    color += redArm * redClouds * 1.8;
-    color += mix(vec3(0.24, 0.12, 0.4), vec3(0.22, 0.17, 0.29), uLightMode) * bulge;
-    color += mix(vec3(1.0, 0.78, 0.58), vec3(0.68, 0.45, 0.2), uLightMode) * core * 2.0;
+    color += mainArm * (armLight + nebula * 0.3);
+    color += pinkArm * pinkClouds * 1.8;
+    color += mix(vec3(0.18, 0.14, 0.32), vec3(0.22, 0.17, 0.29), uLightMode) * bulge;
+    color += mix(vec3(1.0, 0.82, 0.76), vec3(0.68, 0.45, 0.36), uLightMode) * core * 2.0;
 
     vec2 starGrid = vUv * vec2(700.0, 420.0);
     vec2 starCell = floor(starGrid);
@@ -113,7 +113,7 @@ const fragmentShader = `
       exp(-abs(starLocal.y) * 38.0) * exp(-abs(starLocal.x) * 5.0)
     ) * brightStar;
 
-    color += mix(vec3(0.62, 0.72, 1.0), vec3(0.25, 0.2, 0.32), uLightMode) *
+    color += mix(vec3(0.72, 0.82, 1.0), vec3(0.34, 0.24, 0.38), uLightMode) *
       (starDot * 0.8 + crossGlow * 0.7);
     float alpha = clamp(
       0.035 + nebula * 0.2 + armLight * 0.62 + bulge * 0.28 + core * 0.35 +

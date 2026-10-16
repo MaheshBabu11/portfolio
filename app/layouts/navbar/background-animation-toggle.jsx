@@ -6,6 +6,7 @@ const labels = {
   sphere: 'Sphere',
   aurora: 'Aurora',
   galaxy: 'Galaxy',
+  meteors: 'Meteors',
 };
 
 export const BackgroundAnimationToggle = ({ isMobile, ...rest }) => {

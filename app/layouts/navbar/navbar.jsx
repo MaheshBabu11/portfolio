@@ -7,6 +7,7 @@ import { useScrollToHash, useWindowSize } from '~/hooks';
 import { Link as RouterLink, useLocation } from '@remix-run/react';
 import { useEffect, useRef, useState } from 'react';
 import { cssProps, media, msToNum, numToMs } from '~/utils/style';
+import { BackgroundAnimationToggle } from './background-animation-toggle';
 import { NavToggle } from './nav-toggle';
 import { ThemeToggle } from './theme-toggle';
 import { navLinks, socialLinks } from './nav-data';
@@ -195,10 +196,14 @@ export const Navbar = () => {
               </RouterLink>
             ))}
             <NavbarIcons />
+            {location.pathname === '/' && <BackgroundAnimationToggle isMobile />}
             <ThemeToggle isMobile />
           </nav>
         )}
       </Transition>
+      {location.pathname === '/' && !isMobile && (
+        <BackgroundAnimationToggle data-navbar-item />
+      )}
       {!isMobile && <ThemeToggle data-navbar-item />}
     </header>
   );

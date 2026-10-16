@@ -14,7 +14,7 @@ import {
   WebGLRenderer,
 } from 'three';
 import { cleanRenderer, cleanScene } from '~/utils/three';
-import styles from './displacement-sphere.module.css';
+import styles from './background-animation.module.css';
 
 const vertexShader = `
   uniform float uTime;

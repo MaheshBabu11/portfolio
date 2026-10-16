@@ -104,7 +104,7 @@ export const Uses = () => {
                   <ListItem>
                     For building and testing UI components in isolation I use{' '}
                     <Link href="https://storybook.js.org/">Storybook</Link>. Check out the{' '}
-                    <Link href="https://storybook.hamishw.com">
+                    <Link href="https://storybook.maheshbabu11.dev">
                       storybook for this website
                     </Link>
                     .

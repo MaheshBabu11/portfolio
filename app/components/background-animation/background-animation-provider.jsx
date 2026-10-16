@@ -1,10 +1,10 @@
 import { createContext, useCallback, useContext, useState } from 'react';
 
-const modes = ['aurora', 'sphere', 'galaxy'];
+const modes = ['sphere', 'aurora', 'galaxy', 'meteors'];
 const BackgroundAnimationContext = createContext(null);
 
 export function BackgroundAnimationProvider({ children }) {
-  const [mode, setMode] = useState('aurora');
+  const [mode, setMode] = useState('galaxy');
   const nextMode = modes[(modes.indexOf(mode) + 1) % modes.length];
   const cycleMode = useCallback(() => {
     setMode(current => modes[(modes.indexOf(current) + 1) % modes.length]);

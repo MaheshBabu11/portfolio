@@ -19,9 +19,9 @@ import {
 import { media } from '~/utils/style';
 import { throttle } from '~/utils/throttle';
 import { cleanRenderer, cleanScene, removeLights } from '~/utils/three';
-import fragmentShader from './displacement-sphere-fragment.glsl?raw';
-import vertexShader from './displacement-sphere-vertex.glsl?raw';
-import styles from './displacement-sphere.module.css';
+import fragmentShader from './sphere-fragment.glsl?raw';
+import vertexShader from './sphere-vertex.glsl?raw';
+import styles from './background-animation.module.css';
 
 const springConfig = {
   stiffness: 30,
