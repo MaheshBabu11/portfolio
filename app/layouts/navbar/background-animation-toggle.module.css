@@ -1,0 +1,35 @@
+@layer layout {
+  .toggle {
+    --offset: 6px;
+    --inset: calc(var(--spaceOuter) - var(--offset));
+
+    position: fixed;
+    z-index: var(--zIndex4);
+    top: var(--inset);
+    right: calc(var(--inset) + 64px);
+    transform: translate3d(0, 0, 0);
+
+    @media (--mediaMobile), (--mediaMobileLS) {
+      &:not([data-mobile='true']) {
+        display: none;
+      }
+    }
+
+    &[data-mobile='true'] {
+      --offset: var(--spaceXS);
+      --inset: calc(var(--spaceXL) - var(--offset));
+
+      top: unset;
+      right: calc(var(--inset) + 64px);
+      bottom: var(--inset);
+      margin-top: 0;
+      margin-right: 0;
+    }
+  }
+
+  .icon {
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.5;
+  }
+}
