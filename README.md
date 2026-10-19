@@ -33,6 +33,8 @@ You can also import the repository into Vercel. Configure `SESSION_SECRET` in
 the Vercel project settings for persistent theme sessions. For local development,
 copy `.env.example` to `.env.local` and set a random secret. The contact form
 opens a prefilled email draft in the visitor's default email app.
+The PWA caches same-origin assets and displays an offline page when a navigation
+cannot reach the network.
 
 Add source photos to `app/assets/gallery/`. The `predev` and `prebuild` scripts
 generate aspect-ratio-preserving WebP thumbnails (up to 640px) and display-size

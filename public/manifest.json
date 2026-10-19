@@ -1,6 +1,7 @@
 {
   "short_name": "Mahesh Babu",
   "name": "Developer Portfolio of Mahesh Babu",
+  "scope": "/",
   "icons": [
     {
       "src": "shortcut.png",
@@ -13,12 +14,17 @@
       "type": "image/png"
     },
     {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
       "src": "icon-512.png",
       "sizes": "512x512",
       "type": "image/png"
     }
   ],
-  "start_url": ".",
+  "start_url": "/",
   "display": "standalone",
   "theme_color": "#111111",
   "background_color": "#111111"
