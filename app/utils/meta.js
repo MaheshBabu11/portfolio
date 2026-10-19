@@ -8,6 +8,10 @@ export function baseMeta({
   description,
   prefix = name,
   ogImage = defaultOgImage,
+  ogType = 'website',
+  pageUrl = url,
+  articlePublishedTime,
+  articleAuthor,
 }) {
   const titleText = [prefix, title].filter(Boolean).join(' | ');
 
@@ -21,9 +25,13 @@ export function baseMeta({
     { property: 'og:image:height', content: '800' },
     { property: 'og:title', content: titleText },
     { property: 'og:site_name', content: name },
-    { property: 'og:type', content: 'website' },
-    { property: 'og:url', content: url },
+    { property: 'og:type', content: ogType },
+    { property: 'og:url', content: pageUrl },
     { property: 'og:description', content: description },
+    ...(articlePublishedTime
+      ? [{ property: 'article:published_time', content: articlePublishedTime }]
+      : []),
+    ...(articleAuthor ? [{ property: 'article:author', content: articleAuthor }] : []),
     { property: 'twitter:card', content: 'summary_large_image' },
     { property: 'twitter:description', content: description },
     { property: 'twitter:title', content: titleText },
