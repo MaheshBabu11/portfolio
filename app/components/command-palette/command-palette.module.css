@@ -1,0 +1,270 @@
+@layer components {
+  .trigger {
+    position: fixed;
+    right: var(--spaceL);
+    bottom: var(--spaceL);
+    z-index: var(--zIndex4);
+    display: grid;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    place-items: center;
+    border: 1px solid color-mix(in lab, var(--text) 18%, transparent);
+    border-radius: 50%;
+    color: var(--textBody);
+    background: color-mix(in lab, var(--backgroundLight) 88%, transparent);
+    -webkit-backdrop-filter: blur(16px);
+    backdrop-filter: blur(16px);
+    font: inherit;
+    cursor: pointer;
+    transition:
+      color var(--durationS) ease,
+      border-color var(--durationS) ease,
+      transform var(--durationS) ease;
+
+    &:hover {
+      color: var(--text);
+      border-color: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+    }
+
+    @media (max-width: 600px) {
+      right: var(--spaceM);
+      bottom: var(--spaceM);
+    }
+  }
+
+  .triggerIcon {
+    transform: translate(-1px, -1px);
+  }
+
+  .dialog {
+    width: min(640px, calc(100vw - 32px));
+    max-width: none;
+    max-height: min(720px, calc(100dvh - 48px));
+    margin: auto;
+    padding: 0;
+    overflow: hidden;
+    border: 1px solid color-mix(in lab, var(--text) 16%, transparent);
+    border-radius: 16px;
+    color: var(--text);
+    background: var(--backgroundLight);
+    box-shadow: 0 24px 80px rgb(0 0 0 / 35%);
+
+    &::backdrop {
+      background: rgb(0 0 0 / 58%);
+      -webkit-backdrop-filter: blur(5px);
+      backdrop-filter: blur(5px);
+    }
+  }
+
+  .panel {
+    display: flex;
+    width: 100%;
+    max-height: min(720px, calc(100dvh - 48px));
+    flex-direction: column;
+  }
+
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--spaceM) var(--spaceL) var(--spaceS);
+  }
+
+  .title {
+    margin: 0;
+    color: var(--textTitle);
+    font-size: var(--fontSizeBodyM);
+    font-weight: var(--fontWeightMedium);
+  }
+
+  .close {
+    display: grid;
+    width: 36px;
+    height: 36px;
+    place-items: center;
+    border: 0;
+    border-radius: 8px;
+    color: var(--textLight);
+    background: transparent;
+    cursor: pointer;
+
+    &:hover,
+    &:focus-visible {
+      color: var(--text);
+      background: color-mix(in lab, var(--text) 8%, transparent);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+  }
+
+  .searchBox {
+    display: flex;
+    align-items: center;
+    gap: var(--spaceS);
+    margin: 0 var(--spaceL) var(--spaceS);
+    padding: 0 var(--spaceM);
+    min-height: 54px;
+    border: 1px solid color-mix(in lab, var(--text) 16%, transparent);
+    border-radius: 10px;
+    color: var(--textLight);
+    background: color-mix(in lab, var(--background) 60%, transparent);
+  }
+
+  .input {
+    flex: 1;
+    min-width: 0;
+    padding: var(--spaceM) 0;
+    border: 0;
+    outline: 0;
+    color: var(--text);
+    background: transparent;
+    font: inherit;
+    font-size: var(--fontSizeBodyS);
+
+    &::placeholder {
+      color: var(--textLight);
+    }
+
+    &::-webkit-search-cancel-button {
+      cursor: pointer;
+    }
+  }
+
+  .escape,
+  .footer kbd {
+    padding: 3px 6px;
+    border: 1px solid color-mix(in lab, var(--text) 16%, transparent);
+    border-radius: 5px;
+    color: var(--textLight);
+    background: color-mix(in lab, var(--text) 5%, transparent);
+    font-family: var(--monoFontStack);
+    font-size: 0.7rem;
+  }
+
+  .results {
+    width: 100%;
+    min-height: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: var(--spaceXS) var(--spaceS);
+    overscroll-behavior: contain;
+  }
+
+  .result {
+    display: flex;
+    width: 100%;
+    min-width: 0;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--spaceM);
+    padding: 12px var(--spaceM);
+    border-radius: 8px;
+    border: 0;
+    color: var(--textBody);
+    background: transparent;
+    font: inherit;
+    text-align: left;
+    cursor: pointer;
+
+    &[data-active='true'],
+    &:hover {
+      color: var(--text);
+      background: color-mix(in lab, var(--accent) 14%, transparent);
+    }
+  }
+
+  .resultText {
+    display: flex;
+    flex: 1 1 0;
+    min-width: 0;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .resultTitle {
+    overflow: hidden;
+    color: var(--textTitle);
+    font-size: var(--fontSizeBodyS);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .resultDescription {
+    overflow: hidden;
+    color: var(--textLight);
+    font-size: var(--fontSizeBodyXS);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .resultType {
+    flex: 0 0 auto;
+    color: var(--textLight);
+    font-size: var(--fontSizeBodyXS);
+  }
+
+  .resultShortcut {
+    flex: 0 0 auto;
+    padding: 3px 6px;
+    border: 1px solid color-mix(in lab, var(--text) 16%, transparent);
+    border-radius: 5px;
+    color: var(--textLight);
+    background: color-mix(in lab, var(--text) 5%, transparent);
+    font-family: var(--monoFontStack);
+    font-size: 0.65rem;
+    white-space: nowrap;
+  }
+
+  .empty,
+  .status {
+    padding: var(--spaceL);
+    color: var(--textLight);
+    text-align: center;
+  }
+
+  .error {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spaceS);
+    padding: var(--spaceL);
+    color: var(--textLight);
+    font-size: var(--fontSizeBodyXS);
+
+    & button {
+      padding: 4px 8px;
+      border: 1px solid color-mix(in lab, var(--text) 18%, transparent);
+      border-radius: 6px;
+      color: var(--text);
+      background: transparent;
+      cursor: pointer;
+    }
+  }
+
+  .footer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: var(--spaceM);
+    padding: var(--spaceS) var(--spaceL);
+    border-top: 1px solid color-mix(in lab, var(--text) 10%, transparent);
+    color: var(--textLight);
+    font-size: 0.75rem;
+
+    & span {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+  }
+}

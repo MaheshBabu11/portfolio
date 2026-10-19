@@ -20,6 +20,7 @@ import { useEffect } from 'react';
 import { Error } from '~/layouts/error';
 import { getServerEnv } from '~/utils/env';
 import { VisuallyHidden } from '~/components/visually-hidden';
+import { CommandPalette } from '~/components/command-palette';
 import { Navbar } from '~/layouts/navbar';
 import { Progress } from '~/components/progress';
 import config from '~/config.json';
@@ -135,6 +136,7 @@ export default function App() {
               Skip to main content
             </VisuallyHidden>
             <Navbar />
+            <CommandPalette />
             <main
               id="main-content"
               className={styles.container}

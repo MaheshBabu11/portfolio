@@ -3,6 +3,10 @@
         <symbol id="send" width="24" height="24" viewBox="0 0 24 24">
             <path d="M2.01 21 23 12 2.01 3 2 10l15 2-15 2 .01 7Z"/>
         </symbol>
+        <symbol id="search" width="24" height="24" viewBox="0 0 24 24">
+            <circle cx="10.8" cy="10.8" r="6.8" fill="none" stroke="currentColor" stroke-width="2"/>
+            <path d="m16 16 5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </symbol>
         <symbol id="arrow-right" width="24" height="24" viewBox="0 0 24 24">
             <path d="m14.2 4.8 6.5 6.5.71.7-.7.7-6.5 6.5-1.42-1.4 4.8-4.8H3v-2h14.59l-4.8-4.8 1.42-1.4Z"/>
         </symbol>
