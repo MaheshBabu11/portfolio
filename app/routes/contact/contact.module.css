@@ -1,9 +1,7 @@
 .contact {
-  --formHeight: 530px;
-
   display: grid;
   grid-template-rows: 1fr auto;
-  grid-template-columns: 100%;
+  grid-template-columns: minmax(0, 1fr);
   justify-items: center;
   justify-content: center;
   align-items: center;
@@ -15,15 +13,93 @@
   }
 }
 
+.content {
+  grid-row: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 540px) minmax(300px, 380px);
+  align-items: center;
+  justify-content: center;
+  gap: var(--space3XL);
+  width: min(100%, 1020px);
+  padding: var(--space2XL) 0;
+}
+
 .form {
-  grid-area: 1 / 1;
   max-width: var(--maxWidthS);
   width: 100%;
-  padding: var(--space2XL) 0;
+  padding: 0;
 
   @media (--mediaMobile) {
-    padding: var(--space5XL) 0 var(--space2XL);
     align-self: flex-start;
+  }
+}
+
+.businessCard {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 144px;
+  align-items: center;
+  gap: var(--spaceM);
+  padding: var(--spaceL);
+  border: 1px solid color-mix(in lab, var(--text) 14%, transparent);
+  border-radius: 12px;
+  background: color-mix(in lab, var(--backgroundLight) 82%, transparent);
+}
+
+.cardTitle {
+  margin: 0;
+  color: var(--textTitle);
+  font-size: var(--fontSizeBodyM);
+  font-weight: var(--fontWeightMedium);
+}
+
+.cardDescription {
+  margin-top: var(--spaceS);
+  color: var(--textBody);
+  font-size: var(--fontSizeBodyXS);
+  line-height: var(--lineHeightBody);
+}
+
+.cardButton {
+  margin-top: var(--spaceM);
+}
+
+.qrCode {
+  display: block;
+  width: 100%;
+  height: auto;
+  padding: var(--spaceS);
+  border-radius: 8px;
+  background: white;
+}
+
+.footer {
+  grid-row: 2;
+  grid-column: 1;
+}
+
+@media (max-width: 1000px) {
+  .content {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space2XL);
+    width: min(100%, 540px);
+    padding: var(--space3XL) 0;
+  }
+
+  .businessCard {
+    grid-template-columns: minmax(0, 1fr) 144px;
+  }
+}
+
+@media (max-width: 600px) {
+  .content {
+    gap: var(--spaceXL);
+    padding: var(--space5XL) 0 var(--space2XL);
+  }
+
+  .businessCard {
+    grid-template-columns: minmax(0, 1fr) 112px;
+    gap: var(--spaceS);
+    padding: var(--spaceM);
   }
 }
 

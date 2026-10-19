@@ -46,69 +46,99 @@ export const Contact = () => {
 
   return (
     <Section className={styles.contact}>
-      <Transition in timeout={1600}>
-        {({ status, nodeRef }) => (
-          <form
-            className={styles.form}
-            onSubmit={handleSubmit}
-            ref={nodeRef}
-          >
-            <Heading
-              className={styles.title}
-              data-status={status}
-              level={3}
-              as="h1"
-              style={getDelay(tokens.base.durationXS, initDelay, 0.3)}
+      <div className={styles.content}>
+        <Transition in timeout={1600}>
+          {({ status, nodeRef }) => (
+            <form
+              className={styles.form}
+              onSubmit={handleSubmit}
+              ref={nodeRef}
             >
-              <DecoderText text="Say hello" start={status !== 'exited'} delay={300} />
-            </Heading>
-            <Divider
-              className={styles.divider}
-              data-status={status}
-              style={getDelay(tokens.base.durationXS, initDelay, 0.4)}
-            />
-            <Input
-              required
-              className={styles.input}
-              data-status={status}
-              style={getDelay(tokens.base.durationXS, initDelay)}
-              autoComplete="email"
-              label="Your email"
-              type="email"
-              name="email"
-              maxLength={MAX_EMAIL_LENGTH}
-              {...email}
-            />
-            <Input
-              required
-              multiline
-              className={styles.input}
-              data-status={status}
-              style={getDelay(tokens.base.durationS, initDelay)}
-              autoComplete="off"
-              label="Message"
-              name="message"
-              maxLength={MAX_MESSAGE_LENGTH}
-              {...message}
-            />
+              <Heading
+                className={styles.title}
+                data-status={status}
+                level={3}
+                as="h1"
+                style={getDelay(tokens.base.durationXS, initDelay, 0.3)}
+              >
+                <DecoderText text="Say hello" start={status !== 'exited'} delay={300} />
+              </Heading>
+              <Divider
+                className={styles.divider}
+                data-status={status}
+                style={getDelay(tokens.base.durationXS, initDelay, 0.4)}
+              />
+              <Input
+                required
+                className={styles.input}
+                data-status={status}
+                style={getDelay(tokens.base.durationXS, initDelay)}
+                autoComplete="email"
+                label="Your email"
+                type="email"
+                name="email"
+                maxLength={MAX_EMAIL_LENGTH}
+                {...email}
+              />
+              <Input
+                required
+                multiline
+                className={styles.input}
+                data-status={status}
+                style={getDelay(tokens.base.durationS, initDelay)}
+                autoComplete="off"
+                label="Message"
+                name="message"
+                maxLength={MAX_MESSAGE_LENGTH}
+                {...message}
+              />
+              <Button
+                className={styles.button}
+                data-status={status}
+                style={getDelay(tokens.base.durationM, initDelay)}
+                icon="send"
+                type="submit"
+              >
+                Open email app
+              </Button>
+              {draftNotice && (
+                <Text className={styles.mailtoNotice} role="status" size="s" as="p">
+                  Your email app should open with a draft. Review it and send it to
+                  complete delivery.
+                </Text>
+              )}
+            </form>
+          )}
+        </Transition>
+
+        <aside className={styles.businessCard} aria-labelledby="business-card-title">
+          <div className={styles.cardCopy}>
+            <h2 id="business-card-title" className={styles.cardTitle}>
+              Save my contact
+            </h2>
+            <p className={styles.cardDescription}>
+              Scan the QR code to open this page on your phone, or save my contact
+              details.
+            </p>
             <Button
-              className={styles.button}
-              data-status={status}
-              style={getDelay(tokens.base.durationM, initDelay)}
-              icon="send"
-              type="submit"
+              className={styles.cardButton}
+              href="/contact.vcf"
+              download="Mahesh-Babu.vcf"
+              icon="download"
+              secondary
             >
-              Open email app
+              Save contact
             </Button>
-            {draftNotice && (
-              <Text className={styles.mailtoNotice} role="status" size="s" as="p">
-                Your email app should open with a draft. Review it and send it to
-                complete delivery.
-              </Text>
-            )}
-          </form>
-        )}
-      </Transition>
+          </div>
+          <img
+            className={styles.qrCode}
+            src="/contact-qr.svg"
+            alt="QR code linking to Mahesh Babu's contact page"
+            width="160"
+            height="160"
+          />
+        </aside>
+      </div>
       <Footer className={styles.footer} />
     </Section>
   );
