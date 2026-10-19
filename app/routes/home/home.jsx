@@ -12,6 +12,7 @@ import { baseMeta } from '~/utils/meta';
 import { Intro } from './intro';
 import { Profile } from './profile';
 import { ProjectSummary } from './project-summary';
+import { Recommendations } from './recommendations';
 import { useEffect, useRef, useState } from 'react';
 import config from '~/config.json';
 import styles from './home.module.css';
@@ -161,6 +162,7 @@ export const Home = () => {
         visible={visibleSections.includes(details.current)}
         id="details"
       />
+      <Recommendations />
       <Footer />
     </div>
   );
