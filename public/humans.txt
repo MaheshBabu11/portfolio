@@ -8,18 +8,14 @@ and graphic assets behind this site humanstxt.org.
 
 _______________________________________________________________________________
 
-DESIGNER | デザイナー
+DEVELOPER | デベロッパー
 
-Hamish Williams
-Hand crafted design & web development
+Mahesh Babu
+Software Engineer
+Building scalable web applications with Java and Spring Boot.
 
-Design tools:
-Figma
-Photoshop
-Blender
-
-twitter.com/hamishmw
-github.com/hamishmw
+github.com/MaheshBabu11
+linkedin.com/in/maheshbabu11
 
 _______________________________________________________________________________
 
@@ -36,4 +32,3 @@ FONTS | フォント
 
 Gotham
 IPA Gothic Regular
-Hiragino Kaku Gothic W8

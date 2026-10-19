@@ -5,7 +5,7 @@
 
 [![Site preview](/public/site-preview.png)](https://maheshbabu11.dev)
 
-My design portfolio to showcase a few projects. Built with [Remix](https://remix.run/), [Three.js](https://threejs.org/), and [Framer Motion](https://www.framer.com/motion/). View the [live site](https://maheshbabu11.dev) or check out a live version of the [components storybook](https://storybook.maheshbabu11.dev).
+My design portfolio to showcase a few projects. Built with [Remix](https://remix.run/), [Three.js](https://threejs.org/), and [Framer Motion](https://www.framer.com/motion/). View the [live site](https://maheshbabu11.dev).
 
 ## Install & run
 
@@ -21,12 +21,6 @@ Once it's done start up a local server with:
 npm run dev
 ```
 
-To view the components storybook:
-
-```bash
-npm run dev:storybook
-```
-
 ## Deployment
 
 Deploy the site to Cloudflare Pages:
@@ -37,9 +31,8 @@ npm run deploy
 
 To deploy to Vercel, import the repository in Vercel or run `npx vercel --prod`.
 The build automatically selects Vercel's Remix preset on Vercel. Configure
-`SESSION_SECRET`, `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, `EMAIL`, and
-`FROM_EMAIL` in the Vercel project settings to enable sessions and the contact
-form.
+`SESSION_SECRET` in the project settings to enable sessions. The contact form
+opens a prefilled email draft in the visitor's default email app.
 
 Add source photos to `app/assets/gallery/`. The `predev` and `prebuild` scripts
 generate aspect-ratio-preserving WebP thumbnails (up to 640px) and display-size

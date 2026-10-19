@@ -5,5 +5,5 @@
       "~/*": ["./app/*"]
     }
   },
-  "include": ["app", ".storybook/story-container.jsx"]
+  "include": ["app"]
 }

@@ -22,7 +22,7 @@ module.exports = {
   },
 
   // Base config
-  extends: ['eslint:recommended', 'plugin:storybook/recommended'],
+  extends: ['eslint:recommended'],
 
   rules: {
     semi: 'error',

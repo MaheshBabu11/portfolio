@@ -137,10 +137,6 @@
   }
 }
 
-.botkiller {
-  display: none;
-}
-
 .button {
   --buttonLoaderDelay: var(--durationL);
 
@@ -201,108 +197,8 @@
   }
 }
 
-.complete {
-  grid-area: 1 / 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: var(--spaceXL) var(--spaceM);
-  text-align: center;
-  inset: 0;
-}
-
-.completeTitle {
-  margin: 0;
-  transition-property: opacity;
-  transition-timing-function: var(--bezierFastoutSlowin);
-  transition-duration: var(--durationXL);
-  transition-delay: var(--delay);
-  opacity: 0;
-
-  @media (--mediaUseMotion) {
-    transition-property: transform, opacity;
-    transform: translate3d(0, var(--space3XL), 0);
-  }
-
-  &[data-status='entered'] {
-    transform: none;
-    opacity: 1;
-  }
-}
-
-.completeText {
+.mailtoNotice {
   margin-top: var(--spaceM);
-  transition-property: opacity;
-  transition-timing-function: var(--bezierFastoutSlowin);
-  transition-duration: var(--durationXL);
-  transition-delay: var(--delay);
-  opacity: 0;
-
-  @media (--mediaUseMotion) {
-    transition-property: transform, opacity;
-    transform: translate3d(0, var(--space3XL), 0);
-  }
-
-  &[data-status='entered'] {
-    transform: none;
-    opacity: 1;
-  }
-}
-
-.completeButton {
-  margin-top: var(--spaceL);
-  transition-duration: var(--durationXL);
-  transition-delay: var(--delay);
-  opacity: 0;
-
-  &[data-status='entering'],
-  &[data-status='exited'] {
-    transition-property: opacity;
-    transition-timing-function: var(--bezierFastoutSlowin);
-
-    @media (--mediaUseMotion) {
-      transition-property: transform, opacity;
-      transform: translate3d(0, var(--space3XL), 0);
-    }
-  }
-
-  &[data-status='entered'] {
-    opacity: 1;
-
-    &:not(:hover) {
-      transform: none;
-    }
-  }
-}
-
-.formError {
-  color: var(--error);
-  overflow: hidden;
-  height: var(--height);
-
-  @media (--mediaUseMotion) {
-    transition-property: height;
-    transition-duration: var(--durationM);
-    transition-timing-function: var(--bezierFastoutSlowin);
-  }
-}
-
-.formErrorContent {
-  padding-top: var(--spaceXL);
-}
-
-.formErrorMessage {
-  display: flex;
-  padding: var(--spaceM);
-  line-height: 24px;
-  background-color: color-mix(in lab, var(--error) 10%, transparent);
-  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 16px), calc(100% - 16px) 100%, 0 100%);
-}
-
-.formErrorIcon {
-  flex: 0 0 auto;
-  margin-right: var(--spaceS);
 }
 
 .footer {
