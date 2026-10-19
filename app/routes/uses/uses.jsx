@@ -80,8 +80,7 @@ export const Uses = () => {
                   </ListItem>
                   <ListItem>
                     I also work with Jira for project tracking, and deploy web projects
-                    using <Link href="https://vercel.com/">Vercel</Link> and
-                    <Link href="https://www.cloudflare.com/"> Cloudflare</Link>.
+                    using <Link href="https://vercel.com/">Vercel</Link>.
                   </ListItem>
                 </List>
               </ProjectSectionText>

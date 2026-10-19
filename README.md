@@ -9,7 +9,7 @@ My design portfolio to showcase a few projects. Built with [Remix](https://remix
 
 ## Install & run
 
-Make sure you have nodejs `19.9.0` or higher and npm `9.6.3` or higher installed. Install dependencies with:
+Make sure you have Node.js `24.x` LTS or higher and npm `9.6.3` or higher installed. Install dependencies with:
 
 ```bash
 npm install
@@ -23,15 +23,15 @@ npm run dev
 
 ## Deployment
 
-Deploy the site to Cloudflare Pages:
+Deploy the site to Vercel:
 
 ```bash
 npm run deploy
 ```
 
-To deploy to Vercel, import the repository in Vercel or run `npx vercel --prod`.
-The build automatically selects Vercel's Remix preset on Vercel. Configure
-`SESSION_SECRET` in the project settings to enable sessions. The contact form
+You can also import the repository into Vercel. Configure `SESSION_SECRET` in
+the Vercel project settings for persistent theme sessions. For local development,
+copy `.env.example` to `.env.local` and set a random secret. The contact form
 opens a prefilled email draft in the visitor's default email app.
 
 Add source photos to `app/assets/gallery/`. The `predev` and `prebuild` scripts
@@ -58,5 +58,5 @@ I do not give permission to present any of my projects as your own (this is bein
 <details>
   <summary>How do I get the contact form to work?</summary>
   
-  To get the contact form working create an AWS account and set up SES (Simple Email service). Then plug in your details into `.dev.vars.example` and rename it to `.dev.vars`. You'll also need to add these as enviroment variables in the Cloudflare dashboard for it to work in production. Or if you don't mind sending through gmail use [nodemailer](https://nodemailer.com/) instead.
+  The contact form opens a prefilled message in the visitor's default email app. No email service credentials are required.
 </details>

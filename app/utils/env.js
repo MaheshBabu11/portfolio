@@ -1,2 +1,1 @@
-export const getServerEnv = context =>
-  context.cloudflare?.env ?? (typeof process === 'undefined' ? {} : process.env);
+export const getServerEnv = () => process.env;

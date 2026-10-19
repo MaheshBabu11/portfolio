@@ -8,8 +8,8 @@ node_modules
 /app/routes/gallery/gallery-images.json
 
 .wrangler
-.dev.vars
 
 public/draco
 .vercel
 .env*
+!.env.example

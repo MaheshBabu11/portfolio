@@ -91,7 +91,6 @@ const skillIconIds = {
   Jira: 'jiraIcon',
   OpenAI: 'openaiIcon',
   Vercel: 'vercelIcon',
-  Cloudflare: 'cloudflareIcon',
 };
 
 const skills = [
@@ -127,7 +126,6 @@ const skills = [
       'Jira',
       'OpenAI',
       'Vercel',
-      'Cloudflare',
     ],
   },
 ];

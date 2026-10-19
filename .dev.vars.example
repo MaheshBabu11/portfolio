@@ -1,6 +1,0 @@
-# Rename this file from .dev.vars.example to .dev.vars for local development
-
-ENVIRONMENT=development
-
-# This is a random string used for the session cookie for saving the preferred theme
-SESSION_SECRET=KEEP_IT_SECRET_KEEP_IT_SAFE
