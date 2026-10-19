@@ -1,18 +1,29 @@
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-    <url>
-        <loc>https://maheshbabu11.dev/</loc>
-        <changefreq>monthly</changefreq>
-    </url>
-    <url>
-        <loc>https://maheshbabu11.dev/contact/</loc>
-        <changefreq>monthly</changefreq>
-    </url>
-    <url>
-        <loc>https://maheshbabu11.dev/articles/</loc>
-        <changefreq>monthly</changefreq>
-    </url>
-    <url>
-        <loc>https://maheshbabu11.dev/uses/</loc>
-        <changefreq>monthly</changefreq>
-    </url>
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+  xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd"
+>
+  <url><loc>https://maheshbabu11.dev/</loc></url>
+  <url><loc>https://maheshbabu11.dev/about</loc></url>
+  <url><loc>https://maheshbabu11.dev/articles</loc></url>
+  <url><loc>https://maheshbabu11.dev/contact</loc></url>
+  <url><loc>https://maheshbabu11.dev/gallery</loc></url>
+  <url><loc>https://maheshbabu11.dev/uses</loc></url>
+  <url><loc>https://maheshbabu11.dev/articles/Bridging-the-Gap-Full-Stack-Development-with-HTMX-and-Spring-Boot-Showcase</loc></url>
+  <url><loc>https://maheshbabu11.dev/articles/Crafting-your-own-chat-app-using-Hilla-and-Spring-AI</loc></url>
+  <url><loc>https://maheshbabu11.dev/articles/Exploring-Resilience4j-Enhancing-Circuit-Breaker-Patterns-for-Robust-Applications</loc></url>
+  <url><loc>https://maheshbabu11.dev/articles/Free-Hosting-Bliss-Deploying-Your-Spring-Boot-App-on-Render</loc></url>
+  <url><loc>https://maheshbabu11.dev/articles/From-Backend-to-Frontend-Full-Stack-Java-Apps-with-Spring-Boot-and-Vaadin-Flow</loc></url>
+  <url><loc>https://maheshbabu11.dev/articles/How-can-you-quickly-replace-or-remove-the-background-from-your-picture</loc></url>
+  <url><loc>https://maheshbabu11.dev/articles/How-to-Create-Custom-Annotations-in-Spring-Boot-for-Cleaner-Code</loc></url>
+  <url><loc>https://maheshbabu11.dev/articles/Pushing-to-Github-GitLab-GitBucket-using-SSH-Keys</loc></url>
+  <url><loc>https://maheshbabu11.dev/articles/Revolutionizing-the-Laptop-Industry-Get-Excited-for-Framework-Computer</loc></url>
+  <url><loc>https://maheshbabu11.dev/articles/Simplify-API-Testing-with-Postman-A%20Step-by-Step-Tutorial</loc></url>
+  <url><loc>https://maheshbabu11.dev/articles/Supercharge-Your-Alerts-Ntfy-The-Ultimate-Push-Notification-Solution</loc></url>
+  <url><loc>https://maheshbabu11.dev/articles/Synchronizing-Scheduled-Tasks-Across-Spring-Boot-Instances-with-ShedLock</loc></url>
+  <url><loc>https://maheshbabu11.dev/articles/Unlocking-the-Power-of-Spring-Building-an-Interactive-Shell-Application</loc></url>
+  <url><loc>https://maheshbabu11.dev/articles/Unveiling-the-Metaverse-A-Futuristic-Realm-of-Virtual-Reality</loc></url>
+  <url><loc>https://maheshbabu11.dev/articles/What-is-a-GITHUB-Profile-Readme</loc></url>
+  <url><loc>https://maheshbabu11.dev/articles/Why-I-Ditched-Google-Photos-and-Set-Up-Immich-on-Windows</loc></url>
 </urlset>

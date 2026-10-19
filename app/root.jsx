@@ -9,6 +9,8 @@ import {
   useNavigation,
   useRouteError,
 } from '@remix-run/react';
+import { Analytics } from '@vercel/analytics/remix';
+import { SpeedInsights } from '@vercel/speed-insights/remix';
 import { createCookieSessionStorage, json } from '@remix-run/node';
 import { ThemeProvider, themeStyles } from '~/components/theme-provider';
 import { BackgroundAnimationProvider } from '~/components/background-animation/background-animation-provider';
@@ -139,6 +141,8 @@ export default function App() {
         </ThemeProvider>
         <ScrollRestoration />
         <Scripts />
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
@@ -162,6 +166,8 @@ export function ErrorBoundary() {
         <Error error={error} />
         <ScrollRestoration />
         <Scripts />
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
