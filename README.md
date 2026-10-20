@@ -60,11 +60,13 @@ The `prebuild` script also optimizes gallery images before the build.
 
 ## Environment
 
-For local theme-session persistence, copy `.env.example` to `.env.local` and set a random `SESSION_SECRET`:
+For local theme-session persistence and the homepage view counter, copy `.env.example` to `.env.local`, set a random `SESSION_SECRET`, and add your Neon connection string as `DATABASE_URL`:
 
 ```bash
 cp .env.example .env.local
 ```
+
+The homepage counter stores a total page-view count in Neon PostgreSQL. It counts homepage requests rather than unique people and does not store visitor identities. The counter table is created automatically the first time the homepage loads.
 
 The contact form opens a prefilled email draft in the visitor’s default email application.
 
@@ -86,7 +88,7 @@ Deploy to Vercel with:
 npm run deploy
 ```
 
-You can also import this repository into a Vercel project and configure `SESSION_SECRET` in the project’s environment variables.
+You can also import this repository into a Vercel project and configure `SESSION_SECRET` and `DATABASE_URL` in the project’s environment variables. Keep the Neon connection string server-side and rotate its password if it has been exposed.
 
 ## License
 

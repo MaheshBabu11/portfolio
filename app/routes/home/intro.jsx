@@ -19,7 +19,13 @@ const BackgroundAnimation = lazy(() =>
   import('./background-animation').then(module => ({ default: module.BackgroundAnimation }))
 );
 
-export function Intro({ id, sectionRef, scrollIndicatorHidden, ...rest }) {
+export function Intro({
+  id,
+  sectionRef,
+  scrollIndicatorHidden,
+  visitorCount,
+  ...rest
+}) {
   const { theme } = useTheme();
   const { mode: backgroundMode } = useBackgroundAnimation();
   const { disciplines } = config;
@@ -72,7 +78,23 @@ export function Intro({ id, sectionRef, scrollIndicatorHidden, ...rest }) {
               </Suspense>
             )}
             <header className={styles.text}>
-              <Weather />
+              <div className={styles.headerMeta}>
+                <Weather />
+                {Number.isSafeInteger(visitorCount) && visitorCount >= 0 && (
+                  <span
+                    className={styles.visitorCounter}
+                    aria-label={`Home page views: ${visitorCount.toLocaleString('en')}`}
+                  >
+                    <span aria-hidden="true">
+                      {visitorCount.toLocaleString('en')}
+                    </span>
+                    <span className={styles.visitorLabel} aria-hidden="true">
+                      views
+                    </span>
+                    <span className={styles.visitorDecoration} aria-hidden="true" />
+                  </span>
+                )}
+              </div>
               <h1 className={styles.name} data-visible={visible} id={titleId}>
                 <DecoderText text={config.name} delay={500} />
               </h1>

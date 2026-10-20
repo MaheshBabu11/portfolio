@@ -15,6 +15,7 @@ import { Intro } from './intro';
 import { Profile } from './profile';
 import { ProjectSummary } from './project-summary';
 import { Recommendations } from './recommendations';
+import { useLoaderData } from '@remix-run/react';
 import { useEffect, useRef, useState } from 'react';
 import config from '~/config.json';
 import styles from './home.module.css';
@@ -47,6 +48,7 @@ export const meta = () => {
 };
 
 export const Home = () => {
+  const { visitorCount } = useLoaderData();
   const [visibleSections, setVisibleSections] = useState([]);
   const [scrollIndicatorHidden, setScrollIndicatorHidden] = useState(false);
   const intro = useRef();
@@ -107,6 +109,7 @@ export const Home = () => {
         id="intro"
         sectionRef={intro}
         scrollIndicatorHidden={scrollIndicatorHidden}
+        visitorCount={visitorCount}
       />
       <ProjectSummary
         id="project-1"
