@@ -34,7 +34,7 @@ export function ProjectSummary({
 }) {
   const [focused, setFocused] = useState(false);
   const [modelLoaded, setModelLoaded] = useState(false);
-  const { theme } = useTheme();
+  const { theme, design } = useTheme();
   const { width } = useWindowSize();
   const isHydrated = useHydrated();
   const titleId = `${id}-title`;
@@ -43,6 +43,14 @@ export function ProjectSummary({
   const indexText = index < 10 ? `0${index}` : index;
   const phoneSizes = `(max-width: ${media.tablet}px) 30vw, 20vw`;
   const laptopSizes = `(max-width: ${media.tablet}px) 80vw, 40vw`;
+  const deviceModel =
+    design === 'classic'
+      ? {
+          ...deviceModels[model.type],
+          materialColor: 0x1f2025,
+          accentMaterialColor: 0x1f2025,
+        }
+      : deviceModels[model.type];
 
   function handleModelLoad() {
     setModelLoaded(true);
@@ -77,6 +85,14 @@ export function ProjectSummary({
           <span className={styles.indexNumber} data-visible={visible}>
             {indexText}
           </span>
+          {design === 'murim' && (
+            <>
+              <span className={styles.arcLabel}>DEMON SCROLL</span>
+              <span className={styles.seal} aria-hidden="true">
+                魔
+              </span>
+            </>
+          )}
         </div>
         <Heading
           level={3}
@@ -121,6 +137,7 @@ export function ProjectSummary({
               {isHydrated && visible && (
                 <Suspense>
                   <Model
+                    key={`${model.type}-${design}`}
                     alt={model.alt}
                     cameraPosition={{ x: 0, y: 0, z: 8 }}
                     showDelay={700}
@@ -128,7 +145,7 @@ export function ProjectSummary({
                     show={visible}
                     models={[
                       {
-                        ...deviceModels.laptop,
+                        ...deviceModel,
                         texture: {
                           ...model.textures[0],
                           sizes: laptopSizes,
@@ -151,6 +168,7 @@ export function ProjectSummary({
               {isHydrated && visible && (
                 <Suspense>
                   <Model
+                    key={`${model.type}-${design}`}
                     alt={model.alt}
                     cameraPosition={{ x: 0, y: 0, z: 11.5 }}
                     showDelay={300}
@@ -158,7 +176,7 @@ export function ProjectSummary({
                     show={visible}
                     models={[
                       {
-                        ...deviceModels.phone,
+                        ...deviceModel,
                         position: { x: -0.6, y: 1.1, z: 0 },
                         texture: {
                           ...model.textures[0],

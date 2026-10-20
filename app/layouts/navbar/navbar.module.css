@@ -15,6 +15,21 @@
     z-index: var(--zIndex4);
     isolation: isolate;
 
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      z-index: -1;
+      border-left: 1px solid color-mix(in oklab, var(--accent) 16%, transparent);
+      pointer-events: none;
+    }
+
+    :global(body[data-design='classic']) &::before {
+      display: none;
+    }
+
     @media (--mediaMobile) {
       --headerNavFontSize: calc((22 / 16) * 1rem);
     }
@@ -149,7 +164,9 @@
 
     position: fixed;
     inset: 0;
-    background: color-mix(in lab, var(--background) 70%, transparent);
+    background:
+      radial-gradient(ellipse at 50% 38%, color-mix(in oklab, var(--accent) 10%, transparent), transparent 30rem),
+      color-mix(in oklab, var(--background) 88%, transparent);
     transform: translate3d(0, -100%, 0);
     transition-property: background;
     transition-duration: var(--durationL);
@@ -160,6 +177,10 @@
     justify-content: center;
     -webkit-backdrop-filter: var(--backdrop);
     backdrop-filter: var(--backdrop);
+
+    :global(body[data-design='classic']) & {
+      background: color-mix(in lab, var(--background) 70%, transparent);
+    }
 
     @media (--mediaMobile), (--mediaMobileLS) {
       display: flex;
@@ -209,9 +230,13 @@
       right: var(--space3XL);
       left: var(--space3XL);
       height: 4px;
-      background: var(--accent);
+      background: linear-gradient(90deg, var(--accent), var(--primary));
       transform: scaleX(0) translateY(-1px);
       transform-origin: right;
+
+      :global(body[data-design='classic']) & {
+        background: var(--accent);
+      }
     }
 
     @media (--mediaUseMotion) {

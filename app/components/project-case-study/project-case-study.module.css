@@ -1,5 +1,12 @@
 .caseStudy {
   padding-bottom: var(--space4XL);
+  background:
+    radial-gradient(ellipse at 90% 8%, color-mix(in oklab, var(--accent) 6%, transparent), transparent 38rem),
+    transparent;
+
+  :global(body[data-design='classic']) & {
+    background: transparent;
+  }
 }
 
 .header {
@@ -45,10 +52,18 @@
   position: relative;
   overflow: hidden;
   padding: var(--spaceS);
-  border: 1px solid color-mix(in lab, var(--text) 18%, transparent);
-  background: var(--backgroundLight);
-  box-shadow: 0 32px 90px -48px color-mix(in lab, var(--text) 55%, transparent);
+  border: 1px solid color-mix(in oklab, var(--text) 18%, transparent);
+  background:
+    radial-gradient(ellipse at 100% 0%, color-mix(in oklab, var(--accent) 7%, transparent), transparent 45%),
+    var(--backgroundLight);
+  box-shadow: 0 32px 90px -48px color-mix(in oklab, var(--accent) 36%, transparent);
   clip-path: polygon(0 0, calc(100% - 24px) 0, 100% 24px, 100% 100%, 0 100%);
+
+  :global(body[data-design='classic']) & {
+    border-color: color-mix(in lab, var(--text) 18%, transparent);
+    background: var(--backgroundLight);
+    box-shadow: 0 32px 90px -48px color-mix(in lab, var(--text) 55%, transparent);
+  }
 
   &::before {
     content: '';
@@ -117,13 +132,22 @@
   overflow-x: auto;
   margin: var(--spaceL) 0 0;
   padding: var(--spaceL);
-  border: 1px solid color-mix(in lab, var(--text) 14%, transparent);
-  border-radius: 8px;
-  background: var(--backgroundLight);
+  border: 1px solid color-mix(in oklab, var(--text) 14%, transparent);
+  border-left: 2px solid color-mix(in oklab, var(--accent) 70%, transparent);
+  border-radius: 2px;
+  background:
+    linear-gradient(135deg, color-mix(in oklab, var(--accent) 5%, transparent), transparent 58%),
+    var(--backgroundLight);
   color: var(--text);
   font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
   font-size: var(--fontSizeBodyS);
   line-height: 1.6;
+
+  :global(body[data-design='classic']) & {
+    border: 1px solid color-mix(in lab, var(--text) 14%, transparent);
+    border-radius: 8px;
+    background: var(--backgroundLight);
+  }
 }
 
 .backSection {

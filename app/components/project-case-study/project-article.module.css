@@ -4,8 +4,15 @@
   max-width: 100%;
   height: auto;
   margin: var(--space2XL) 0;
-  border: 1px solid color-mix(in lab, var(--text) 14%, transparent);
-  border-radius: 12px;
+  border: 1px solid color-mix(in oklab, var(--text) 16%, transparent);
+  border-radius: 2px;
+  box-shadow: 0 18px 48px -36px color-mix(in oklab, var(--accent) 44%, transparent);
+
+  :global(body[data-design='classic']) & {
+    border-color: color-mix(in lab, var(--text) 14%, transparent);
+    border-radius: 12px;
+    box-shadow: none;
+  }
 }
 
 .articleImage[width] {

@@ -1,7 +1,14 @@
 @layer layout {
   .heading {
     position: relative;
+    padding-left: var(--spaceM);
+    border-left: 2px solid color-mix(in oklab, var(--accent) 68%, transparent);
     scroll-margin-top: calc(var(--spaceOuter) + var(--spaceS));
+
+    :global(body[data-design='classic']) & {
+      padding-left: 0;
+      border-left: 0;
+    }
 
     @media (--mediaMobile) {
       scroll-margin-top: var(--mobileNavOffset);
@@ -71,9 +78,15 @@
 
   .code {
     color: var(--textLight);
-    background: color-mix(in lab, var(--text) 8%, transparent);
+    border: 1px solid color-mix(in oklab, var(--primary) 16%, transparent);
+    background: color-mix(in oklab, var(--accent) 6%, var(--backgroundLight));
     padding: 0.2em 0.6em 0.2em 0.4em;
     font-size: 0.9em;
+
+    :global(body[data-design='classic']) & {
+      border: 0;
+      background: color-mix(in lab, var(--text) 8%, transparent);
+    }
 
     --size: 3px;
     --angle: 180deg;
@@ -89,9 +102,19 @@
 
   .pre {
     margin: var(--space3XL) calc(var(--space2XL) * -1);
+    border: 1px solid color-mix(in oklab, var(--text) 14%, transparent);
+    border-left: 2px solid color-mix(in oklab, var(--accent) 68%, transparent);
+    background:
+      radial-gradient(ellipse at 100% 0%, color-mix(in oklab, var(--accent) 6%, transparent), transparent 48%),
+      var(--backgroundLight);
 
     + & {
       margin-top: 0;
+    }
+
+    :global(body[data-design='classic']) & {
+      border: 0;
+      background: transparent;
     }
 
     @media (--mediaTablet) {

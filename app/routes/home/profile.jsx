@@ -10,14 +10,19 @@ import { Link } from '~/components/link';
 import { Section } from '~/components/section';
 import { Text } from '~/components/text';
 import { Transition } from '~/components/transition';
+import { useTheme } from '~/components/theme-provider';
 import { Fragment, useState } from 'react';
 import { media } from '~/utils/style';
 import katakana from './katakana.svg';
 import styles from './profile.module.css';
 
-const ProfileText = ({ visible, titleId }) => (<Fragment>
+const ProfileText = ({ visible, titleId, design }) => (<Fragment>
   <Heading className={styles.title} data-visible={visible} level={3} id={titleId}>
-    <DecoderText text="Hi there" start={visible} delay={500} />
+    <DecoderText
+      text={design === 'murim' ? 'The person behind the code' : 'Hi there'}
+      start={visible}
+      delay={500}
+    />
   </Heading>
   <Text className={styles.description} data-visible={visible} size="l" as="p">
     I’m Mahesh, currently I live in Kerala working as a senior software engineer at{' '}
@@ -36,6 +41,7 @@ const ProfileText = ({ visible, titleId }) => (<Fragment>
 
 export const Profile = ({ id, visible, sectionRef }) => {
   const [focused, setFocused] = useState(false);
+  const { design } = useTheme();
   const titleId = `${id}-title`;
 
   return (<Section
@@ -51,7 +57,7 @@ export const Profile = ({ id, visible, sectionRef }) => {
     <Transition in={visible || focused} timeout={0}>
       {({ visible, nodeRef }) => (<div className={styles.content} ref={nodeRef}>
         <div className={styles.column}>
-          <ProfileText visible={visible} titleId={titleId} />
+          <ProfileText visible={visible} titleId={titleId} design={design} />
           <Button
             secondary
             className={styles.button}
@@ -71,7 +77,7 @@ export const Profile = ({ id, visible, sectionRef }) => {
               collapseDelay={1000}
             />
             <div className={styles.tagText} data-visible={visible}>
-              About me
+              {design === 'murim' ? 'Character profile' : 'About me'}
             </div>
           </div>
           <div className={styles.image}>

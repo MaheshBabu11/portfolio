@@ -1,4 +1,6 @@
 .contact {
+  position: relative;
+  isolation: isolate;
   display: grid;
   grid-template-rows: 1fr auto;
   grid-template-columns: minmax(0, 1fr);
@@ -8,12 +10,34 @@
   min-height: 100vh;
   width: 100%;
 
+  :global(body[data-design='classic']) & {
+    position: static;
+    isolation: auto;
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background:
+      radial-gradient(ellipse at 85% 18%, color-mix(in oklab, var(--accent) 10%, transparent), transparent 32rem),
+      linear-gradient(90deg, transparent 0 12%, color-mix(in oklab, var(--text) 2%, transparent) 12.1%, transparent 12.2%);
+    pointer-events: none;
+  }
+
+  :global(body[data-design='classic']) &::before {
+    display: none;
+  }
+
   @media (--mediaMobile) {
     padding-top: 0;
   }
 }
 
 .content {
+  position: relative;
+  z-index: 1;
   grid-row: 1;
   display: grid;
   grid-template-columns: minmax(0, 540px) minmax(300px, 380px);
@@ -22,6 +46,11 @@
   gap: var(--space3XL);
   width: min(100%, 1020px);
   padding: var(--space2XL) 0;
+
+  :global(body[data-design='classic']) & {
+    position: static;
+    z-index: auto;
+  }
 }
 
 .form {
@@ -35,14 +64,70 @@
 }
 
 .businessCard {
+  position: relative;
+  overflow: hidden;
   display: grid;
   grid-template-columns: minmax(0, 1fr) 144px;
   align-items: center;
   gap: var(--spaceM);
   padding: var(--spaceL);
-  border: 1px solid color-mix(in lab, var(--text) 14%, transparent);
-  border-radius: 12px;
-  background: color-mix(in lab, var(--backgroundLight) 82%, transparent);
+  border: 1px solid color-mix(in oklab, var(--text) 16%, transparent);
+  border-left: 2px solid color-mix(in oklab, var(--accent) 72%, transparent);
+  border-radius: 2px;
+  background:
+    radial-gradient(ellipse at 100% 0%, color-mix(in oklab, var(--primary) 8%, transparent), transparent 48%),
+    color-mix(in oklab, var(--backgroundLight) 88%, transparent);
+  box-shadow: 0 20px 60px -42px color-mix(in oklab, var(--accent) 58%, transparent);
+
+  :global(body[data-design='classic']) & {
+    position: static;
+    overflow: visible;
+    border: 1px solid color-mix(in lab, var(--text) 14%, transparent);
+    border-radius: 12px;
+    background: color-mix(in lab, var(--backgroundLight) 82%, transparent);
+    box-shadow: none;
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: -1px;
+    right: -1px;
+    z-index: 0;
+    width: 28px;
+    height: 28px;
+    border-top: 1px solid var(--primary);
+    border-right: 1px solid var(--primary);
+    pointer-events: none;
+  }
+
+  &::after {
+    content: '信';
+    position: absolute;
+    right: 12px;
+    bottom: 8px;
+    z-index: 0;
+    color: color-mix(in oklab, var(--accent) 12%, transparent);
+    font-family: var(--japaneseFontStack);
+    font-size: 48px;
+    line-height: 1;
+    pointer-events: none;
+  }
+
+  :global(body[data-design='classic']) &::before,
+  :global(body[data-design='classic']) &::after {
+    display: none;
+  }
+}
+
+.businessCard > * {
+  position: relative;
+  z-index: 1;
+
+  :global(body[data-design='classic']) & {
+    position: static;
+    z-index: auto;
+  }
 }
 
 .cardTitle {
@@ -68,8 +153,14 @@
   width: 100%;
   height: auto;
   padding: var(--spaceS);
-  border-radius: 8px;
+  border: 1px solid color-mix(in oklab, var(--primary) 35%, transparent);
+  border-radius: 2px;
   background: white;
+
+  :global(body[data-design='classic']) & {
+    border: 0;
+    border-radius: 8px;
+  }
 }
 
 .footer {

@@ -37,7 +37,7 @@ export function CommandPalette() {
   const fetcher = useFetcher();
   const navigate = useNavigate();
   const { cycleMode } = useBackgroundAnimation();
-  const { theme, toggleTheme } = useTheme();
+  const { theme, toggleTheme, design } = useTheme();
 
   const articles = fetcher.data?.articles;
   const results = useMemo(() => {
@@ -51,14 +51,18 @@ export function CommandPalette() {
         type: 'Action',
         action: toggleTheme,
       },
-      {
-        title: 'Cycle background graphics',
-        description: 'Switch to the next animated background',
-        keywords: 'background animation visual',
-        shortcut: 'Alt/Option + G',
-        type: 'Action',
-        action: cycleMode,
-      },
+      ...(design === 'classic'
+        ? [
+            {
+              title: 'Cycle background graphics',
+              description: 'Switch to the next animated background',
+              keywords: 'background animation visual',
+              shortcut: 'Alt/Option + G',
+              type: 'Action',
+              action: cycleMode,
+            },
+          ]
+        : []),
       ...(articles ?? []).map(article => ({ ...article, type: 'Article' })),
     ];
     const normalizedQuery = query.trim().toLocaleLowerCase();
@@ -72,7 +76,7 @@ export function CommandPalette() {
         .toLocaleLowerCase()
         .includes(normalizedQuery)
     );
-  }, [articles, cycleMode, query, theme, toggleTheme]);
+  }, [articles, query, theme, toggleTheme, design, cycleMode]);
 
   useEffect(() => {
     const handleShortcut = event => {
@@ -103,7 +107,7 @@ export function CommandPalette() {
       if (event.code === 'KeyL') {
         event.preventDefault();
         toggleTheme();
-      } else if (event.code === 'KeyG') {
+      } else if (event.code === 'KeyG' && design === 'classic') {
         event.preventDefault();
         cycleMode();
       }
@@ -111,7 +115,7 @@ export function CommandPalette() {
 
     document.addEventListener('keydown', handleShortcut);
     return () => document.removeEventListener('keydown', handleShortcut);
-  }, [cycleMode, toggleTheme]);
+  }, [cycleMode, design, toggleTheme]);
 
   useEffect(() => {
     if (!isOpen || requestedArticles.current) return;

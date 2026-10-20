@@ -3,14 +3,34 @@
     --lineHeightBody: 1.1;
 
     display: flex;
+    flex-direction: column;
     flex-wrap: wrap;
-    align-items: baseline;
+    align-items: center;
     justify-content: center;
+    gap: var(--spaceL);
     width: 100vw;
-    padding: var(--space3XL) var(--spaceL);
+    padding: var(--space2XL) var(--spaceL) var(--space3XL);
+    border-top: 1px solid color-mix(in oklab, var(--text) 14%, transparent);
     z-index: var(--zIndex2);
     position: relative;
     color: var(--textLight);
+
+    :global(body[data-design='classic']) & {
+      flex-direction: row;
+      align-items: baseline;
+      gap: normal;
+      padding: var(--space3XL) var(--spaceL);
+      border-top: 0;
+    }
+  }
+
+  .epilogue {
+    color: var(--accent);
+    font-family: var(--monoFontStack);
+    font-size: var(--fontSizeBodyXS);
+    letter-spacing: 0.12em;
+    text-align: center;
+    text-transform: uppercase;
   }
 
   .link {

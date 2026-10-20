@@ -18,7 +18,7 @@ export const Navbar = () => {
   const [current, setCurrent] = useState();
   const [menuOpen, setMenuOpen] = useState(false);
   const [target, setTarget] = useState();
-  const { theme } = useTheme();
+  const { theme, design } = useTheme();
   const location = useLocation();
   const windowSize = useWindowSize();
   const headerRef = useRef();
@@ -196,12 +196,14 @@ export const Navbar = () => {
               </RouterLink>
             ))}
             <NavbarIcons />
-            {location.pathname === '/' && <BackgroundAnimationToggle isMobile />}
+            {location.pathname === '/' && design === 'classic' && (
+              <BackgroundAnimationToggle isMobile />
+            )}
             <ThemeToggle isMobile />
           </nav>
         )}
       </Transition>
-      {location.pathname === '/' && !isMobile && (
+      {location.pathname === '/' && design === 'classic' && !isMobile && (
         <BackgroundAnimationToggle data-navbar-item />
       )}
       {!isMobile && <ThemeToggle data-navbar-item />}

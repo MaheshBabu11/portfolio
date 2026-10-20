@@ -9,10 +9,10 @@ import { Weather } from '~/components/weather';
 import { VisuallyHidden } from '~/components/visually-hidden';
 import { Link as RouterLink } from '@remix-run/react';
 import { useInterval, usePrevious, useScrollToHash } from '~/hooks';
+import { useHydrated } from '~/hooks/useHydrated';
 import { Suspense, lazy, useEffect, useState } from 'react';
 import { cssProps } from '~/utils/style';
 import config from '~/config.json';
-import { useHydrated } from '~/hooks/useHydrated';
 import styles from './intro.module.css';
 
 const BackgroundAnimation = lazy(() =>
@@ -26,7 +26,7 @@ export function Intro({
   visitorCount,
   ...rest
 }) {
-  const { theme } = useTheme();
+  const { theme, design } = useTheme();
   const { mode: backgroundMode } = useBackgroundAnimation();
   const { disciplines } = config;
   const [disciplineIndex, setDisciplineIndex] = useState(0);
@@ -72,7 +72,7 @@ export function Intro({
       <Transition in key={theme} timeout={3000}>
         {({ visible, status }) => (
           <>
-            {isHydrated && (
+            {design === 'classic' && isHydrated && (
               <Suspense>
                 <BackgroundAnimation variant={backgroundMode} />
               </Suspense>
@@ -80,21 +80,29 @@ export function Intro({
             <header className={styles.text}>
               <div className={styles.headerMeta}>
                 <Weather />
-                {Number.isSafeInteger(visitorCount) && visitorCount >= 0 && (
-                  <span
-                    className={styles.visitorCounter}
-                    aria-label={`Home page views: ${visitorCount.toLocaleString('en')}`}
-                  >
-                    <span aria-hidden="true">
-                      {visitorCount.toLocaleString('en')}
+                {design === 'classic' &&
+                  Number.isSafeInteger(visitorCount) &&
+                  visitorCount >= 0 && (
+                    <span
+                      className={styles.visitorCounter}
+                      role="group"
+                      aria-label={`Home page views: ${visitorCount.toLocaleString('en')}`}
+                    >
+                      <span aria-hidden="true">
+                        {visitorCount.toLocaleString('en')}
+                      </span>
+                      <span className={styles.visitorLabel} aria-hidden="true">
+                        views
+                      </span>
+                      <span className={styles.visitorDecoration} aria-hidden="true" />
                     </span>
-                    <span className={styles.visitorLabel} aria-hidden="true">
-                      views
-                    </span>
-                    <span className={styles.visitorDecoration} aria-hidden="true" />
-                  </span>
-                )}
+                  )}
               </div>
+              <p className={styles.eyebrow}>
+                {design === 'murim'
+                  ? 'MURIM ARCHIVE / TECHNIQUE RECORD'
+                  : 'SOFTWARE ENGINEER / PORTFOLIO'}
+              </p>
               <h1 className={styles.name} data-visible={visible} id={titleId}>
                 <DecoderText text={config.name} delay={500} />
               </h1>
@@ -137,7 +145,46 @@ export function Intro({
                   ))}
                 </div>
               </Heading>
+              <p className={styles.tagline}>
+                Rewriting the future, one thoughtful build at a time.
+              </p>
+              <a className={styles.chapterLink} href="#project-1">
+                <span>{design === 'murim' ? 'Enter the archive' : 'View projects'}</span>
+                <span aria-hidden="true">↘</span>
+              </a>
+              {design === 'murim' &&
+                Number.isSafeInteger(visitorCount) &&
+                visitorCount >= 0 && (
+                  <div
+                    className={styles.visitorCounter}
+                    role="group"
+                    aria-label={`Home page views: ${visitorCount.toLocaleString('en')}`}
+                  >
+                    <span aria-hidden="true">{visitorCount.toLocaleString('en')}</span>
+                    <span className={styles.visitorLabel} aria-hidden="true">
+                      archive views
+                    </span>
+                  </div>
+                )}
             </header>
+            {design === 'murim' && (
+              <div className={styles.illustration} aria-hidden="true">
+                <div className={styles.illustrationFrame}>
+                  <span className={styles.frameTop}>
+                    SCROLL 01&nbsp; / &nbsp;BLOOD-MOON ASCENT
+                  </span>
+                  <span className={styles.moon} />
+                  <span className={styles.mountain} />
+                  <span className={styles.mountainBack} />
+                  <span className={styles.sword} />
+                  <span className={styles.illustrationSeal}>魔</span>
+                  <span className={styles.frameSide}>
+                    MURIM&nbsp; · &nbsp;JAVA&nbsp; · &nbsp;SYSTEMS
+                  </span>
+                  <span className={styles.frameBottom}>ASCEND THROUGH THE ARCHIVE</span>
+                </div>
+              </div>
+            )}
             <RouterLink
               to="/#project-1"
               className={styles.scrollIndicator}

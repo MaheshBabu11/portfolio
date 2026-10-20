@@ -398,7 +398,12 @@ const Device = ({
 
       gltf.scene.traverse(async node => {
         if (node.material) {
-          node.material.color = new Color(0x1f2025);
+          const baseColor = model.materialColor ?? 0x1f2025;
+          const materialColor =
+            node.name === MeshType.Logo
+              ? model.accentMaterialColor ?? baseColor
+              : baseColor;
+          node.material.color = new Color(materialColor);
         }
 
         if (node.name === MeshType.Screen) {

@@ -19,6 +19,7 @@ import GothamMedium from '~/assets/fonts/gotham-medium.woff2';
 import { useEffect } from 'react';
 import { Error } from '~/layouts/error';
 import { getServerEnv } from '~/utils/env';
+import { getDefaultSiteDesign, getGlobalSiteDesign } from '~/utils/site-design.server';
 import { VisuallyHidden } from '~/components/visually-hidden';
 import { CommandPalette } from '~/components/command-palette';
 import { Navbar } from '~/layouts/navbar';
@@ -27,6 +28,8 @@ import config from '~/config.json';
 import styles from './root.module.css';
 import './reset.module.css';
 import './global.module.css';
+
+let hasLoggedDesignDatabaseFailure = false;
 
 export const links = () => [
   {
@@ -72,9 +75,25 @@ export const loader = async ({ request }) => {
 
   const session = await getSession(request.headers.get('Cookie'));
   const theme = session.get('theme') || 'dark';
+  const defaultDesign = getDefaultSiteDesign();
+  let design = defaultDesign;
+  let designError = false;
+
+  try {
+    design = await getGlobalSiteDesign(env.DATABASE_URL, defaultDesign);
+  } catch (error) {
+    designError = true;
+    if (!hasLoggedDesignDatabaseFailure) {
+      console.error(
+        'Failed to load the global site design; using DEFAULT_DESIGN.',
+        error instanceof Error ? error.name : 'Unknown error'
+      );
+      hasLoggedDesignDatabaseFailure = true;
+    }
+  }
 
   return json(
-    { canonicalUrl, theme },
+    { canonicalUrl, theme, design, designError },
     {
       headers: {
         'Set-Cookie': await commitSession(session),
@@ -84,7 +103,7 @@ export const loader = async ({ request }) => {
 };
 
 export default function App() {
-  let { canonicalUrl, theme } = useLoaderData();
+  let { canonicalUrl, theme, design } = useLoaderData();
   const fetcher = useFetcher();
   const { state } = useNavigation();
 
@@ -118,7 +137,18 @@ export default function App() {
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         {/* Theme color doesn't support oklch so I'm hard coding these hexes for now */}
-        <meta name="theme-color" content={theme === 'dark' ? '#111' : '#F2F2F2'} />
+        <meta
+          name="theme-color"
+          content={
+            design === 'classic'
+              ? theme === 'dark'
+                ? '#111111'
+                : '#f2f2f2'
+              : theme === 'dark'
+                ? '#1b1011'
+                : '#f3ecdf'
+          }
+        />
         <meta
           name="color-scheme"
           content={theme === 'light' ? 'light dark' : 'dark light'}
@@ -128,8 +158,12 @@ export default function App() {
         <Links />
         <link rel="canonical" href={canonicalUrl} />
       </head>
-      <body data-theme={theme}>
-        <ThemeProvider theme={theme} toggleTheme={toggleTheme}>
+      <body data-theme={theme} data-design={design}>
+        <ThemeProvider
+          theme={theme}
+          design={design}
+          toggleTheme={toggleTheme}
+        >
           <BackgroundAnimationProvider>
             <Progress />
             <VisuallyHidden showOnFocus as="a" className={styles.skip} href="#main-content">
@@ -164,13 +198,13 @@ export function ErrorBoundary() {
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="theme-color" content="#111" />
+        <meta name="theme-color" content="#1b1011" />
         <meta name="color-scheme" content="dark light" />
         <style dangerouslySetInnerHTML={{ __html: themeStyles }} />
         <Meta />
         <Links />
       </head>
-      <body data-theme="dark">
+      <body data-theme="dark" data-design="murim">
         <Error error={error} />
         <ScrollRestoration />
         <Scripts />
