@@ -1,0 +1,13 @@
+.articleImage {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  margin: var(--space2XL) 0;
+  border: 1px solid color-mix(in lab, var(--text) 14%, transparent);
+  border-radius: 12px;
+}
+
+.articleImage[width] {
+  width: auto;
+}

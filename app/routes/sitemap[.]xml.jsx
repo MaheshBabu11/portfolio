@@ -2,12 +2,18 @@ import { getPosts } from './articles_._index/posts.server';
 import config from '~/config.json';
 
 const staticPaths = ['/', '/about', '/articles', '/contact', '/gallery', '/uses'];
+const projectModules = import.meta.glob('./projects.*.mdx');
 
 export async function loader() {
   const posts = await getPosts();
+  const projectUrls = Object.keys(projectModules).map(file => {
+    const slug = file.replace('./projects.', '').replace(/\.mdx$/, '');
+    return `${config.url}/projects/${encodeURIComponent(slug)}`;
+  });
   const urls = [
     ...staticPaths.map(path => `${config.url}${path}`),
     ...posts.map(post => `${config.url}/articles/${encodeURIComponent(post.slug)}`),
+    ...projectUrls,
   ];
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">

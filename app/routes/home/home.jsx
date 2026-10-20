@@ -1,3 +1,5 @@
+import codeCoffeeScreenshot from '~/assets/code-coffee-repeat.png';
+import excel2DataMapScreenshot from '~/assets/excel2datamap.png';
 import httpClientScreenshot from '~/assets/http-client-plus.png';
 import httpClientScreenshotLarge from '~/assets/http-client-plus-large.png';
 import httpClientScreenshotPlaceholder from '~/assets/http-client-plus-placeholder.png';
@@ -51,10 +53,20 @@ export const Home = () => {
   const projectOne = useRef();
   const projectTwo = useRef();
   const projectThree = useRef();
+  const projectFour = useRef();
+  const projectFive = useRef();
   const details = useRef();
 
   useEffect(() => {
-    const sections = [intro, projectOne, projectTwo, projectThree, details];
+    const sections = [
+      intro,
+      projectOne,
+      projectTwo,
+      projectThree,
+      projectFour,
+      projectFive,
+      details,
+    ];
 
     const sectionObserver = new IntersectionObserver(
       (entries, observer) => {
@@ -105,6 +117,7 @@ export const Home = () => {
         description="An IntelliJ IDEA plugin for composing and executing HTTP requests, with support for request configuration, .http file persistence, and JavaScript scripting."
         buttonText="Download plugin"
         buttonLink="https://plugins.jetbrains.com/plugin/28340-http-client-plus"
+        caseStudySlug="http-client-plus"
         model={{
           type: 'laptop',
           alt: 'HTTP Client Plus plugin for IntelliJ IDEA',
@@ -126,6 +139,7 @@ export const Home = () => {
         description="A web app that converts images into ASCII art, with support for custom character sets and file downloads."
         buttonText="View website"
         buttonLink="https://ascii-art-generator.maheshbabu11.dev/"
+        caseStudySlug="ascii-art-generator"
         model={{
           type: 'phone',
           alt: 'App login screen',
@@ -146,6 +160,7 @@ export const Home = () => {
         description="A lightweight Java library for publishing notifications to ntfy servers and receiving messages in real time over a WebSocket-like stream."
         buttonText="View on GitHub"
         buttonLink="https://github.com/MaheshBabu11/ntfy-java/packages/1957376"
+        caseStudySlug="ntfy-java"
         model={{
           type: 'laptop',
           alt: 'NTFY Java library for publishing notifications to ntfy servers',
@@ -153,6 +168,49 @@ export const Home = () => {
             {
               srcSet: `${ntfyScreenshot} 800w, ${ntfyScreenshotLarge} 1920w`,
               placeholder: ntfyScreenshotPlaceholder,
+            },
+          ],
+        }}
+      />
+      <ProjectSummary
+        id="project-4"
+        alternate
+        sectionRef={projectFour}
+        visible={visibleSections.includes(projectFour.current)}
+        index={4}
+        title="Code Coffee Repeat"
+        description="A blog about Java, Spring Boot, programming, and web development, built with Next.js, Tailwind CSS, React Server Components, and Contentlayer."
+        buttonText="Read the blog"
+        buttonLink="https://blog.maheshbabu11.dev/"
+        caseStudySlug="code-coffee-repeat"
+        model={{
+          type: 'laptop',
+          alt: 'Code Coffee Repeat software engineering blog',
+          textures: [
+            {
+              srcSet: `${codeCoffeeScreenshot} 1306w`,
+              placeholder: codeCoffeeScreenshot,
+            },
+          ],
+        }}
+      />
+      <ProjectSummary
+        id="project-5"
+        sectionRef={projectFive}
+        visible={visibleSections.includes(projectFive.current)}
+        index={5}
+        title="Excel2DataMap"
+        description="A Java library that reads Excel and CSV files and converts their contents into data maps for database workflows, with file-type detection and conversion utilities."
+        buttonText="View on GitHub"
+        buttonLink="https://github.com/MaheshBabu11/Excel2DataMap"
+        caseStudySlug="excel2datamap"
+        model={{
+          type: 'laptop',
+          alt: 'Excel2DataMap Java library project',
+          textures: [
+            {
+              srcSet: `${excel2DataMapScreenshot} 1311w`,
+              placeholder: excel2DataMapScreenshot,
             },
           ],
         }}
