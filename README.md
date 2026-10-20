@@ -1,64 +1,93 @@
 <p align="center">
-  <img src="/public/favicon.svg" width="50" alt="Logo" />
+  <img src="public/favicon.svg" width="52" alt="Mahesh Babu portfolio logo" />
 </p>
-<h1 align="center">Personal portfolio</h1>
 
-[![Site preview](/public/site-preview.png)](https://maheshbabu11.dev)
+<h1 align="center">Mahesh Babu — Software Engineer</h1>
 
-My design portfolio to showcase a few projects. Built with [Remix](https://remix.run/), [Three.js](https://threejs.org/), and [Framer Motion](https://www.framer.com/motion/). View the [live site](https://maheshbabu11.dev).
+<p align="center">
+  <a href="https://maheshbabu11.dev">Portfolio</a> ·
+  <a href="https://github.com/MaheshBabu11">GitHub</a> ·
+  <a href="https://www.linkedin.com/in/maheshbabu11/">LinkedIn</a>
+</p>
 
-## Install & run
+<p align="center">
+  <a href="https://maheshbabu11.dev">
+    <img src="public/site-preview.png" alt="Preview of Mahesh Babu's portfolio website" />
+  </a>
+</p>
 
-Make sure you have Node.js `24.x` LTS or higher and npm `9.6.3` or higher installed. Install dependencies with:
+I’m Mahesh, a software engineer with 5+ years of experience building web applications. I work primarily with Java and Spring Boot, and enjoy building scalable backend APIs, web applications, and data-driven systems. I currently work at Acmatek and am pursuing an MSc in Data Science at Hamburg University of Technology.
+
+This repository contains the source for my portfolio website: [maheshbabu11.dev](https://maheshbabu11.dev).
+
+## Featured projects
+
+- **[HTTP Client Plus](https://plugins.jetbrains.com/plugin/28340-http-client-plus)** — An IntelliJ IDEA plugin for composing, organizing, and executing HTTP requests, saved in the standard `.http` format. [Case study](https://maheshbabu11.dev/projects/http-client-plus)
+- **[ASCII Art Generator](https://ascii-art-generator.maheshbabu11.dev/)** — A Spring Boot and HTMX application for generating ASCII art. [Case study](https://maheshbabu11.dev/projects/ascii-art-generator)
+- **[NTFY Java](https://github.com/MaheshBabu11/ntfy-java)** — A Java library for publishing notifications to ntfy servers. [Case study](https://maheshbabu11.dev/projects/ntfy-java)
+- **[Code Coffee Repeat](https://blog.maheshbabu11.dev/)** — A software engineering blog covering Java, Spring Boot, and web development. [Case study](https://maheshbabu11.dev/projects/code-coffee-repeat)
+- **[Excel2DataMap](https://github.com/MaheshBabu11/Excel2DataMap)** — A Java library for converting Excel and CSV files into data maps. [Case study](https://maheshbabu11.dev/projects/excel2datamap)
+
+## About this portfolio
+
+The site is built with React, Remix, Vite, Three.js, and Framer Motion. It includes project case studies and technical articles authored in MDX, a photo gallery, and responsive light and dark themes. Project and article pages are generated from their slugs, and the sitemap includes those pages automatically.
+
+My main areas of interest and experience include:
+
+- **Languages:** Java, Python, C/C++, JavaScript, TypeScript
+- **Backend and data:** Spring Boot, Hibernate, PostgreSQL, MySQL, Microsoft SQL Server
+- **Tools:** Git, Docker, Azure DevOps, IntelliJ IDEA
+- **Web:** React, Remix, Three.js, Framer Motion
+
+## Run locally
+
+Requirements: Node.js 24 or later and npm 9.6.3 or later.
 
 ```bash
 npm install
+npm run dev
 ```
 
-Once it's done start up a local server with:
+The development server is started by `npm run dev`. Before starting, the `predev` script optimizes gallery images.
+
+To create a production build:
 
 ```bash
-npm run dev
+npm run build
+```
+
+The `prebuild` script also optimizes gallery images before the build.
+
+## Environment
+
+For local theme-session persistence, copy `.env.example` to `.env.local` and set a random `SESSION_SECRET`:
+
+```bash
+cp .env.example .env.local
+```
+
+The contact form opens a prefilled email draft in the visitor’s default email application.
+
+## Gallery images
+
+Add source photos to `app/assets/gallery/`. The gallery optimizer generates thumbnails (up to 640px) and display images (up to 1800px) in `public/gallery-optimized/`. The grid loads thumbnails, and selecting a photo opens its display-size image. Generated images and the manifest are ignored by Git; source photos remain in `app/assets/gallery/`.
+
+After adding photos while the development server is already running, regenerate the images with:
+
+```bash
+npm run gallery:optimize
 ```
 
 ## Deployment
 
-Deploy the site to Vercel:
+Deploy to Vercel with:
 
 ```bash
 npm run deploy
 ```
 
-You can also import the repository into Vercel. Configure `SESSION_SECRET` in
-the Vercel project settings for persistent theme sessions. For local development,
-copy `.env.example` to `.env.local` and set a random secret. The contact form
-opens a prefilled email draft in the visitor's default email app.
-The PWA caches same-origin assets and displays an offline page when a navigation
-cannot reach the network.
+You can also import this repository into a Vercel project and configure `SESSION_SECRET` in the project’s environment variables.
 
-Add source photos to `app/assets/gallery/`. The `predev` and `prebuild` scripts
-generate aspect-ratio-preserving WebP thumbnails (up to 640px) and display-size
-images (up to 1800px) in `public/gallery-optimized/`; the gallery grid loads only
-thumbnails, and clicking one opens its display-size version. Generated images and the manifest are
-ignored by Git, while source photos remain in the assets folder. Run
-`npm run gallery:optimize` after adding photos to an already-running dev server.
+## License
 
-## Permissions
-
-I'm cool with anyone using the code or parts of the code for their own site, it is open source so people can learn from it and adapt it. However, I would encourage you to modify the theme and components it to make it your own. If you are using the site's design largely unmodified, I'd appreciate being credited as the designer of the website.
-
-I do not give permission to present any of my projects as your own (this is being actively used as my portfolio site and these are my real projects I've worked on).
-
-## FAQs
-
-<details>
-  <summary>How do I change the color on the <code>DisplacementSphere</code> (blobby rotating thing in the background).</summary>
-  
-  You'll need to edit the fragment shader. [Check out this issue for more details](https://github.com/HamishMW/portfolio/issues/19#issuecomment-870996615).
-</details>
-
-<details>
-  <summary>How do I get the contact form to work?</summary>
-  
-  The contact form opens a prefilled message in the visitor's default email app. No email service credentials are required.
-</details>
+See [LICENSE](LICENSE).
