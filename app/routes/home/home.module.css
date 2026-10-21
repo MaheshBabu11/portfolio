@@ -1,3 +1,46 @@
 .home {
   overflow-x: hidden;
 }
+
+.scrollToTop {
+  --buttonSize: 44px;
+  --buttonPadding: 0;
+  --buttonTextColor: var(--textBody);
+
+  position: fixed;
+  right: var(--spaceL);
+  bottom: calc(44px + var(--spaceL) + var(--spaceS));
+  z-index: var(--zIndex3);
+  display: grid;
+  place-items: center;
+  border: 1px solid color-mix(in lab, var(--text) 18%, transparent);
+  border-radius: 12px;
+  background: color-mix(in lab, var(--backgroundLight) 88%, transparent);
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+
+  &::after {
+    clip-path: none;
+    border-radius: inherit;
+    background: color-mix(in lab, var(--text) 4%, transparent);
+  }
+
+  &:hover::after {
+    background: color-mix(in lab, var(--accent) 12%, transparent);
+  }
+
+  :global(svg) {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    transform: translate(-50%, -50%) rotate(90deg);
+    transform-origin: center;
+  }
+
+  @media (max-width: 600px) {
+    right: var(--spaceM);
+    bottom: calc(44px + var(--spaceM) + var(--spaceS));
+  }
+}

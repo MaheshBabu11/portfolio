@@ -4,7 +4,7 @@
     opacity: 0;
 
     &[data-loaded='true']:global {
-      animation: fade-in 1s ease forwards var(--delay);
+      animation: fade-in 750ms ease forwards var(--delay);
     }
   }
 

@@ -17,6 +17,7 @@ import { ProjectSummary } from './project-summary';
 import { Recommendations } from './recommendations';
 import { useLoaderData } from '@remix-run/react';
 import { useEffect, useRef, useState } from 'react';
+import { Button } from '~/components/button';
 import config from '~/config.json';
 import styles from './home.module.css';
 
@@ -51,6 +52,7 @@ export const Home = () => {
   const { visitorCount } = useLoaderData();
   const [visibleSections, setVisibleSections] = useState([]);
   const [scrollIndicatorHidden, setScrollIndicatorHidden] = useState(false);
+  const [showScrollToTop, setShowScrollToTop] = useState(false);
   const intro = useRef();
   const projectOne = useRef();
   const projectTwo = useRef();
@@ -103,8 +105,28 @@ export const Home = () => {
     };
   }, [visibleSections]);
 
+  useEffect(() => {
+    const updateScrollToTopVisibility = () => {
+      setShowScrollToTop(window.scrollY > 400);
+    };
+
+    window.addEventListener('scroll', updateScrollToTopVisibility, { passive: true });
+    updateScrollToTopVisibility();
+
+    return () => window.removeEventListener('scroll', updateScrollToTopVisibility);
+  }, []);
+
+  const handleScrollToTop = () => {
+    const behavior = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+      ? 'auto'
+      : 'smooth';
+
+    window.scrollTo({ top: 0, behavior });
+  };
+
   return (
-    <div className={styles.home}>
+    <>
+      <div className={styles.home}>
       <Intro
         id="intro"
         sectionRef={intro}
@@ -225,6 +247,17 @@ export const Home = () => {
       />
       <Recommendations />
       <Footer />
-    </div>
+      </div>
+      {showScrollToTop && (
+        <Button
+          className={styles.scrollToTop}
+          icon="arrow-left"
+          iconOnly
+          aria-label="Scroll to top"
+          onClick={handleScrollToTop}
+          type="button"
+        />
+      )}
+    </>
   );
 };
