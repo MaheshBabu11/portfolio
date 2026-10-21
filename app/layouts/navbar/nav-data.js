@@ -18,6 +18,10 @@ export const navLinks = [
     pathname: '/gallery',
   },
   {
+    label: 'Homelab',
+    pathname: '/homelab',
+  },
+  {
     label: 'Articles',
     pathname: '/articles',
   },

@@ -1,7 +1,15 @@
 import { getPosts } from './articles_._index/posts.server';
 import config from '~/config.json';
 
-const staticPaths = ['/', '/about', '/articles', '/contact', '/gallery', '/uses'];
+const staticPaths = [
+  '/',
+  '/about',
+  '/articles',
+  '/contact',
+  '/gallery',
+  '/homelab',
+  '/uses',
+];
 const projectModules = import.meta.glob('./projects.*.mdx');
 
 export async function loader() {

@@ -59,7 +59,7 @@ function createAdminSessionStorage(sessionSecret) {
     cookie: {
       name: adminSessionCookie,
       httpOnly: true,
-      maxAge: 28_800,
+      maxAge: 3_600,
       path: '/admin',
       sameSite: 'lax',
       secrets: [sessionSecret],

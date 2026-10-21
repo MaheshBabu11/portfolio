@@ -16,23 +16,30 @@
   </a>
 </p>
 
-I’m Mahesh, a software engineer with 5+ years of experience building web applications. I work primarily with Java and Spring Boot, and enjoy building scalable backend APIs, web applications, and data-driven systems. I currently work at Acmatek and am pursuing an MSc in Data Science at Hamburg University of Technology.
+This repository contains the source code for [maheshbabu11.dev](https://maheshbabu11.dev), my personal portfolio. I’m a software engineer with 5+ years of experience building web applications, primarily with Java and Spring Boot. I currently work at Acmatek and am pursuing an MSc in Data Science at Hamburg University of Technology.
 
-This repository contains the source for my portfolio website: [maheshbabu11.dev](https://maheshbabu11.dev).
+## Features
+
+- Responsive portfolio with light and dark themes and three visual designs.
+- Project case studies and technical articles written in MDX.
+- Interactive 3D project previews, animated backgrounds, and a photo gallery.
+- Contact form powered by EmailJS.
+- Searchable command palette for pages, articles, and site controls.
+- Password-protected `/homelab` dashboard with Dashdot system metrics and live HTTP checks for Paperless-ngx, Portainer, Immich, and Vaultwarden.
 
 ## Featured projects
 
-- **[HTTP Client Plus](https://plugins.jetbrains.com/plugin/28340-http-client-plus)** — An IntelliJ IDEA plugin for composing, organizing, and executing HTTP requests, saved in the standard `.http` format. [Case study](https://maheshbabu11.dev/projects/http-client-plus)
-- **[ASCII Art Generator](https://ascii-art-generator.maheshbabu11.dev/)** — A Spring Boot and HTMX application for generating ASCII art. [Case study](https://maheshbabu11.dev/projects/ascii-art-generator)
-- **[NTFY Java](https://github.com/MaheshBabu11/ntfy-java)** — A Java library for publishing notifications to ntfy servers. [Case study](https://maheshbabu11.dev/projects/ntfy-java)
-- **[Code Coffee Repeat](https://blog.maheshbabu11.dev/)** — A software engineering blog covering Java, Spring Boot, and web development. [Case study](https://maheshbabu11.dev/projects/code-coffee-repeat)
-- **[Excel2DataMap](https://github.com/MaheshBabu11/Excel2DataMap)** — A Java library for converting Excel and CSV files into data maps. [Case study](https://maheshbabu11.dev/projects/excel2datamap)
+- **[HTTP Client Plus](https://plugins.jetbrains.com/plugin/28340-http-client-plus)** — IntelliJ IDEA plugin for composing, organizing, and executing HTTP requests in the standard `.http` format. [Case study](https://maheshbabu11.dev/projects/http-client-plus)
+- **[ASCII Art Generator](https://ascii-art-generator.maheshbabu11.dev/)** — Spring Boot and HTMX application for generating ASCII art. [Case study](https://maheshbabu11.dev/projects/ascii-art-generator)
+- **[NTFY Java](https://github.com/MaheshBabu11/ntfy-java)** — Java library for publishing notifications to ntfy servers. [Case study](https://maheshbabu11.dev/projects/ntfy-java)
+- **[Code Coffee Repeat](https://blog.maheshbabu11.dev/)** — Software engineering blog covering Java, Spring Boot, and web development. [Case study](https://maheshbabu11.dev/projects/code-coffee-repeat)
+- **[Excel2DataMap](https://github.com/MaheshBabu11/Excel2DataMap)** — Java library for converting Excel and CSV files into data maps. [Case study](https://maheshbabu11.dev/projects/excel2datamap)
 
-## About this portfolio
+## Technology
 
-The site is built with React, Remix, Vite, Three.js, and Framer Motion. It includes project case studies and technical articles authored in MDX, a photo gallery, and responsive light and dark themes. Project and article pages are generated from their slugs, and the sitemap includes those pages automatically.
+The site is built with React, Remix, Vite, Three.js, and Framer Motion. Project and article pages are generated from MDX files; the sitemap includes those pages automatically.
 
-My main areas of interest and experience include:
+My work spans:
 
 - **Languages:** Java, Python, C/C++, JavaScript, TypeScript
 - **Backend and data:** Spring Boot, Hibernate, PostgreSQL, MySQL, Microsoft SQL Server
@@ -41,46 +48,69 @@ My main areas of interest and experience include:
 
 ## Run locally
 
-Requirements: Node.js 24 or later and npm 9.6.3 or later.
+### Requirements
+
+- Node.js 24 or later
+- npm 9.6.3 or later
+
+### Setup
 
 ```bash
 npm install
+cp .env.example .env.local
+```
+
+Configure the required environment variables in `.env.local` (see [Configuration](#configuration)), then start the development server:
+
+```bash
 npm run dev
 ```
 
-The development server is started by `npm run dev`. Before starting, the `predev` script optimizes gallery images.
+The development and production commands optimize gallery images before starting or building the app.
 
-To create a production build:
+### Production build
 
 ```bash
 npm run build
 ```
 
-The `prebuild` script also optimizes gallery images before the build.
+## Configuration
 
-## Environment
+| Variable | Purpose |
+| --- | --- |
+| `SESSION_SECRET` | Signs the visitor’s preferred light/dark theme cookie. |
+| `DATABASE_URL` | Neon PostgreSQL connection used for global design settings and the homepage view counter. |
+| `DEFAULT_DESIGN` | Initial site design: `murim`, `nano`, or `classic`. |
+| `ADMIN_PASSWORD` | Initial password for `/admin` and `/homelab`; its scrypt hash is stored in Neon. |
+| `ADMIN_SESSION_SECRET` | Optional initial admin/homelab session signing secret. If omitted, one is generated and stored in Neon. |
+| `EMAILJS_SERVICE_ID` | EmailJS service used by the contact form. |
+| `EMAILJS_TEMPLATE_ID` | EmailJS template used by the contact form. |
+| `EMAILJS_PUBLIC_KEY` | EmailJS public key. |
+| `EMAILJS_PRIVATE_KEY` | EmailJS private key; keep it server-side. |
+| `CONTACT_TO_EMAIL` | Recipient for contact-form messages. |
+| `DASHDOT_URL` | Optional Dashdot base URL. Defaults to `https://dashdot.maheshbabu11.dev`. |
 
-For local theme persistence, the global design setting, and the homepage view counter, copy `.env.example` to `.env.local` and set the values:
+The first `/admin` visit initializes the admin password hash and session secret in the Neon `portfolio_settings` table. After initialization, the bootstrap password and optional session secret can be removed from the environment. Keep `DATABASE_URL`, `SESSION_SECRET`, and the EmailJS private key on the server.
 
-```bash
-cp .env.example .env.local
-```
+The contact form sends messages through EmailJS. Configure the template with `to_email`, `reply_to`, and `subject`, and include `from_email` and `message` in the body. Enable API access for Node.js in EmailJS security settings.
 
-Set `DATABASE_URL` to a Neon PostgreSQL connection string, choose `DEFAULT_DESIGN` as `murim`, `nano`, or `classic`, and set `ADMIN_PASSWORD` for the first `/admin` visit. The app stores the password as a scrypt hash and stores the cookie-signing secret in the Neon `portfolio_settings` table. `ADMIN_SESSION_SECRET` is optional during initialization; if omitted, the app generates a random secret and saves it there. After the first admin visit initializes these rows, the environment values can be removed.
+### Homelab dashboard
 
-The contact form sends messages through EmailJS. Create an EmailJS email service and template, then configure the template with `to_email` as the recipient, `reply_to` as the reply-to address, `subject` as the subject, and include `from_email` and `message` in the body. Use the sender configured for your EmailJS service as the From address. Enable API access for Node.js in your EmailJS security settings. Set `EMAILJS_SERVICE_ID`, `EMAILJS_TEMPLATE_ID`, `EMAILJS_PUBLIC_KEY`, `EMAILJS_PRIVATE_KEY`, and `CONTACT_TO_EMAIL`; keep the private key server-side and configure these values in your deployment environment as well as `.env.local`.
+The `/homelab` page uses the admin password to create a separate HTTP-only session cookie that expires after one hour. The page and its data endpoints require this session.
 
-Sign in at `/admin` to switch the site-wide design between Murim, Nano Machine, and Original; the selection is stored in Neon and applies to all visitors. The Nano Machine design has its own light and dark palettes and system-interface styling. The settings table is created automatically. The session secret is stored in the database as requested, so restrict database access and keep `DATABASE_URL` server-side.
+System metrics are fetched server-side from Dashdot’s documented `/info` and `/load/*` endpoints every 30 seconds. Service availability checks for Paperless-ngx, Portainer, Immich, and Vaultwarden also run server-side every 30 seconds. The page is private to authenticated visitors; no service API credentials are required.
 
-`SESSION_SECRET` signs each visitor's preferred light/dark theme cookie. The homepage counter stores a total page-view count in Neon PostgreSQL. It counts homepage requests rather than unique people and does not store visitor identities; its table is created automatically.
+### Admin and homepage data
 
-The contact form sends the message directly through EmailJS. Visitors receive an on-page success or error message, and replies to the notification go to the sender’s submitted email address.
+Sign in at `/admin` to change the site-wide design. The selection applies to all visitors. The Nano Machine design has its own light and dark palettes and system-interface styling.
 
-## Gallery images
+The homepage counter records total homepage requests in Neon; it does not identify unique visitors or store visitor identities. Database tables for settings and the counter are created automatically.
 
-Add source photos to `app/assets/gallery/`. The gallery optimizer generates thumbnails (up to 640px) and display images (up to 1800px) in `public/gallery-optimized/`. The grid loads thumbnails, and selecting a photo opens its display-size image. Generated images and the manifest are ignored by Git; source photos remain in `app/assets/gallery/`.
+## Gallery
 
-After adding photos while the development server is already running, regenerate the images with:
+Add source photos to `app/assets/gallery/`. The gallery optimizer creates thumbnails (up to 640 px) and display images (up to 1800 px) in `public/gallery-optimized/`. Generated images and the manifest are ignored by Git; keep source photos in `app/assets/gallery/`.
+
+To regenerate optimized images while the development server is running:
 
 ```bash
 npm run gallery:optimize
@@ -94,7 +124,7 @@ Deploy to Vercel with:
 npm run deploy
 ```
 
-You can also import this repository into a Vercel project and configure `SESSION_SECRET`, `DATABASE_URL`, `DEFAULT_DESIGN`, the initial `ADMIN_PASSWORD`, and the EmailJS variables in the project’s environment variables. `ADMIN_SESSION_SECRET` is optional. Keep the Neon connection string and EmailJS private key server-side, and rotate credentials if they have been exposed.
+Alternatively, import the repository into a Vercel project and configure the required environment variables in the project settings. Set `DASHDOT_URL` only if you use a different Dashdot instance.
 
 ## License
 

@@ -1,0 +1,462 @@
+.homelab {
+  position: relative;
+  isolation: isolate;
+  padding-bottom: var(--space4XL);
+
+  &::before {
+    position: absolute;
+    z-index: -1;
+    inset: 0;
+    background-image: radial-gradient(
+      circle,
+      color-mix(in oklab, var(--accent) 24%, transparent) 1px,
+      transparent 1.5px
+    );
+    background-size: 32px 32px;
+    content: '';
+    opacity: 0.18;
+    pointer-events: none;
+  }
+}
+
+.content {
+  display: grid;
+  gap: var(--space2XL);
+}
+
+.loginContent {
+  display: grid;
+  justify-items: center;
+}
+
+.loginForm {
+  display: grid;
+  width: min(100%, 440px);
+  gap: var(--spaceM);
+  padding: var(--space2XL);
+  border: 1px solid color-mix(in oklab, var(--text) 14%, transparent);
+  border-top: 2px solid var(--accent);
+  background: color-mix(in oklab, var(--backgroundLight) 58%, transparent);
+
+  h3,
+  p {
+    margin: 0;
+  }
+
+  p[role='alert'] {
+    color: var(--accent);
+  }
+
+  :global(body[data-design='classic']) & {
+    border-radius: 12px;
+    background: color-mix(in oklab, var(--backgroundLight) 72%, transparent);
+  }
+}
+
+.passwordLabel {
+  color: var(--textLight);
+  font-size: var(--fontSizeBodyS);
+}
+
+.passwordInput {
+  width: 100%;
+  min-height: 48px;
+  padding: var(--spaceM);
+  border: 1px solid color-mix(in oklab, var(--text) 24%, transparent);
+  border-radius: 4px;
+  background: color-mix(in oklab, var(--background) 78%, transparent);
+  color: var(--textBody);
+  font: inherit;
+
+  &:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+}
+
+.passwordSubmit {
+  min-height: 48px;
+  padding: var(--spaceM) var(--spaceL);
+  border: 1px solid var(--accent);
+  background: var(--accent);
+  color: var(--background);
+  font: inherit;
+  font-weight: var(--fontWeightMedium);
+  cursor: pointer;
+
+  &:disabled {
+    cursor: wait;
+    opacity: 0.7;
+  }
+}
+
+.liveHeader,
+.liveStatus,
+.sectionHeader,
+.storageTitle,
+.usageHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spaceM);
+}
+
+.liveHeader {
+  min-height: 42px;
+}
+
+.liveStatus {
+  justify-content: flex-start;
+
+  p {
+    margin: 0;
+  }
+}
+
+.statusDot {
+  width: 9px;
+  height: 9px;
+  flex: 0 0 9px;
+  border-radius: 50%;
+  background: var(--textLight);
+
+  &[data-connected='true'] {
+    background: #54d48b;
+    box-shadow: 0 0 14px color-mix(in oklab, #54d48b 55%, transparent);
+  }
+}
+
+.dashdotLink {
+  color: var(--accent);
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.metrics {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--spaceM);
+}
+
+.metricCard,
+.hardwareCard,
+.storageCard,
+.message,
+.emptyState {
+  border: 1px solid color-mix(in oklab, var(--text) 14%, transparent);
+  background:
+    linear-gradient(135deg, color-mix(in oklab, var(--accent) 5%, transparent), transparent 62%),
+    color-mix(in oklab, var(--backgroundLight) 58%, transparent);
+
+  :global(body[data-design='classic']) & {
+    border-color: color-mix(in oklab, var(--text) 12%, transparent);
+    border-radius: 12px;
+    background: color-mix(in oklab, var(--backgroundLight) 72%, transparent);
+  }
+}
+
+.metricCard {
+  position: relative;
+  display: grid;
+  align-content: start;
+  min-height: 190px;
+  gap: var(--spaceS);
+  padding: var(--spaceL);
+  overflow: hidden;
+  border-top: 2px solid var(--accent);
+}
+
+.metricLabel,
+.hardwareLabel {
+  color: var(--textLight);
+  font-size: var(--fontSizeBodyS);
+}
+
+.metricValue {
+  color: var(--textTitle);
+  font-size: clamp(1.5rem, 3.2vw, 2.5rem);
+  font-weight: var(--fontWeightMedium);
+  line-height: 1.1;
+  overflow-wrap: anywhere;
+}
+
+.metricDetail,
+.metricFootnote {
+  color: var(--textLight);
+  font-size: var(--fontSizeBodyXS);
+  overflow-wrap: anywhere;
+}
+
+.sparkline {
+  position: absolute;
+  right: var(--spaceM);
+  bottom: var(--spaceM);
+  left: var(--spaceM);
+  width: calc(100% - var(--space2XL));
+  height: 34px;
+  overflow: visible;
+  opacity: 0.75;
+
+  polyline {
+    fill: none;
+    stroke: var(--accent);
+    stroke-width: 2;
+    vector-effect: non-scaling-stroke;
+  }
+}
+
+.metricFootnote {
+  align-self: end;
+  margin-top: auto;
+  padding-top: var(--spaceL);
+}
+
+.section {
+  display: grid;
+  gap: var(--spaceL);
+}
+
+.serviceGrid {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--spaceXL);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.serviceCard {
+  display: grid;
+  place-items: center;
+}
+
+.serviceLink {
+  position: relative;
+  display: grid;
+  width: 84px;
+  height: 84px;
+  place-items: center;
+  color: inherit;
+  text-decoration: none;
+
+  &:focus-visible {
+    border-radius: 16px;
+    outline-offset: 2px;
+  }
+}
+
+.serviceIcon {
+  position: relative;
+  display: grid;
+  width: 68px;
+  height: 68px;
+  place-items: center;
+  overflow: visible;
+  border-radius: 14px;
+  background: #fff;
+  color: #242424;
+  font-size: 1.75rem;
+  font-weight: var(--fontWeightMedium);
+
+  img {
+    position: absolute;
+    inset: 7px;
+    width: 54px;
+    height: 54px;
+    object-fit: contain;
+  }
+
+  img[hidden] {
+    display: none;
+  }
+}
+
+.serviceIndicator {
+  position: absolute;
+  right: -3px;
+  bottom: -3px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--textLight);
+  box-shadow:
+    0 0 0 3px color-mix(in oklab, var(--backgroundLight) 90%, transparent),
+    0 0 12px color-mix(in oklab, currentColor 48%, transparent);
+
+  &[data-state='online'] {
+    background: #54d48b;
+    box-shadow:
+      0 0 0 3px color-mix(in oklab, var(--backgroundLight) 90%, transparent),
+      0 0 12px color-mix(in oklab, #54d48b 68%, transparent);
+  }
+
+  &[data-state='degraded'] {
+    background: #e8b45b;
+  }
+
+  &[data-state='offline'] {
+    background: #ed6a72;
+  }
+}
+
+.sectionHeader {
+  align-items: baseline;
+  padding-bottom: var(--spaceS);
+  border-bottom: 1px solid color-mix(in oklab, var(--text) 16%, transparent);
+
+  p {
+    margin: 0;
+  }
+}
+
+.hardwareGrid,
+.storageGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--spaceM);
+}
+
+.hardwareCard {
+  display: grid;
+  align-content: start;
+  gap: var(--spaceS);
+  min-width: 0;
+  padding: var(--spaceL);
+
+  strong,
+  span {
+    overflow-wrap: anywhere;
+  }
+
+  strong {
+    color: var(--textTitle);
+  }
+
+  > span:last-child {
+    color: var(--textLight);
+    font-size: var(--fontSizeBodyXS);
+  }
+}
+
+.hardwareLabel {
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.storageGrid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.storageCard {
+  display: grid;
+  gap: var(--spaceL);
+  padding: var(--spaceL);
+}
+
+.storageTitle {
+  align-items: flex-start;
+
+  strong {
+    overflow-wrap: anywhere;
+  }
+
+  span {
+    flex: 0 0 auto;
+    color: var(--textLight);
+    font-size: var(--fontSizeBodyXS);
+  }
+}
+
+.usage {
+  display: grid;
+  gap: var(--spaceS);
+}
+
+.usageHeader {
+  color: var(--textLight);
+  font-size: var(--fontSizeBodyXS);
+}
+
+.usageHeader span:last-child {
+  text-align: right;
+}
+
+.usageTrack {
+  height: 8px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: color-mix(in oklab, var(--text) 12%, transparent);
+
+  > span {
+    display: block;
+    height: 100%;
+    border-radius: inherit;
+    background: linear-gradient(90deg, var(--primary), var(--accent));
+    transition: width var(--durationM) ease;
+  }
+}
+
+.message,
+.emptyState {
+  display: grid;
+  gap: var(--spaceS);
+  padding: var(--space2XL);
+
+  h4,
+  p {
+    margin: 0;
+  }
+}
+
+.staleNotice {
+  margin: 0;
+  padding: var(--spaceM);
+  border-left: 2px solid var(--accent);
+  background: color-mix(in oklab, var(--accent) 6%, transparent);
+  color: var(--textBody);
+}
+
+@media (--mediaLaptop) {
+  .metrics {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (--mediaTablet) {
+  .hardwareGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (--mediaMobile) {
+  .storageGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .sectionHeader {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: var(--spaceXS);
+  }
+}
+
+@media (max-width: 420px) {
+  .metrics {
+    grid-template-columns: 1fr;
+  }
+
+  .liveHeader {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .usageTrack > span {
+    transition: none;
+  }
+}
