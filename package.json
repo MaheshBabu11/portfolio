@@ -2,7 +2,7 @@
   "name": "portfolio",
   "homepage": "https://maheshbabu11.dev",
   "description": "Portfolio site for Mahesh Babu",
-  "repository": "https://github.com/MaheshBabu11/portfolio-new",
+  "repository": "https://github.com/MaheshBabu11/portfolio",
   "author": "Mahesh Babu",
   "sideEffects": false,
   "type": "module",
