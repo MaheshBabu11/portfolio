@@ -170,14 +170,14 @@ export function ProjectSummary({
                   <Model
                     key={`${model.type}-${design}`}
                     alt={model.alt}
-                    cameraPosition={{ x: 0, y: 0, z: 11.5 }}
+                    cameraPosition={{ x: 0, y: 0, z: 13 }}
                     showDelay={200}
                     onLoad={handleModelLoad}
                     show={visible}
                     models={[
                       {
                         ...deviceModel,
-                        position: { x: -0.6, y: 1.1, z: 0 },
+                        position: { x: -0.8, y: 0.7, z: 0 },
                         texture: {
                           ...model.textures[0],
                           sizes: phoneSizes,
@@ -185,7 +185,7 @@ export function ProjectSummary({
                       },
                       {
                         ...deviceModels.phone,
-                        position: { x: 0.6, y: -0.5, z: 0.3 },
+                        position: { x: 0.8, y: -0.15, z: 0.3 },
                         texture: {
                           ...model.textures[1],
                           sizes: phoneSizes,
