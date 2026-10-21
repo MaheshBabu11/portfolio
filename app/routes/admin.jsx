@@ -1,4 +1,5 @@
 import { json, redirect } from '@remix-run/node';
+import { randomBytes } from 'node:crypto';
 import {
   Form,
   useActionData,
@@ -11,13 +12,19 @@ import { Text } from '~/components/text';
 import {
   getAdminAuthConfig,
   getAdminSession,
+  hashAdminPassword,
   verifyAdminPassword,
 } from '~/utils/admin-auth.server';
 import { getServerEnv } from '~/utils/env';
+import { setPortfolioSetting } from '~/utils/portfolio-settings.server';
 import { setGlobalSiteDesign } from '~/utils/site-design.server';
 import styles from '../admin.module.css';
 
 const allowedDesigns = new Set(['classic', 'murim', 'nano']);
+const passwordHashSetting = 'admin-password-hash';
+const sessionSecretSetting = 'admin-session-secret';
+const maxPasswordLength = 1024;
+const minPasswordLength = 12;
 
 function checkRequestOrigin(request) {
   const origin = request.headers.get('Origin');
@@ -80,7 +87,10 @@ export async function action({ request }) {
     }
 
     if (!(await verifyAdminPassword(formData.get('password'), authConfig.passwordHash))) {
-      return json({ error: 'The password is incorrect.' }, { status: 401 });
+      return json(
+        { intent: 'login', error: 'The password is incorrect.' },
+        { status: 401 }
+      );
     }
 
     const { storage } = await getAdminSession(request, authConfig.sessionSecret);
@@ -120,6 +130,93 @@ export async function action({ request }) {
     return json({ error: 'Authentication is required.' }, { status: 401 });
   }
 
+  if (intent === 'change-password') {
+    const currentPassword = formData.get('current-password');
+    const newPassword = formData.get('new-password');
+    const confirmPassword = formData.get('confirm-password');
+
+    if (
+      typeof currentPassword !== 'string' ||
+      currentPassword.length > maxPasswordLength ||
+      typeof newPassword !== 'string' ||
+      typeof confirmPassword !== 'string'
+    ) {
+      return json(
+        { intent: 'change-password', error: 'Enter valid password values.' },
+        { status: 400 }
+      );
+    }
+
+    if (newPassword.length < minPasswordLength) {
+      return json(
+        {
+          intent: 'change-password',
+          error: `Your new password must be at least ${minPasswordLength} characters.`,
+        },
+        { status: 400 }
+      );
+    }
+
+    if (newPassword.length > maxPasswordLength) {
+      return json(
+        { intent: 'change-password', error: 'Your new password is too long.' },
+        { status: 400 }
+      );
+    }
+
+    if (newPassword !== confirmPassword) {
+      return json(
+        { intent: 'change-password', error: 'The new passwords do not match.' },
+        { status: 400 }
+      );
+    }
+
+    if (!(await verifyAdminPassword(currentPassword, authConfig.passwordHash))) {
+      return json(
+        { intent: 'change-password', error: 'The current password is incorrect.' },
+        { status: 401 }
+      );
+    }
+
+    const { DATABASE_URL } = getServerEnv();
+
+    if (!DATABASE_URL) {
+      return json(
+        { intent: 'change-password', error: 'DATABASE_URL is not configured.' },
+        { status: 503 }
+      );
+    }
+
+    try {
+      const newSessionSecret = randomBytes(48).toString('base64url');
+      await setPortfolioSetting(DATABASE_URL, sessionSecretSetting, newSessionSecret);
+      await setPortfolioSetting(
+        DATABASE_URL,
+        passwordHashSetting,
+        await hashAdminPassword(newPassword)
+      );
+    } catch (error) {
+      console.error(
+        'Failed to change the admin password.',
+        error instanceof Error ? error.name : 'Unknown error'
+      );
+      return json(
+        {
+          intent: 'change-password',
+          error: 'The password could not be changed. Check the server logs and try again.',
+        },
+        { status: 503 }
+      );
+    }
+
+    return redirect('/admin', {
+      headers: {
+        'Cache-Control': 'no-store',
+        'Set-Cookie': await storage.destroySession(session),
+      },
+    });
+  }
+
   if (intent !== 'set-design') {
     return json({ error: 'Unsupported admin action.' }, { status: 400 });
   }
@@ -127,13 +224,19 @@ export async function action({ request }) {
   const design = formData.get('design');
 
   if (typeof design !== 'string' || !allowedDesigns.has(design)) {
-    return json({ error: 'Choose a valid site design.' }, { status: 400 });
+    return json(
+      { intent: 'set-design', error: 'Choose a valid site design.' },
+      { status: 400 }
+    );
   }
 
   const { DATABASE_URL } = getServerEnv();
 
   if (!DATABASE_URL) {
-    return json({ error: 'DATABASE_URL is not configured.' }, { status: 503 });
+    return json(
+      { intent: 'set-design', error: 'DATABASE_URL is not configured.' },
+      { status: 503 }
+    );
   }
 
   try {
@@ -144,7 +247,10 @@ export async function action({ request }) {
       error instanceof Error ? error.name : 'Unknown error'
     );
     return json(
-      { error: 'The global design could not be saved. Check the server logs and try again.' },
+      {
+        intent: 'set-design',
+        error: 'The global design could not be saved. Check the server logs and try again.',
+      },
       { status: 503 }
     );
   }
@@ -166,6 +272,8 @@ export default function Admin() {
   const isLoggingIn = isSubmitting && navigation.formData?.get('intent') === 'login';
   const isSavingDesign =
     isSubmitting && navigation.formData?.get('intent') === 'set-design';
+  const isChangingPassword =
+    isSubmitting && navigation.formData?.get('intent') === 'change-password';
   const actionData = useActionData();
 
   return (
@@ -212,7 +320,7 @@ export default function Admin() {
                 required
               />
             </label>
-            {actionData?.error && (
+            {actionData?.intent === 'login' && actionData.error && (
               <p className={styles.error} role="alert">
                 {actionData.error}
               </p>
@@ -253,7 +361,7 @@ export default function Admin() {
                   <span className={styles.selectArrow} aria-hidden="true" />
                 </span>
               </label>
-              {actionData?.error && (
+              {actionData?.intent === 'set-design' && actionData.error && (
                 <p className={styles.error} role="alert">
                   {actionData.error}
                 </p>
@@ -264,6 +372,61 @@ export default function Admin() {
                 disabled={Boolean(databaseError) || isSavingDesign}
               >
                 {isSavingDesign ? 'Saving…' : 'Save design'}
+              </button>
+            </Form>
+            <Form method="post" className={styles.passwordForm}>
+              <input type="hidden" name="intent" value="change-password" />
+              <Heading level={2}>Change admin password</Heading>
+              <label className={styles.label}>
+                Current password
+                <input
+                  className={styles.input}
+                  type="password"
+                  name="current-password"
+                  autoComplete="current-password"
+                  required
+                  maxLength={maxPasswordLength}
+                />
+              </label>
+              <label className={styles.label}>
+                New password
+                <input
+                  className={styles.input}
+                  type="password"
+                  name="new-password"
+                  autoComplete="new-password"
+                  minLength={minPasswordLength}
+                  maxLength={maxPasswordLength}
+                  required
+                />
+              </label>
+              <label className={styles.label}>
+                Confirm new password
+                <input
+                  className={styles.input}
+                  type="password"
+                  name="confirm-password"
+                  autoComplete="new-password"
+                  minLength={minPasswordLength}
+                  maxLength={maxPasswordLength}
+                  required
+                />
+              </label>
+              {actionData?.intent === 'change-password' && actionData.error && (
+                <p className={styles.error} role="alert">
+                  {actionData.error}
+                </p>
+              )}
+              <Text as="p" secondary>
+                Use at least {minPasswordLength} characters. Saving signs out all
+                current admin and homelab sessions.
+              </Text>
+              <button
+                className={styles.submit}
+                type="submit"
+                disabled={isChangingPassword}
+              >
+                {isChangingPassword ? 'Changing password…' : 'Change password'}
               </button>
             </Form>
             <Form method="post" className={styles.logoutForm}>

@@ -35,9 +35,21 @@
 }
 
 .loginForm,
-.settingsForm {
+.settingsForm,
+.passwordForm {
   display: grid;
   gap: var(--spaceL);
+}
+
+.passwordForm {
+  margin-top: var(--space2XL);
+  padding-top: var(--space2XL);
+  border-top: 1px solid color-mix(in oklab, var(--text) 16%, transparent);
+
+  h2,
+  p {
+    margin: 0;
+  }
 }
 
 .label {

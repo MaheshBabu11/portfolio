@@ -102,7 +102,7 @@ System metrics are fetched server-side from Dashdot’s documented `/info` and `
 
 ### Admin and homepage data
 
-Sign in at `/admin` to change the site-wide design. The selection applies to all visitors. The Nano Machine design has its own light and dark palettes and system-interface styling.
+Sign in at `/admin` to change the site-wide design or update the admin password. New passwords must be at least 12 characters; changing the password rotates the session secret and signs out existing admin and homelab sessions. The site-wide design applies to all visitors. The Nano Machine design has its own light and dark palettes and system-interface styling.
 
 The homepage counter records total homepage requests in Neon; it does not identify unique visitors or store visitor identities. Database tables for settings and the counter are created automatically.
 
