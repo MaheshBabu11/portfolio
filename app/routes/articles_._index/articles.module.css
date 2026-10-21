@@ -109,19 +109,6 @@
   border-top: 1px solid color-mix(in lab, var(--text) 10%, transparent);
 }
 
-.skeleton {
-  filter: grayscale(1);
-  pointer-events: none;
-
-  & > * {
-    opacity: 0.3;
-  }
-}
-
-.skeletonBone {
-  background-color: color-mix(in lab, var(--text) 20%, transparent);
-}
-
 .post {
   --featuredPostPadding: var(--space5XL);
   --featuredPostClip: polygon(0 0, calc(100% - 32px) 0, 100% 32px, 100% 100%, 0 100%);
