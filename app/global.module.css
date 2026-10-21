@@ -62,6 +62,32 @@
     background-image: none;
   }
 
+  :global(body[data-design='nano']) {
+    background-image:
+      radial-gradient(
+        ellipse at 78% 6%,
+        color-mix(in oklab, var(--primary) 12%, transparent),
+        transparent 40rem
+      ),
+      radial-gradient(
+        ellipse at 8% 75%,
+        color-mix(in oklab, var(--accent) 5%, transparent),
+        transparent 36rem
+      ),
+      repeating-linear-gradient(
+        0deg,
+        transparent 0 79px,
+        color-mix(in oklab, var(--primary) 3%, transparent) 80px
+      ),
+      repeating-linear-gradient(
+        90deg,
+        transparent 0 79px,
+        color-mix(in oklab, var(--primary) 3%, transparent) 80px
+      );
+    background-size: 100% 100vh, 100% 100vh, 100% 100vh, 100% 100vh;
+    background-repeat: no-repeat, no-repeat, repeat, repeat;
+  }
+
   :global(:where(code, pre)) {
     font-family: var(--monoFontStack);
   }

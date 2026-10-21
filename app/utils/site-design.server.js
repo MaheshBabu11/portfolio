@@ -5,14 +5,14 @@ import {
   setPortfolioSettingIfAbsent,
 } from './portfolio-settings.server';
 
-const designs = new Set(['classic', 'murim']);
+const designs = new Set(['classic', 'murim', 'nano']);
 const settingName = 'site-design';
 
 export function getDefaultSiteDesign() {
   const design = getServerEnv().DEFAULT_DESIGN || 'murim';
 
   if (!designs.has(design)) {
-    throw new Error('DEFAULT_DESIGN must be either "classic" or "murim".');
+    throw new Error('DEFAULT_DESIGN must be "classic", "murim", or "nano".');
   }
 
   return design;

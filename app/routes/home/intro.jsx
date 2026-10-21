@@ -101,6 +101,8 @@ export function Intro({
               <p className={styles.eyebrow}>
                 {design === 'murim'
                   ? 'MURIM ARCHIVE / TECHNIQUE RECORD'
+                  : design === 'nano'
+                    ? 'NANO SYSTEM / ENGINEER RECORD'
                   : 'SOFTWARE ENGINEER / PORTFOLIO'}
               </p>
               <h1 className={styles.name} data-visible={visible} id={titleId}>
@@ -146,10 +148,18 @@ export function Intro({
                 </div>
               </Heading>
               <p className={styles.tagline}>
-                Rewriting the future, one thoughtful build at a time.
+                {design === 'nano'
+                  ? 'A system-assisted path through the world of software engineering.'
+                  : 'Rewriting the future, one thoughtful build at a time.'}
               </p>
               <a className={styles.chapterLink} href="#project-1">
-                <span>{design === 'murim' ? 'Enter the archive' : 'View projects'}</span>
+                <span>
+                  {design === 'murim'
+                    ? 'Enter the archive'
+                    : design === 'nano'
+                      ? 'Open the system'
+                      : 'View projects'}
+                </span>
                 <span aria-hidden="true">↘</span>
               </a>
               {design === 'murim' &&
@@ -163,6 +173,20 @@ export function Intro({
                     <span aria-hidden="true">{visitorCount.toLocaleString('en')}</span>
                     <span className={styles.visitorLabel} aria-hidden="true">
                       archive views
+                    </span>
+                  </div>
+                )}
+              {design === 'nano' &&
+                Number.isSafeInteger(visitorCount) &&
+                visitorCount >= 0 && (
+                  <div
+                    className={`${styles.visitorCounter} ${styles.nanoVisitorCounter}`}
+                    role="group"
+                    aria-label={`Home page views: ${visitorCount.toLocaleString('en')}`}
+                  >
+                    <span aria-hidden="true">{visitorCount.toLocaleString('en')}</span>
+                    <span className={styles.visitorLabel} aria-hidden="true">
+                      system access records
                     </span>
                   </div>
                 )}
@@ -182,6 +206,40 @@ export function Intro({
                     MURIM&nbsp; · &nbsp;JAVA&nbsp; · &nbsp;SYSTEMS
                   </span>
                   <span className={styles.frameBottom}>ASCEND THROUGH THE ARCHIVE</span>
+                </div>
+              </div>
+            )}
+            {design === 'nano' && (
+              <div className={styles.nanoIllustration} aria-hidden="true">
+                <div className={styles.nanoFrame}>
+                  <span className={styles.nanoHeader}>NANO SYSTEM // ONLINE</span>
+                  <span className={styles.nanoStatus}>
+                    USER STATUS&nbsp; · &nbsp;ACTIVE
+                    <br />
+                    SYNC RATE&nbsp; · &nbsp;99.8%
+                  </span>
+                  <span className={styles.nanoCore}>
+                    <span className={styles.nanoOrbit} />
+                    <span className={styles.nanoPulse} />
+                  </span>
+                  <span className={`${styles.nanoChip} ${styles.nanoChipLeft}`}>
+                    <span>NEURAL LINK</span>
+                    <strong>ESTABLISHED</strong>
+                  </span>
+                  <span className={`${styles.nanoChip} ${styles.nanoChipRight}`}>
+                    <span>TECHNIQUE SYNC</span>
+                    <strong>READY</strong>
+                  </span>
+                  <span className={styles.nanoReadout}>
+                    <span>NEURAL LINK</span>
+                    <span className={styles.nanoMeter} />
+                    <span>TECHNIQUE ANALYSIS</span>
+                    <span className={styles.nanoMeter} />
+                  </span>
+                  <span className={styles.nanoScanline} />
+                  <span className={styles.nanoFooter}>
+                    MARTIAL ARTS&nbsp; // &nbsp;EVOLUTION
+                  </span>
                 </div>
               </div>
             )}

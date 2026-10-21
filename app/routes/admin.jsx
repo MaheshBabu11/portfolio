@@ -17,7 +17,7 @@ import { getServerEnv } from '~/utils/env';
 import { setGlobalSiteDesign } from '~/utils/site-design.server';
 import styles from '../admin.module.css';
 
-const allowedDesigns = new Set(['classic', 'murim']);
+const allowedDesigns = new Set(['classic', 'murim', 'nano']);
 
 function checkRequestOrigin(request) {
   const origin = request.headers.get('Origin');
@@ -226,7 +226,13 @@ export default function Admin() {
             <p className={databaseError ? styles.error : styles.notice} role="status">
               {databaseError
                 ? databaseError
-                : `Current selection: ${design === 'murim' ? 'Murim' : 'Original'}`}
+                : `Current selection: ${
+                    design === 'murim'
+                      ? 'Murim'
+                      : design === 'nano'
+                        ? 'Nano Machine'
+                        : 'Original'
+                  }`}
             </p>
             <Form method="post" className={styles.settingsForm}>
               <input type="hidden" name="intent" value="set-design" />
@@ -241,6 +247,7 @@ export default function Admin() {
                     disabled={Boolean(databaseError)}
                   >
                     <option value="murim">Murim</option>
+                    <option value="nano">Nano Machine</option>
                     <option value="classic">Original (Master)</option>
                   </select>
                   <span className={styles.selectArrow} aria-hidden="true" />

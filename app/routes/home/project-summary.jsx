@@ -50,6 +50,12 @@ export function ProjectSummary({
           materialColor: 0x1f2025,
           accentMaterialColor: 0x1f2025,
         }
+      : design === 'nano'
+        ? {
+            ...deviceModels[model.type],
+            materialColor: 0x07151c,
+            accentMaterialColor: 0x19c6d2,
+          }
       : deviceModels[model.type];
 
   function handleModelLoad() {
@@ -92,6 +98,9 @@ export function ProjectSummary({
                 魔
               </span>
             </>
+          )}
+          {design === 'nano' && (
+            <span className={styles.arcLabel}>SYSTEM LOG</span>
           )}
         </div>
         <Heading

@@ -154,6 +154,13 @@
   box-shadow: 0 0 0 3px color-mix(in lab, var(--accent) 8%, transparent);
 }
 
+:global(body[data-design='nano']) .avatar {
+  border-radius: 2px;
+  border-color: color-mix(in lab, var(--primary) 58%, var(--backgroundLight));
+  box-shadow: 0 0 0 3px color-mix(in lab, var(--primary) 8%, transparent);
+  filter: saturate(0.78);
+}
+
 .panel[data-active='true'] .avatar {
   flex-basis: 56px;
   width: 56px;
@@ -302,5 +309,6 @@
     &::before {
       inset: 96px var(--spaceL) var(--spaceL);
     }
+
   }
 }

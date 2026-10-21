@@ -80,6 +80,10 @@
     display: none;
   }
 
+  :global(body[data-design='nano']) &::before {
+    content: 'NANO SYSTEM  /  KNOWLEDGE LOG';
+  }
+
   @media (--singleColumnWidth) {
     padding-top: calc(var(--spaceM) - var(--spaceXS));
     padding-bottom: 0;

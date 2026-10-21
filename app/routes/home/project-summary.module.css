@@ -52,6 +52,36 @@
     pointer-events: none;
   }
 
+  :global(body[data-design='nano']) &::after {
+    right: 7%;
+    bottom: 11%;
+    width: min(34%, 420px);
+    height: 38%;
+    clip-path: none;
+    border: 1px solid color-mix(in oklab, var(--primary) 20%, transparent);
+    background:
+      repeating-linear-gradient(
+        0deg,
+        transparent 0 27px,
+        color-mix(in oklab, var(--primary) 10%, transparent) 28px
+      ),
+      repeating-linear-gradient(
+        90deg,
+        transparent 0 27px,
+        color-mix(in oklab, var(--primary) 10%, transparent) 28px
+      );
+    opacity: 0.3;
+  }
+
+  :global(body[data-design='nano']) &::before {
+    inset: 7% 4% 7% clamp(160px, 9vw, 220px);
+    border-right: 1px solid color-mix(in oklab, var(--primary) 24%, transparent);
+    border-left: 1px solid color-mix(in oklab, var(--primary) 24%, transparent);
+    background:
+      linear-gradient(90deg, color-mix(in oklab, var(--primary) 5%, transparent), transparent 55%),
+      repeating-linear-gradient(90deg, transparent 0 79px, color-mix(in oklab, var(--primary) 3%, transparent) 80px);
+  }
+
   :global(body[data-design='classic']) &::before,
   :global(body[data-design='classic']) &::after {
     display: none;
@@ -150,6 +180,18 @@
     linear-gradient(135deg, color-mix(in oklab, var(--text) 3%, transparent), transparent 58%),
     color-mix(in oklab, var(--backgroundLight) 44%, var(--background));
 
+  :global(body[data-design='nano']) & {
+    border-color: color-mix(in oklab, var(--primary) 24%, transparent);
+    border-left-color: var(--primary);
+    background:
+      linear-gradient(115deg, color-mix(in oklab, var(--primary) 7%, transparent), transparent 55%),
+      repeating-linear-gradient(0deg, transparent 0 32px, color-mix(in oklab, var(--primary) 3%, transparent) 33px),
+      color-mix(in oklab, var(--backgroundLight) 28%, var(--background));
+    box-shadow: 0 24px 70px -48px color-mix(in oklab, var(--primary) 60%, transparent);
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+  }
+
   :global(body[data-design='classic']) & {
     padding: 0;
     border: 0;
@@ -235,6 +277,29 @@
     transform: translate(-50%, -50%);
     pointer-events: none;
     z-index: 0;
+  }
+
+  :global(body[data-design='nano']) &::before,
+  :global(body[data-design='nano']) &::after {
+    width: min(78%, 430px);
+    aspect-ratio: 1.18;
+    border-radius: 0;
+    clip-path: polygon(0 12%, 12% 12%, 12% 0, 88% 0, 88% 12%, 100% 12%, 100% 88%, 88% 88%, 88% 100%, 12% 100%, 12% 88%, 0 88%);
+  }
+
+  :global(body[data-design='nano']) &::before {
+    background:
+      repeating-linear-gradient(0deg, transparent 0 27px, color-mix(in oklab, var(--primary) 8%, transparent) 28px),
+      repeating-linear-gradient(90deg, transparent 0 27px, color-mix(in oklab, var(--primary) 8%, transparent) 28px),
+      radial-gradient(ellipse, color-mix(in oklab, var(--primary) 10%, transparent), transparent 70%);
+    box-shadow: 0 0 80px color-mix(in oklab, var(--primary) 14%, transparent);
+  }
+
+  :global(body[data-design='nano']) &::after {
+    width: min(90%, 490px);
+    border-color: color-mix(in oklab, var(--accent) 42%, transparent);
+    border-style: solid;
+    transform: translate(-50%, -50%);
   }
 
   &::before {
@@ -366,6 +431,10 @@
 
   &[data-visible='true'] {
     opacity: var(--opacity);
+  }
+
+  :global(body[data-design='nano']) & {
+    display: none;
   }
 
   &[data-device='laptop'] {

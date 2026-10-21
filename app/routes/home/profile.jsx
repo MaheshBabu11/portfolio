@@ -19,7 +19,13 @@ import styles from './profile.module.css';
 const ProfileText = ({ visible, titleId, design }) => (<Fragment>
   <Heading className={styles.title} data-visible={visible} level={3} id={titleId}>
     <DecoderText
-      text={design === 'murim' ? 'The person behind the code' : 'Hi there'}
+      text={
+        design === 'murim'
+          ? 'The person behind the code'
+          : design === 'nano'
+            ? 'Operator profile'
+            : 'Hi there'
+      }
       start={visible}
       delay={500}
     />
@@ -77,7 +83,11 @@ export const Profile = ({ id, visible, sectionRef }) => {
               collapseDelay={1000}
             />
             <div className={styles.tagText} data-visible={visible}>
-              {design === 'murim' ? 'Character profile' : 'About me'}
+              {design === 'murim'
+                ? 'Character profile'
+                : design === 'nano'
+                  ? 'System profile'
+                  : 'About me'}
             </div>
           </div>
           <div className={styles.image}>

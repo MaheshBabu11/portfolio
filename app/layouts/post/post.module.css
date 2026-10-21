@@ -83,6 +83,10 @@
       letter-spacing: 0.16em;
     }
 
+    :global(body[data-design='nano']) &::before {
+      content: 'NANO SYSTEM  /  CHRONICLE';
+    }
+
     :global(body[data-design='classic']) &::before {
       display: none;
     }

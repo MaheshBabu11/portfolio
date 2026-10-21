@@ -145,8 +145,12 @@ export default function App() {
                 ? '#111111'
                 : '#f2f2f2'
               : theme === 'dark'
-                ? '#1b1011'
-                : '#f3ecdf'
+                ? design === 'nano'
+                  ? '#06151c'
+                  : '#1b1011'
+                : design === 'nano'
+                  ? '#f4efe3'
+                  : '#f3ecdf'
           }
         />
         <meta

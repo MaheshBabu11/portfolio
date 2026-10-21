@@ -15,6 +15,9 @@ export const Footer = ({ className }) => {
           End of this arc · the next begins with a hello
         </span>
       )}
+      {design === 'nano' && (
+        <span className={styles.epilogue}>NANO SYSTEM // SESSION COMPLETE</span>
+      )}
       <Text size="s" align="center">
         <span className={styles.date}>
           {`© ${new Date().getFullYear()} ${config.name}.`}

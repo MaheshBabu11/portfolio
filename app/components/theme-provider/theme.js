@@ -131,6 +131,31 @@ const light = {
   textLight: 'oklch(48% 0.022 45)',
 };
 
+export const nanoThemes = {
+  dark: {
+    background: 'oklch(11% 0.025 250)',
+    backgroundLight: 'oklch(16% 0.03 248)',
+    primary: 'oklch(76% 0.14 194)',
+    accent: 'oklch(68% 0.2 25)',
+    error: 'oklch(65.91% 0.249 13.76)',
+    text: 'var(--white)',
+    textTitle: 'var(--text)',
+    textBody: 'oklch(84% 0.02 225)',
+    textLight: 'oklch(66% 0.025 225)',
+  },
+  light: {
+    background: 'oklch(95% 0.018 82)',
+    backgroundLight: 'oklch(98% 0.01 84)',
+    primary: 'oklch(43% 0.12 205)',
+    accent: 'oklch(53% 0.19 25)',
+    error: 'oklch(63.17% 0.259 25.41)',
+    text: 'var(--black)',
+    textTitle: 'oklch(22% 0.025 245)',
+    textBody: 'oklch(35% 0.025 245)',
+    textLight: 'oklch(49% 0.025 245)',
+  },
+};
+
 export const classicThemes = {
   dark: {
     background: 'oklch(17.76% 0 0)',

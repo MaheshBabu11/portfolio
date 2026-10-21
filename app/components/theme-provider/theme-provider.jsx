@@ -7,7 +7,7 @@ import GothamMedium from '~/assets/fonts/gotham-medium.woff2';
 import IPAGothic from '~/assets/fonts/ipa-gothic.woff2';
 import { createContext, useContext } from 'react';
 import { classes, media } from '~/utils/style';
-import { classicThemes, themes, tokens } from './theme';
+import { classicThemes, nanoThemes, themes, tokens } from './theme';
 
 export const ThemeContext = createContext({ design: 'murim' });
 
@@ -133,6 +133,16 @@ const classicStyleTokens = squish(`
   }
 `);
 
+const nanoStyleTokens = squish(`
+  [data-design='nano'][data-theme='dark'] {
+    ${createThemeProperties(nanoThemes.dark)}
+  }
+
+  [data-design='nano'][data-theme='light'] {
+    ${createThemeProperties(nanoThemes.light)}
+  }
+`);
+
 const fontStyles = squish(`
   @font-face {
     font-family: Gotham;
@@ -197,6 +207,7 @@ export const themeStyles = squish(`
   @layer theme {
     ${tokenStyles}
     ${classicStyleTokens}
+    ${nanoStyleTokens}
     ${fontStyles}
   }
 `);

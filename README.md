@@ -66,9 +66,9 @@ For local theme persistence, the global design setting, and the homepage view co
 cp .env.example .env.local
 ```
 
-Set `DATABASE_URL` to a Neon PostgreSQL connection string, choose `DEFAULT_DESIGN` as `murim` or `classic`, and set `ADMIN_PASSWORD` for the first `/admin` visit. The app stores the password as a scrypt hash and stores the cookie-signing secret in the Neon `portfolio_settings` table. `ADMIN_SESSION_SECRET` is optional during initialization; if omitted, the app generates a random secret and saves it there. After the first admin visit initializes these rows, the environment values can be removed.
+Set `DATABASE_URL` to a Neon PostgreSQL connection string, choose `DEFAULT_DESIGN` as `murim`, `nano`, or `classic`, and set `ADMIN_PASSWORD` for the first `/admin` visit. The app stores the password as a scrypt hash and stores the cookie-signing secret in the Neon `portfolio_settings` table. `ADMIN_SESSION_SECRET` is optional during initialization; if omitted, the app generates a random secret and saves it there. After the first admin visit initializes these rows, the environment values can be removed.
 
-Sign in at `/admin` to switch the site-wide design; the selection is stored in Neon and applies to all visitors. The settings table is created automatically. The session secret is stored in the database as requested, so restrict database access and keep `DATABASE_URL` server-side.
+Sign in at `/admin` to switch the site-wide design between Murim, Nano Machine, and Original; the selection is stored in Neon and applies to all visitors. The Nano Machine design has its own light and dark palettes and system-interface styling. The settings table is created automatically. The session secret is stored in the database as requested, so restrict database access and keep `DATABASE_URL` server-side.
 
 `SESSION_SECRET` signs each visitor's preferred light/dark theme cookie. The homepage counter stores a total page-view count in Neon PostgreSQL. It counts homepage requests rather than unique people and does not store visitor identities; its table is created automatically.
 

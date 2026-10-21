@@ -106,6 +106,24 @@
       }
     }
 
+    :global(body[data-design='nano']) .navLink::after {
+      inset-inline-start: var(--spaceXS);
+      inset-inline-end: auto;
+      inset-block-start: var(--spaceS);
+      inset-block-end: var(--spaceS);
+      width: 2px;
+      block-size: auto;
+      transform: scaleY(0) translateZ(0);
+      transform-origin: center;
+    }
+
+    :global(body[data-design='nano']) .navLink:hover::after,
+    :global(body[data-design='nano']) .navLink:active::after,
+    :global(body[data-design='nano']) .navLink[aria-current='page']::after {
+      transform: scaleY(1) translateZ(0);
+      transform-origin: center;
+    }
+
     &:hover::after,
     &:active::after,
     &[aria-current='page']::after {
@@ -257,4 +275,5 @@
       transform: none;
     }
   }
+
 }
