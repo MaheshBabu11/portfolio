@@ -16,6 +16,7 @@
     "gallery:optimize": "node scripts/optimize-gallery.mjs"
   },
   "dependencies": {
+    "@emailjs/nodejs": "^5.0.2",
     "@mdx-js/react": "^3.0.1",
     "@neondatabase/serverless": "^1.2.0",
     "@remix-run/node": "^2.8.1",

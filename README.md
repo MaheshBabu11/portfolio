@@ -68,11 +68,13 @@ cp .env.example .env.local
 
 Set `DATABASE_URL` to a Neon PostgreSQL connection string, choose `DEFAULT_DESIGN` as `murim`, `nano`, or `classic`, and set `ADMIN_PASSWORD` for the first `/admin` visit. The app stores the password as a scrypt hash and stores the cookie-signing secret in the Neon `portfolio_settings` table. `ADMIN_SESSION_SECRET` is optional during initialization; if omitted, the app generates a random secret and saves it there. After the first admin visit initializes these rows, the environment values can be removed.
 
+The contact form sends messages through EmailJS. Create an EmailJS email service and template, then configure the template with `to_email` as the recipient, `reply_to` as the reply-to address, `subject` as the subject, and include `from_email` and `message` in the body. Use the sender configured for your EmailJS service as the From address. Enable API access for Node.js in your EmailJS security settings. Set `EMAILJS_SERVICE_ID`, `EMAILJS_TEMPLATE_ID`, `EMAILJS_PUBLIC_KEY`, `EMAILJS_PRIVATE_KEY`, and `CONTACT_TO_EMAIL`; keep the private key server-side and configure these values in your deployment environment as well as `.env.local`.
+
 Sign in at `/admin` to switch the site-wide design between Murim, Nano Machine, and Original; the selection is stored in Neon and applies to all visitors. The Nano Machine design has its own light and dark palettes and system-interface styling. The settings table is created automatically. The session secret is stored in the database as requested, so restrict database access and keep `DATABASE_URL` server-side.
 
 `SESSION_SECRET` signs each visitor's preferred light/dark theme cookie. The homepage counter stores a total page-view count in Neon PostgreSQL. It counts homepage requests rather than unique people and does not store visitor identities; its table is created automatically.
 
-The contact form opens a prefilled email draft in the visitor’s default email application.
+The contact form sends the message directly through EmailJS. Visitors receive an on-page success or error message, and replies to the notification go to the sender’s submitted email address.
 
 ## Gallery images
 
@@ -92,7 +94,7 @@ Deploy to Vercel with:
 npm run deploy
 ```
 
-You can also import this repository into a Vercel project and configure `SESSION_SECRET`, `DATABASE_URL`, `DEFAULT_DESIGN`, and the initial `ADMIN_PASSWORD` in the project’s environment variables. `ADMIN_SESSION_SECRET` is optional. Keep the Neon connection string server-side, and rotate credentials if they have been exposed.
+You can also import this repository into a Vercel project and configure `SESSION_SECRET`, `DATABASE_URL`, `DEFAULT_DESIGN`, the initial `ADMIN_PASSWORD`, and the EmailJS variables in the project’s environment variables. `ADMIN_SESSION_SECRET` is optional. Keep the Neon connection string and EmailJS private key server-side, and rotate credentials if they have been exposed.
 
 ## License
 
