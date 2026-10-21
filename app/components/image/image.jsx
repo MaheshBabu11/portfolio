@@ -20,7 +20,7 @@ export const Image = ({
   ...rest
 }) => {
   const [loaded, setLoaded] = useState(false);
-  const { theme } = useTheme();
+  const { theme, design } = useTheme();
   const containerRef = useRef();
   const src = baseSrc || srcSet.split(' ')[0];
   const inViewport = useInViewport(containerRef, !getIsVideo(src));
@@ -36,6 +36,7 @@ export const Image = ({
       data-reveal={reveal}
       data-raised={raised}
       data-theme={theme}
+      data-design={design}
       style={cssProps({ delay: numToMs(delay) }, style)}
       ref={containerRef}
     >

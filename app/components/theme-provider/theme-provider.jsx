@@ -7,12 +7,13 @@ import GothamMedium from '~/assets/fonts/gotham-medium.woff2';
 import IPAGothic from '~/assets/fonts/ipa-gothic.woff2';
 import { createContext, useContext } from 'react';
 import { classes, media } from '~/utils/style';
-import { themes, tokens } from './theme';
+import { classicThemes, nanoThemes, themes, tokens } from './theme';
 
-export const ThemeContext = createContext({});
+export const ThemeContext = createContext({ design: 'murim' });
 
 export const ThemeProvider = ({
   theme = 'dark',
+  design,
   children,
   className,
   as: Component = 'div',
@@ -21,18 +22,25 @@ export const ThemeProvider = ({
 }) => {
   const parentTheme = useTheme();
   const isRootProvider = !parentTheme.theme;
+  const designMode = design ?? parentTheme.design ?? 'murim';
 
   return (
     <ThemeContext.Provider
       value={{
         theme,
+        design: designMode,
         toggleTheme: toggleTheme || parentTheme.toggleTheme,
       }}
     >
       {isRootProvider && children}
       {/* Nested providers need a div to override theme tokens */}
       {!isRootProvider && (
-        <Component className={classes(className)} data-theme={theme} {...rest}>
+        <Component
+          className={classes(className)}
+          data-theme={theme}
+          data-design={designMode}
+          {...rest}
+        >
           {children}
         </Component>
       )}
@@ -115,6 +123,26 @@ const tokenStyles = squish(`
   }
 `);
 
+const classicStyleTokens = squish(`
+  [data-design='classic'][data-theme='dark'] {
+    ${createThemeProperties(classicThemes.dark)}
+  }
+
+  [data-design='classic'][data-theme='light'] {
+    ${createThemeProperties(classicThemes.light)}
+  }
+`);
+
+const nanoStyleTokens = squish(`
+  [data-design='nano'][data-theme='dark'] {
+    ${createThemeProperties(nanoThemes.dark)}
+  }
+
+  [data-design='nano'][data-theme='light'] {
+    ${createThemeProperties(nanoThemes.light)}
+  }
+`);
+
 const fontStyles = squish(`
   @font-face {
     font-family: Gotham;
@@ -178,6 +206,8 @@ export const themeStyles = squish(`
 
   @layer theme {
     ${tokenStyles}
+    ${classicStyleTokens}
+    ${nanoStyleTokens}
     ${fontStyles}
   }
 `);

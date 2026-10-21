@@ -1,14 +1,40 @@
 .about {
-  --cyber-cyan: #5cf4ff;
-  --cyber-magenta: #ff4fd8;
-
   position: relative;
   isolation: isolate;
+
+  :global(body[data-design='classic']) & {
+    --cyber-cyan: #5cf4ff;
+    --cyber-magenta: #ff4fd8;
+  }
 
   &::before {
     position: absolute;
     z-index: -1;
     inset: 0;
+    background-image:
+      radial-gradient(
+        ellipse at 82% 0%,
+        color-mix(in oklab, var(--accent) 9%, transparent),
+        transparent 34rem
+      ),
+      linear-gradient(
+        to right,
+        color-mix(in oklab, var(--text) 1.2%, transparent) 1px,
+        transparent 1px
+      ),
+      linear-gradient(
+        to bottom,
+        color-mix(in oklab, var(--text) 1.2%, transparent) 1px,
+        transparent 1px
+      );
+    background-repeat: no-repeat, repeat, repeat;
+    background-size: 100% 680px, 48px 48px, 48px 48px;
+    content: '';
+    opacity: 0.32;
+    pointer-events: none;
+  }
+
+  :global(body[data-design='classic']) &::before {
     background-image:
       radial-gradient(
         ellipse at 82% 0%,
@@ -25,11 +51,6 @@
         color-mix(in lab, var(--cyber-cyan) 9%, transparent) 1px,
         transparent 1px
       );
-    background-repeat: no-repeat, repeat, repeat;
-    background-size: 100% 680px, 48px 48px, 48px 48px;
-    content: '';
-    opacity: 0.32;
-    pointer-events: none;
   }
 }
 
@@ -53,11 +74,19 @@
   max-width: 220px;
   aspect-ratio: 1;
   overflow: hidden;
-  border: 2px solid var(--cyber-cyan);
-  border-radius: 50%;
+  border: 2px solid color-mix(in oklab, var(--primary) 72%, transparent);
+  border-radius: 2px;
   box-shadow:
-    0 0 0 5px color-mix(in lab, var(--cyber-magenta) 14%, transparent),
-    0 0 24px color-mix(in lab, var(--cyber-cyan) 42%, transparent);
+    0 0 0 5px color-mix(in oklab, var(--accent) 10%, transparent),
+    0 18px 44px -28px color-mix(in oklab, var(--accent) 60%, transparent);
+
+  :global(body[data-design='classic']) & {
+    border: 2px solid var(--cyber-cyan);
+    border-radius: 50%;
+    box-shadow:
+      0 0 0 5px color-mix(in lab, var(--cyber-magenta) 14%, transparent),
+      0 0 24px color-mix(in lab, var(--cyber-cyan) 42%, transparent);
+  }
 
   & img {
     object-fit: cover;
@@ -83,21 +112,35 @@
 }
 
 .neonDivider > div {
-  background-color: var(--cyber-cyan);
-  box-shadow: 0 0 8px color-mix(in lab, var(--cyber-cyan) 70%, transparent);
+  background-color: var(--accent);
+  box-shadow: 0 0 8px color-mix(in oklab, var(--accent) 46%, transparent);
+
+  :global(body[data-design='classic']) & {
+    background-color: var(--cyber-cyan);
+    box-shadow: 0 0 8px color-mix(in lab, var(--cyber-cyan) 70%, transparent);
+  }
 }
 
 .kicker {
-  color: var(--cyber-magenta);
+  color: var(--primary);
   letter-spacing: 0.08em;
   text-transform: uppercase;
+
+  :global(body[data-design='classic']) & {
+    color: var(--cyber-magenta);
+  }
 }
 
 .name {
-  color: var(--cyber-cyan);
+  color: var(--textTitle);
   margin-top: var(--spaceXS);
   margin-bottom: var(--spaceXS);
-  text-shadow: 0 0 18px color-mix(in lab, var(--cyber-cyan) 32%, transparent);
+  text-shadow: 0 4px 22px color-mix(in oklab, var(--accent) 12%, transparent);
+
+  :global(body[data-design='classic']) & {
+    color: var(--cyber-cyan);
+    text-shadow: 0 0 18px color-mix(in lab, var(--cyber-cyan) 32%, transparent);
+  }
 }
 
 .sectionTitle {
@@ -109,7 +152,11 @@
 }
 
 .sectionTitle > h2 {
-  text-shadow: 0 0 14px color-mix(in lab, var(--cyber-cyan) 16%, transparent);
+  text-shadow: 0 3px 18px color-mix(in oklab, var(--accent) 10%, transparent);
+
+  :global(body[data-design='classic']) & {
+    text-shadow: 0 0 14px color-mix(in lab, var(--cyber-cyan) 16%, transparent);
+  }
 }
 
 .sectionMeta {
@@ -130,7 +177,11 @@
   width: 100%;
   margin-left: var(--spaceS);
   padding-left: var(--spaceL);
-  border-left: 1px solid color-mix(in lab, var(--cyber-cyan) 32%, transparent);
+  border-left: 1px solid color-mix(in oklab, var(--accent) 38%, transparent);
+
+  :global(body[data-design='classic']) & {
+    border-left-color: color-mix(in lab, var(--cyber-cyan) 32%, transparent);
+  }
 }
 
 .entry {
@@ -140,10 +191,20 @@
   flex-direction: column;
   gap: var(--spaceM);
   padding: var(--spaceL);
-  border: 1px solid color-mix(in lab, var(--cyber-cyan) 22%, transparent);
-  border-radius: 12px;
-  background: color-mix(in lab, var(--cyber-cyan) 4%, var(--backgroundLight));
+  border: 1px solid color-mix(in oklab, var(--text) 14%, transparent);
+  border-left: 2px solid color-mix(in oklab, var(--accent) 66%, transparent);
+  border-radius: 2px;
+  background:
+    radial-gradient(ellipse at 100% 0%, color-mix(in oklab, var(--accent) 6%, transparent), transparent 48%),
+    color-mix(in oklab, var(--backgroundLight) 82%, var(--background));
   transition: border-color var(--durationM) ease;
+
+  :global(body[data-design='classic']) & {
+    border-color: color-mix(in lab, var(--cyber-cyan) 22%, transparent);
+    border-left-width: 1px;
+    border-radius: 12px;
+    background: color-mix(in lab, var(--cyber-cyan) 4%, var(--backgroundLight));
+  }
 
   &::after {
     position: absolute;
@@ -151,10 +212,15 @@
     inset: 0;
     transform: scaleX(0);
     transform-origin: right;
-    border-radius: 11px;
-    background: color-mix(in lab, var(--cyber-cyan) 12%, var(--backgroundLight));
+    border-radius: 1px;
+    background: color-mix(in oklab, var(--accent) 8%, var(--backgroundLight));
     content: '';
     transition: transform var(--durationM) var(--bezierFastoutSlowin);
+  }
+
+  :global(body[data-design='classic']) &::after {
+    border-radius: 11px;
+    background: color-mix(in lab, var(--cyber-cyan) 12%, var(--backgroundLight));
   }
 
   &::before {
@@ -165,10 +231,18 @@
     width: 12px;
     height: 12px;
     border: 2px solid var(--background);
+    border-radius: 1px;
+    background: var(--accent);
+    box-shadow: 0 0 12px color-mix(in oklab, var(--accent) 36%, transparent);
+    transform: rotate(45deg);
+    content: '';
+  }
+
+  :global(body[data-design='classic']) &::before {
     border-radius: 50%;
     background: var(--cyber-cyan);
     box-shadow: 0 0 12px color-mix(in lab, var(--cyber-cyan) 60%, transparent);
-    content: '';
+    transform: none;
   }
 }
 
@@ -236,9 +310,17 @@
   gap: var(--spaceM);
   min-width: 0;
   padding: var(--spaceL);
-  border: 1px solid color-mix(in lab, var(--cyber-cyan) 20%, transparent);
-  border-radius: 12px;
-  background: color-mix(in lab, var(--cyber-cyan) 4%, var(--backgroundLight));
+  border: 1px solid color-mix(in oklab, var(--text) 14%, transparent);
+  border-top: 2px solid color-mix(in oklab, var(--primary) 68%, transparent);
+  border-radius: 2px;
+  background: color-mix(in oklab, var(--backgroundLight) 82%, var(--background));
+
+  :global(body[data-design='classic']) & {
+    border-color: color-mix(in lab, var(--cyber-cyan) 20%, transparent);
+    border-top-width: 1px;
+    border-radius: 12px;
+    background: color-mix(in lab, var(--cyber-cyan) 4%, var(--backgroundLight));
+  }
 }
 
 .skillList {
@@ -256,18 +338,28 @@
   align-items: center;
   gap: var(--spaceS);
   padding: var(--spaceXS) var(--spaceM);
-  border: 1px solid color-mix(in lab, var(--cyber-cyan) 30%, transparent);
-  border-radius: 4px;
-  background: color-mix(in lab, var(--cyber-cyan) 5%, var(--backgroundLight));
+  border: 1px solid color-mix(in oklab, var(--primary) 24%, transparent);
+  border-radius: 2px;
+  background: color-mix(in oklab, var(--primary) 5%, var(--backgroundLight));
   color: var(--text);
   font-size: var(--fontSizeBodyS);
+
+  :global(body[data-design='classic']) & {
+    border-color: color-mix(in lab, var(--cyber-cyan) 30%, transparent);
+    border-radius: 4px;
+    background: color-mix(in lab, var(--cyber-cyan) 5%, var(--backgroundLight));
+  }
 }
 
 .skillIcon {
   width: 18px;
   height: 18px;
   flex: 0 0 auto;
-  color: var(--cyber-cyan);
+  color: var(--primary);
+
+  :global(body[data-design='classic']) & {
+    color: var(--cyber-cyan);
+  }
 }
 
 .certificationList {
@@ -284,11 +376,18 @@
   min-width: 0;
   min-height: 100%;
   padding: var(--spaceM);
-  border: 1px solid color-mix(in lab, var(--cyber-magenta) 25%, transparent);
-  border-left-width: 2px;
-  border-radius: 12px;
-  background: color-mix(in lab, var(--cyber-magenta) 4%, var(--backgroundLight));
+  border: 1px solid color-mix(in oklab, var(--text) 14%, transparent);
+  border-left: 2px solid color-mix(in oklab, var(--primary) 68%, transparent);
+  border-radius: 2px;
+  background: color-mix(in oklab, var(--primary) 4%, var(--backgroundLight));
   transition: border-color var(--durationM) ease;
+
+  :global(body[data-design='classic']) & {
+    border-color: color-mix(in lab, var(--cyber-magenta) 25%, transparent);
+    border-left-width: 2px;
+    border-radius: 12px;
+    background: color-mix(in lab, var(--cyber-magenta) 4%, var(--backgroundLight));
+  }
 
   &::after {
     position: absolute;
@@ -296,9 +395,13 @@
     inset: 0;
     transform: scaleX(0);
     transform-origin: right;
-    background: color-mix(in lab, var(--cyber-magenta) 12%, var(--backgroundLight));
+    background: color-mix(in oklab, var(--primary) 8%, var(--backgroundLight));
     content: '';
     transition: transform var(--durationM) var(--bezierFastoutSlowin);
+  }
+
+  :global(body[data-design='classic']) &::after {
+    background: color-mix(in lab, var(--cyber-magenta) 12%, var(--backgroundLight));
   }
 }
 
@@ -319,11 +422,19 @@
 }
 
 .actions a {
-  border-color: color-mix(in lab, var(--cyber-cyan) 35%, transparent);
+  border-color: color-mix(in oklab, var(--accent) 35%, transparent);
+
+  :global(body[data-design='classic']) & {
+    border-color: color-mix(in lab, var(--cyber-cyan) 35%, transparent);
+  }
 }
 
 .actions a:hover {
-  box-shadow: 0 0 16px color-mix(in lab, var(--cyber-cyan) 28%, transparent);
+  box-shadow: 0 0 16px color-mix(in oklab, var(--accent) 22%, transparent);
+
+  :global(body[data-design='classic']) & {
+    box-shadow: 0 0 16px color-mix(in lab, var(--cyber-cyan) 28%, transparent);
+  }
 }
 
 @media (--mediaTablet) {
@@ -377,13 +488,23 @@
 
 @media (--mediaUseMotion) {
   .entry:hover {
-    border-color: color-mix(in lab, var(--cyber-cyan) 58%, transparent);
-    box-shadow: 0 0 22px color-mix(in lab, var(--cyber-cyan) 16%, transparent);
+    border-color: color-mix(in oklab, var(--accent) 52%, transparent);
+    box-shadow: 0 12px 28px color-mix(in oklab, var(--accent) 8%, transparent);
+
+    :global(body[data-design='classic']) & {
+      border-color: color-mix(in lab, var(--cyber-cyan) 58%, transparent);
+      box-shadow: 0 0 22px color-mix(in lab, var(--cyber-cyan) 16%, transparent);
+    }
   }
 
   .certification:hover {
-    border-color: color-mix(in lab, var(--cyber-magenta) 58%, transparent);
-    box-shadow: 0 0 22px color-mix(in lab, var(--cyber-magenta) 16%, transparent);
+    border-color: color-mix(in oklab, var(--primary) 52%, transparent);
+    box-shadow: 0 12px 28px color-mix(in oklab, var(--primary) 8%, transparent);
+
+    :global(body[data-design='classic']) & {
+      border-color: color-mix(in lab, var(--cyber-magenta) 58%, transparent);
+      box-shadow: 0 0 22px color-mix(in lab, var(--cyber-magenta) 16%, transparent);
+    }
   }
 
   .entry:hover::after,

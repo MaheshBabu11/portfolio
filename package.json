@@ -2,7 +2,7 @@
   "name": "portfolio",
   "homepage": "https://maheshbabu11.dev",
   "description": "Portfolio site for Mahesh Babu",
-  "repository": "https://github.com/MaheshBabu11/portfolio-new",
+  "repository": "https://github.com/MaheshBabu11/portfolio",
   "author": "Mahesh Babu",
   "sideEffects": false,
   "type": "module",
@@ -16,6 +16,7 @@
     "gallery:optimize": "node scripts/optimize-gallery.mjs"
   },
   "dependencies": {
+    "@emailjs/nodejs": "^5.0.2",
     "@mdx-js/react": "^3.0.1",
     "@neondatabase/serverless": "^1.2.0",
     "@remix-run/node": "^2.8.1",

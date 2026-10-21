@@ -1,4 +1,6 @@
 .summary {
+  --chapter-accent: var(--accent);
+
   height: 100vh;
   width: 100%;
   max-height: 1080px;
@@ -8,6 +10,82 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  isolation: isolate;
+  background:
+    radial-gradient(ellipse at 78% 50%, color-mix(in oklab, var(--accent) 8%, transparent), transparent 48%),
+    repeating-linear-gradient(0deg, transparent 0 52px, color-mix(in oklab, var(--text) 1.6%, transparent) 53px),
+    var(--background);
+
+  :global(body[data-design='classic']) & {
+    isolation: auto;
+    background: transparent;
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 7% 4% 7% clamp(160px, 9vw, 220px);
+    z-index: -1;
+    border: 1px solid color-mix(in oklab, var(--text) 12%, transparent);
+    border-left: 2px solid color-mix(in oklab, var(--accent) 70%, transparent);
+    background: linear-gradient(
+      105deg,
+      color-mix(in oklab, var(--text) 2.5%, transparent),
+      transparent 60%
+    );
+    pointer-events: none;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    right: 7%;
+    bottom: 11%;
+    z-index: -1;
+    width: min(34%, 420px);
+    height: 38%;
+    clip-path: polygon(0 100%, 15% 54%, 28% 72%, 50% 18%, 67% 55%, 82% 34%, 100% 100%);
+    background:
+      repeating-linear-gradient(115deg, transparent 0 12px, color-mix(in oklab, var(--accent) 20%, transparent) 13px 14px),
+      linear-gradient(180deg, color-mix(in oklab, var(--accent) 12%, transparent), transparent);
+    opacity: 0.38;
+    pointer-events: none;
+  }
+
+  :global(body[data-design='nano']) &::after {
+    right: 7%;
+    bottom: 11%;
+    width: min(34%, 420px);
+    height: 38%;
+    clip-path: none;
+    border: 1px solid color-mix(in oklab, var(--primary) 20%, transparent);
+    background:
+      repeating-linear-gradient(
+        0deg,
+        transparent 0 27px,
+        color-mix(in oklab, var(--primary) 10%, transparent) 28px
+      ),
+      repeating-linear-gradient(
+        90deg,
+        transparent 0 27px,
+        color-mix(in oklab, var(--primary) 10%, transparent) 28px
+      );
+    opacity: 0.3;
+  }
+
+  :global(body[data-design='nano']) &::before {
+    inset: 7% 4% 7% clamp(160px, 9vw, 220px);
+    border-right: 1px solid color-mix(in oklab, var(--primary) 24%, transparent);
+    border-left: 1px solid color-mix(in oklab, var(--primary) 24%, transparent);
+    background:
+      linear-gradient(90deg, color-mix(in oklab, var(--primary) 5%, transparent), transparent 55%),
+      repeating-linear-gradient(90deg, transparent 0 79px, color-mix(in oklab, var(--primary) 3%, transparent) 80px);
+  }
+
+  :global(body[data-design='classic']) &::before,
+  :global(body[data-design='classic']) &::after {
+    display: none;
+  }
 
   @media (--mediaDesktop) {
     margin: var(--space2XL) 0;
@@ -21,6 +99,18 @@
   @media (--mediaMobile) {
     padding-bottom: var(--space4XL);
     margin-bottom: 0;
+
+    &::before {
+      inset: 96px var(--spaceL) var(--spaceL);
+    }
+
+    &::after {
+      right: 5%;
+      bottom: 8%;
+      width: 68%;
+      height: 24%;
+      opacity: 0.18;
+    }
   }
 
   &[data-first='true'] {
@@ -30,6 +120,17 @@
       margin-top: 0;
     }
   }
+
+  &[data-alternate='true']::before {
+    border-right: 2px solid color-mix(in oklab, var(--accent) 70%, transparent);
+    border-left-width: 1px;
+  }
+
+  &[data-alternate='true']::after {
+    right: auto;
+    left: 7%;
+    transform: scaleX(-1);
+  }
 }
 
 .content {
@@ -37,11 +138,16 @@
 
   width: 100%;
   max-width: var(--maxWidthL);
+  min-width: 0;
   align-items: center;
   justify-content: center;
   display: grid;
   grid-template-columns: var(--textColumnWidth) 1fr;
   grid-column-gap: var(--space2XL);
+
+  :global(body[data-design='classic']) & {
+    min-width: auto;
+  }
 
   .summary[data-alternate='true'] & {
     grid-template-columns: 1fr var(--textColumnWidth);
@@ -65,6 +171,68 @@
 .details {
   z-index: var(--zIndex1);
   position: relative;
+  padding: clamp(var(--spaceL), 2vw, var(--spaceXL));
+  border: 1px solid color-mix(in oklab, var(--text) 16%, transparent);
+  border-left: 2px solid color-mix(in oklab, var(--accent) 68%, transparent);
+  background:
+    radial-gradient(ellipse at 100% 0%, color-mix(in oklab, var(--accent) 8%, transparent), transparent 52%),
+    repeating-linear-gradient(0deg, transparent 0 28px, color-mix(in oklab, var(--text) 2%, transparent) 29px),
+    linear-gradient(135deg, color-mix(in oklab, var(--text) 3%, transparent), transparent 58%),
+    color-mix(in oklab, var(--backgroundLight) 44%, var(--background));
+
+  :global(body[data-design='nano']) & {
+    border-color: color-mix(in oklab, var(--primary) 24%, transparent);
+    border-left-color: var(--primary);
+    background:
+      linear-gradient(115deg, color-mix(in oklab, var(--primary) 7%, transparent), transparent 55%),
+      repeating-linear-gradient(0deg, transparent 0 32px, color-mix(in oklab, var(--primary) 3%, transparent) 33px),
+      color-mix(in oklab, var(--backgroundLight) 28%, var(--background));
+    box-shadow: 0 24px 70px -48px color-mix(in oklab, var(--primary) 60%, transparent);
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+  }
+
+  :global(body[data-design='classic']) & {
+    padding: 0;
+    border: 0;
+    background: transparent;
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: -1px;
+    right: -1px;
+    width: 32px;
+    height: 32px;
+    border-top: 1px solid var(--accent);
+    border-right: 1px solid var(--accent);
+    pointer-events: none;
+  }
+
+  :global(body[data-design='classic']) &::before {
+    display: none;
+  }
+
+  .summary[data-alternate='true'] & {
+    border-right: 2px solid color-mix(in oklab, var(--accent) 68%, transparent);
+    border-left-width: 1px;
+
+    :global(body[data-design='classic']) & {
+      border: 0;
+    }
+
+    &::before {
+      right: auto;
+      left: -1px;
+      border-right: 0;
+      border-left: 1px solid var(--accent);
+    }
+
+    :global(body[data-design='classic']) &::before {
+      display: none;
+    }
+  }
 
   @media (--mediaTablet) {
     flex: 0 0 auto;
@@ -72,6 +240,8 @@
     grid-row: 2;
     grid-column: 1;
     justify-self: center;
+    width: 100%;
+    padding: var(--spaceL);
   }
 }
 
@@ -83,58 +253,164 @@
   justify-content: center;
   height: 100%;
   width: 100%;
+  min-width: 0;
+
+  :global(body[data-design='classic']) & {
+    min-width: auto;
+  }
+
+  :global(body[data-design='classic']) &::before,
+  :global(body[data-design='classic']) &::after {
+    display: none;
+  }
+
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: min(78%, 390px);
+    aspect-ratio: 1;
+    border: 1px solid color-mix(in oklab, var(--accent) 32%, transparent);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  :global(body[data-design='nano']) &::before,
+  :global(body[data-design='nano']) &::after {
+    width: min(78%, 430px);
+    aspect-ratio: 1.18;
+    border-radius: 0;
+    clip-path: polygon(0 12%, 12% 12%, 12% 0, 88% 0, 88% 12%, 100% 12%, 100% 88%, 88% 88%, 88% 100%, 12% 100%, 12% 88%, 0 88%);
+  }
+
+  :global(body[data-design='nano']) &::before {
+    background:
+      repeating-linear-gradient(0deg, transparent 0 27px, color-mix(in oklab, var(--primary) 8%, transparent) 28px),
+      repeating-linear-gradient(90deg, transparent 0 27px, color-mix(in oklab, var(--primary) 8%, transparent) 28px),
+      radial-gradient(ellipse, color-mix(in oklab, var(--primary) 10%, transparent), transparent 70%);
+    box-shadow: 0 0 80px color-mix(in oklab, var(--primary) 14%, transparent);
+  }
+
+  :global(body[data-design='nano']) &::after {
+    width: min(90%, 490px);
+    border-color: color-mix(in oklab, var(--accent) 42%, transparent);
+    border-style: solid;
+    transform: translate(-50%, -50%);
+  }
+
+  &::before {
+    background: radial-gradient(
+      circle,
+      color-mix(in oklab, var(--accent) 8%, transparent),
+      transparent 68%
+    );
+    box-shadow: 0 0 80px color-mix(in oklab, var(--accent) 12%, transparent);
+  }
+
+  &::after {
+    width: min(88%, 440px);
+    border-color: color-mix(in oklab, var(--primary) 28%, transparent);
+    border-style: dashed;
+    transform: translate(-50%, -50%) rotate(-24deg) scaleY(0.72);
+  }
 }
 
 .model {
-  --width: 180%;
+  --width: 100%;
   --aspectRatio: 12 / 10;
 
-  min-width: var(--width);
+  width: var(--width);
+  min-width: 0;
   aspect-ratio: var(--aspectRatio);
   display: grid;
   position: relative;
+  z-index: 1;
+
+  :global(body[data-design='classic']) & {
+    --width: 180%;
+
+    width: auto;
+    min-width: var(--width);
+    z-index: auto;
+  }
 
   &[data-device='laptop'] {
-    top: 6%;
-    left: 14%;
+    top: 0;
+    left: 0;
+
+    :global(body[data-design='classic']) & {
+      top: 6%;
+      left: 14%;
+    }
 
     @media (--mediaDesktop) {
-      --width: 180%;
+      :global(body[data-design='classic']) & {
+        --width: 180%;
+      }
     }
 
     @media (--mediaTablet) {
-      --width: 140%;
-
-      top: 10%;
+      --width: 100%;
+      top: 0;
       left: 0;
+
+      :global(body[data-design='classic']) & {
+        --width: 140%;
+
+        top: 10%;
+        left: 0;
+      }
     }
   }
 
   &[data-device='phone'] {
-    --width: 116%;
+    --width: 100%;
     --aspectRatio: 7 / 10;
 
-    top: 5%;
-    left: -10%;
+    top: 0;
+    left: 0;
+
+    :global(body[data-design='classic']) & {
+      --width: 116%;
+
+      top: 5%;
+      left: -10%;
+    }
 
     @media (--mediaDesktop) {
-      --width: 108%;
+      :global(body[data-design='classic']) & {
+        --width: 108%;
 
-      left: 0;
+        left: 0;
+      }
     }
 
     @media (--mediaTablet) {
-      --width: 108%;
-
+      --width: 100%;
       left: 0;
       max-height: 60vh;
+
+      :global(body[data-design='classic']) & {
+        --width: 108%;
+
+        left: 0;
+      }
     }
 
     @media (--mediaMobile) {
-      --width: 108%;
-
+      --width: 100%;
       left: 0;
       max-height: none;
+
+      :global(body[data-design='classic']) & {
+        --width: 108%;
+
+        left: 0;
+      }
     }
   }
 }
@@ -157,34 +433,75 @@
     opacity: var(--opacity);
   }
 
+  :global(body[data-design='nano']) & {
+    display: none;
+  }
+
   &[data-device='laptop'] {
     position: absolute;
-    width: 100%;
-    right: -36%;
-    bottom: 24%;
+    width: 76%;
+    right: 2%;
+    bottom: 22%;
     transform: translateY(50%);
 
     @media (--mediaTablet) {
-      width: 80%;
-      right: -10%;
+      width: 86%;
+      right: 0;
       bottom: 18%;
     }
 
     @media (--mediaMobile) {
-      right: 0;
+      width: 90%;
+      bottom: 10%;
+    }
+
+    :global(body[data-design='classic']) & {
+      width: 100%;
+      right: -36%;
+      bottom: 24%;
+    }
+
+    @media (--mediaTablet) {
+      :global(body[data-design='classic']) & {
+        width: 80%;
+        right: -10%;
+        bottom: 18%;
+      }
+    }
+
+    @media (--mediaMobile) {
+      :global(body[data-design='classic']) & {
+        right: 0;
+      }
     }
   }
 
   &[data-device='phone'] {
     position: absolute;
-    bottom: 23%;
+    bottom: 30%;
     transform: translateY(50%);
-    width: 100%;
+    width: 74%;
     transition-delay: 800ms;
 
     @media (--mediaTablet) {
-      width: 80%;
+      width: 82%;
+      bottom: 24%;
+    }
+
+    @media (--mediaMobile) {
+      bottom: 18%;
+    }
+
+    :global(body[data-design='classic']) & {
       bottom: 23%;
+      width: 100%;
+    }
+
+    @media (--mediaTablet) {
+      :global(body[data-design='classic']) & {
+        width: 80%;
+        bottom: 23%;
+      }
     }
   }
 }
@@ -192,10 +509,47 @@
 .index {
   position: relative;
   display: grid;
-  grid-template-columns: 90px 1fr;
+  grid-template-columns: 90px auto 1fr 42px;
   gap: var(--spaceM);
   align-items: center;
   margin-bottom: var(--spaceXL);
+
+  :global(body[data-design='classic']) & {
+    grid-template-columns: 90px 1fr;
+  }
+}
+
+.arcLabel {
+  color: var(--chapter-accent);
+  font-family: var(--monoFontStack);
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  white-space: nowrap;
+  text-transform: uppercase;
+}
+
+.seal {
+  position: relative;
+  display: grid;
+  width: 38px;
+  height: 38px;
+  place-items: center;
+  border: 1px solid var(--accent);
+  box-shadow: inset 0 0 0 3px color-mix(in oklab, var(--accent) 12%, transparent);
+  background: color-mix(in oklab, var(--accent) 5%, var(--backgroundLight));
+  color: var(--accent);
+  font-family: var(--japaneseFontStack);
+  font-size: 21px;
+  line-height: 1;
+  transform: rotate(4deg);
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 5px;
+    border: 1px solid color-mix(in oklab, var(--accent) 48%, transparent);
+    transform: rotate(45deg);
+  }
 }
 
 .indexNumber {
@@ -221,6 +575,8 @@
 
 .title {
   margin-bottom: var(--spaceL);
+  text-wrap: balance;
+  text-shadow: 0 3px 20px color-mix(in oklab, var(--background) 35%, transparent);
   transition-property: opacity;
   transition-timing-function: var(--bezierFastoutSlowin);
   transition-duration: var(--durationXL);
@@ -235,6 +591,11 @@
   &[data-visible='true'] {
     transform: none;
     opacity: 1;
+  }
+
+  :global(body[data-design='classic']) & {
+    text-wrap: initial;
+    text-shadow: none;
   }
 }
 

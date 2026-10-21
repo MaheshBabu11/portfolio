@@ -1,12 +1,38 @@
 .section {
+  position: relative;
+  isolation: isolate;
   width: 100%;
   padding-top: var(--space4XL);
   padding-bottom: var(--space5XL);
   display: flex;
   justify-content: center;
+  background:
+    radial-gradient(ellipse at 82% 55%, color-mix(in oklab, var(--accent) 4%, transparent), transparent 48%),
+    var(--background);
+
+  :global(body[data-design='classic']) & {
+    position: static;
+    isolation: auto;
+    background: transparent;
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 8% 4% 8% clamp(160px, 9vw, 220px);
+    z-index: -1;
+    border: 1px solid color-mix(in oklab, var(--text) 12%, transparent);
+    border-right: 2px solid color-mix(in oklab, var(--accent) 70%, transparent);
+    pointer-events: none;
+  }
+
+  :global(body[data-design='classic']) &::before {
+    display: none;
+  }
 }
 
 .content {
+  position: relative;
   width: 100%;
   max-width: var(--maxWidthL);
 }
@@ -49,8 +75,12 @@
   min-width: 0;
   overflow: hidden;
   border: 1px solid color-mix(in lab, var(--text) 14%, transparent);
-  border-radius: 14px;
+  border-radius: 2px;
   background: var(--backgroundLight);
+
+  :global(body[data-design='classic']) & {
+    border-radius: 14px;
+  }
 }
 
 .panel[data-active='true'] {
@@ -124,6 +154,13 @@
   box-shadow: 0 0 0 3px color-mix(in lab, var(--accent) 8%, transparent);
 }
 
+:global(body[data-design='nano']) .avatar {
+  border-radius: 2px;
+  border-color: color-mix(in lab, var(--primary) 58%, var(--backgroundLight));
+  box-shadow: 0 0 0 3px color-mix(in lab, var(--primary) 8%, transparent);
+  filter: saturate(0.78);
+}
+
 .panel[data-active='true'] .avatar {
   flex-basis: 56px;
   width: 56px;
@@ -161,11 +198,21 @@
   margin: var(--spaceS) 0 0;
   padding: var(--spaceXS) var(--spaceM);
   border: 1px solid color-mix(in lab, var(--accent) 20%, transparent);
-  border-radius: 999px;
+  border-radius: 0;
   color: var(--textLight);
   background: color-mix(in lab, var(--accent) 5%, var(--backgroundLight));
+  font-family: var(--monoFontStack);
+  font-size: var(--fontSizeBodyXS);
+  letter-spacing: 0.04em;
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
+
+  :global(body[data-design='classic']) & {
+    border-radius: 999px;
+    font-family: inherit;
+    font-size: inherit;
+    letter-spacing: normal;
+  }
 }
 
 .quote {
@@ -258,5 +305,10 @@
   .section {
     padding-top: var(--space3XL);
     padding-bottom: var(--space4XL);
+
+    &::before {
+      inset: 96px var(--spaceL) var(--spaceL);
+    }
+
   }
 }

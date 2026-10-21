@@ -108,27 +108,77 @@ const tokensMobileSmall = {
 
 // Tokens that change based on theme
 const dark = {
-  background: 'oklch(17.76% 0 0)',
-  backgroundLight: 'oklch(21.78% 0 0)',
-  primary: 'oklch(84.42% 0.19 302.24)',
-  accent: 'oklch(84.42% 0.19 302.24)',
+  background: 'oklch(12% 0.018 20)',
+  backgroundLight: 'oklch(17% 0.024 20)',
+  primary: 'oklch(68% 0.17 31)',
+  accent: 'oklch(63% 0.22 25)',
   error: 'oklch(65.91% 0.249 13.76)',
   text: 'var(--white)',
   textTitle: 'var(--text)',
-  textBody: 'color-mix(in lab, var(--text) 80%, transparent)',
-  textLight: 'color-mix(in lab, var(--text) 60%, transparent)',
+  textBody: 'oklch(83% 0.018 75)',
+  textLight: 'oklch(64% 0.02 75)',
 };
 
 const light = {
-  background: 'oklch(96.12% 0 0)',
-  backgroundLight: 'var(--white)',
-  primary: 'var(--black)',
-  accent: 'oklch(84.42% 0.19 302.24)',
+  background: 'oklch(94% 0.025 72)',
+  backgroundLight: 'oklch(97% 0.015 75)',
+  primary: 'oklch(46% 0.15 25)',
+  accent: 'oklch(52% 0.2 27)',
   error: 'oklch(63.17% 0.259 25.41)',
   text: 'var(--black)',
-  textTitle: 'color-mix(in lab, var(--text) 90%, transparent)',
-  textBody: 'color-mix(in lab, var(--text) 75%, transparent)',
-  textLight: 'color-mix(in lab, var(--text) 55%, transparent)',
+  textTitle: 'oklch(22% 0.018 45)',
+  textBody: 'oklch(34% 0.018 45)',
+  textLight: 'oklch(48% 0.022 45)',
+};
+
+export const nanoThemes = {
+  dark: {
+    background: 'oklch(11% 0.025 250)',
+    backgroundLight: 'oklch(16% 0.03 248)',
+    primary: 'oklch(76% 0.14 194)',
+    accent: 'oklch(68% 0.2 25)',
+    error: 'oklch(65.91% 0.249 13.76)',
+    text: 'var(--white)',
+    textTitle: 'var(--text)',
+    textBody: 'oklch(84% 0.02 225)',
+    textLight: 'oklch(66% 0.025 225)',
+  },
+  light: {
+    background: 'oklch(95% 0.018 82)',
+    backgroundLight: 'oklch(98% 0.01 84)',
+    primary: 'oklch(43% 0.12 205)',
+    accent: 'oklch(53% 0.19 25)',
+    error: 'oklch(63.17% 0.259 25.41)',
+    text: 'var(--black)',
+    textTitle: 'oklch(22% 0.025 245)',
+    textBody: 'oklch(35% 0.025 245)',
+    textLight: 'oklch(49% 0.025 245)',
+  },
+};
+
+export const classicThemes = {
+  dark: {
+    background: 'oklch(17.76% 0 0)',
+    backgroundLight: 'oklch(21.78% 0 0)',
+    primary: 'oklch(84.42% 0.19 302.24)',
+    accent: 'oklch(84.42% 0.19 302.24)',
+    error: 'oklch(65.91% 0.249 13.76)',
+    text: 'var(--white)',
+    textTitle: 'var(--text)',
+    textBody: 'color-mix(in lab, var(--text) 80%, transparent)',
+    textLight: 'color-mix(in lab, var(--text) 60%, transparent)',
+  },
+  light: {
+    background: 'oklch(96.12% 0 0)',
+    backgroundLight: 'var(--white)',
+    primary: 'var(--black)',
+    accent: 'oklch(84.42% 0.19 302.24)',
+    error: 'oklch(63.17% 0.259 25.41)',
+    text: 'var(--black)',
+    textTitle: 'color-mix(in lab, var(--text) 90%, transparent)',
+    textBody: 'color-mix(in lab, var(--text) 75%, transparent)',
+    textLight: 'color-mix(in lab, var(--text) 55%, transparent)',
+  },
 };
 
 export const tokens = {

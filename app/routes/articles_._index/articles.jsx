@@ -11,7 +11,7 @@ import { useWindowSize } from '~/hooks';
 import { Link as RouterLink, useLoaderData } from '@remix-run/react';
 import { useState, useEffect } from 'react';
 import { formatDate } from '~/utils/date';
-import { classes, cssProps } from '~/utils/style';
+import { cssProps } from '~/utils/style';
 import styles from './articles.module.css';
 
 function ArticlesPost({ slug, frontmatter, timecode, index }) {
@@ -93,46 +93,6 @@ function ArticlesPost({ slug, frontmatter, timecode, index }) {
   );
 }
 
-function SkeletonPost({ index }) {
-  return (
-    <article
-      aria-hidden="true"
-      className={classes(styles.post, styles.skeleton)}
-      data-featured="false"
-      style={index !== undefined ? cssProps({ delay: index * 100 + 200 }) : undefined}
-    >
-      <div className={styles.postLink}>
-        <div className={styles.postDetails}>
-          <div aria-hidden className={styles.postDate}>
-            <Divider notchWidth="64px" notchHeight="8px" />
-            Coming soon...
-          </div>
-          <Heading
-            className={styles.skeletonBone}
-            as="h2"
-            level={4}
-            style={{ height: 24, width: '70%' }}
-          />
-          <Text
-            className={styles.skeletonBone}
-            size="s"
-            as="p"
-            style={{ height: 90, width: '100%' }}
-          />
-          <div className={styles.postFooter}>
-            <Button secondary iconHoverShift icon="chevron-right" as="div">
-              Read more
-            </Button>
-            <Text className={styles.timecode} size="s">
-              00:00:00:00
-            </Text>
-          </div>
-        </div>
-      </div>
-    </article>
-  );
-}
-
 export function Articles() {
   const { posts, featured } = useLoaderData();
   const { width } = useWindowSize();
@@ -154,11 +114,6 @@ export function Articles() {
       {posts.map(({ slug, ...post }, index) => (
         <ArticlesPost key={slug} slug={slug} index={index} {...post} />
       ))}
-      {/*{Array(2)*/}
-      {/*  .fill()*/}
-      {/*  .map((skeleton, index) => (*/}
-      {/*    <SkeletonPost key={index} index={index} />*/}
-      {/*  ))}*/}
     </div>
   );
 

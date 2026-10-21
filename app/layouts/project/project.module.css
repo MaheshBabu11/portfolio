@@ -18,12 +18,84 @@
   }
 
   .project {
+    isolation: isolate;
     position: relative;
     width: 100%;
     display: flex;
     justify-content: center;
     flex-direction: column;
     align-items: center;
+    background:
+      radial-gradient(ellipse at 92% 4%, color-mix(in oklab, var(--accent) 5%, transparent), transparent 38rem),
+      transparent;
+
+    :global(body[data-design='classic']) & {
+      isolation: auto;
+      background: transparent;
+    }
+
+    &::before,
+    &::after {
+      content: '';
+      position: absolute;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    &::before {
+      top: 14vh;
+      right: 6%;
+      width: min(30vw, 390px);
+      aspect-ratio: 1;
+      border: 1px solid color-mix(in oklab, var(--primary) 20%, transparent);
+      border-radius: 50%;
+      box-shadow:
+        inset 0 0 0 10px color-mix(in oklab, var(--accent) 2%, transparent),
+        inset 0 0 0 11px color-mix(in oklab, var(--accent) 12%, transparent);
+    }
+
+    &::after {
+      right: 0;
+      bottom: 0;
+      left: 0;
+      height: clamp(180px, 24vw, 340px);
+      clip-path: polygon(0 100%, 0 74%, 13% 52%, 21% 67%, 37% 30%, 49% 61%, 62% 23%, 77% 65%, 89% 42%, 100% 73%, 100% 100%);
+      background:
+        repeating-linear-gradient(124deg, transparent 0 14px, color-mix(in oklab, var(--accent) 10%, transparent) 15px 16px),
+        linear-gradient(180deg, color-mix(in oklab, var(--accent) 7%, transparent), transparent);
+      opacity: 0.3;
+    }
+
+    :global(body[data-design='nano']) &::after {
+      clip-path: none;
+      background:
+        repeating-linear-gradient(
+          0deg,
+          transparent 0 28px,
+          color-mix(in oklab, var(--primary) 8%, transparent) 29px
+        ),
+        repeating-linear-gradient(
+          90deg,
+          transparent 0 28px,
+          color-mix(in oklab, var(--primary) 8%, transparent) 29px
+        );
+      opacity: 0.2;
+    }
+
+    :global(body[data-design='nano']) &::before {
+      top: 12vh;
+      right: 6%;
+      width: min(30vw, 390px);
+      aspect-ratio: 1.18;
+      border-radius: 0;
+      clip-path: polygon(0 12%, 12% 12%, 12% 0, 88% 0, 88% 12%, 100% 12%, 100% 88%, 88% 88%, 88% 100%, 12% 100%, 12% 88%, 0 88%);
+      box-shadow: inset 0 0 0 10px color-mix(in oklab, var(--primary) 3%, transparent);
+    }
+
+    :global(body[data-design='classic']) &::before,
+    :global(body[data-design='classic']) &::after {
+      display: none;
+    }
   }
 
   .section {
@@ -216,6 +288,25 @@
     gap: var(--space4XL);
     max-width: var(--maxWidthL);
 
+    &::before {
+      content: 'MURIM ARCHIVE  /  CULTIVATION RECORD';
+      position: absolute;
+      top: -1.8em;
+      left: 0;
+      color: var(--primary);
+      font-family: var(--monoFontStack);
+      font-size: 10px;
+      letter-spacing: 0.16em;
+    }
+
+    :global(body[data-design='nano']) &::before {
+      content: 'NANO SYSTEM  /  PROJECT RECORD';
+    }
+
+    :global(body[data-design='classic']) &::before {
+      display: none;
+    }
+
     @media (--mediaDesktop) {
       grid-template-columns: 1fr 400px;
     }
@@ -305,10 +396,22 @@
   }
 
   .metaItem {
-    padding: var(--spaceL) 0;
+    padding: var(--spaceL) 0 var(--spaceL) var(--spaceM);
     font-size: var(--fontSizeBodyS);
     font-weight: var(--fontWeightRegular);
-    border-top: 1px solid color-mix(in lab, var(--text) 20%, transparent);
+    border-top: 1px solid color-mix(in oklab, var(--text) 16%, transparent);
+    border-left: 2px solid color-mix(in oklab, var(--accent) 60%, transparent);
+
+    :global(body[data-design='classic']) & {
+      padding-left: 0;
+      padding-right: 0;
+      border-left: 0;
+      border-top-color: color-mix(in lab, var(--text) 20%, transparent);
+    }
+
+    :global(body[data-design='classic']) &:last-child {
+      border-bottom: 1px solid color-mix(in lab, var(--text) 20%, transparent);
+    }
 
     @media (--mediaUseMotion) {
       opacity: 0;
@@ -320,7 +423,7 @@
     }
 
     &:last-child {
-      border-bottom: 1px solid color-mix(in lab, var(--text) 20%, transparent);
+      border-bottom: 1px solid color-mix(in oklab, var(--text) 16%, transparent);
     }
   }
 
@@ -357,6 +460,13 @@
 
   .sectionHeading {
     margin-bottom: 0.6em;
+    padding-left: var(--spaceM);
+    border-left: 2px solid color-mix(in oklab, var(--accent) 68%, transparent);
+
+    :global(body[data-design='classic']) & {
+      padding-left: 0;
+      border-left: 0;
+    }
   }
 
   .sectionText {

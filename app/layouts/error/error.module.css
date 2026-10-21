@@ -24,7 +24,15 @@
     height: 100%;
     overflow: hidden;
     position: relative;
-    border: var(--space3XL) solid transparent;
+    border: var(--space3XL) solid color-mix(in oklab, var(--accent) 12%, var(--background));
+    background: color-mix(in oklab, var(--backgroundLight) 70%, var(--background));
+    box-shadow: 0 24px 80px -48px color-mix(in oklab, var(--accent) 50%, transparent);
+
+    :global(body[data-design='classic']) & {
+      border-color: transparent;
+      background: transparent;
+      box-shadow: none;
+    }
 
     @media (--mediaLaptop) {
       border-width: var(--spaceL);

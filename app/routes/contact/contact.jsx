@@ -8,8 +8,8 @@ import { Section } from '~/components/section';
 import { Text } from '~/components/text';
 import { tokens } from '~/components/theme-provider/theme';
 import { Transition } from '~/components/transition';
-import { useFormInput } from '~/hooks';
-import { useState } from 'react';
+import { Form, useActionData, useNavigation } from '@remix-run/react';
+import { useEffect, useState } from 'react';
 import { cssProps, msToNum, numToMs } from '~/utils/style';
 import { baseMeta } from '~/utils/meta';
 import styles from './contact.module.css';
@@ -22,38 +22,45 @@ export const meta = () => {
   });
 };
 
-const MAX_EMAIL_LENGTH = 512;
-const MAX_MESSAGE_LENGTH = 4096;
-const CONTACT_EMAIL = 'mahesh.b.pec@gmail.com';
+export const MAX_EMAIL_LENGTH = 512;
+export const MAX_MESSAGE_LENGTH = 4096;
 
 export const Contact = () => {
-  const email = useFormInput('');
-  const message = useFormInput('');
-  const [draftNotice, setDraftNotice] = useState(false);
+  const [email, setEmail] = useState('');
+  const [message, setMessage] = useState('');
+  const actionData = useActionData();
+  const navigation = useNavigation();
+  const isSubmitting = navigation.state === 'submitting';
   const initDelay = tokens.base.durationS;
 
-  const handleSubmit = event => {
-    event.preventDefault();
-
-    const params = new URLSearchParams({
-      subject: `Portfolio message from ${email.value}`,
-      body: `From: ${email.value}\n\n${message.value}`,
-    });
-
-    window.location.href = `mailto:${CONTACT_EMAIL}?${params.toString()}`;
-    setDraftNotice(true);
-  };
+  useEffect(() => {
+    if (actionData?.success) {
+      setEmail('');
+      setMessage('');
+    }
+  }, [actionData]);
 
   return (
     <Section className={styles.contact}>
       <div className={styles.content}>
         <Transition in timeout={1600}>
           {({ status, nodeRef }) => (
-            <form
+            <Form
               className={styles.form}
-              onSubmit={handleSubmit}
+              method="post"
               ref={nodeRef}
             >
+              <div className={styles.honeypot} aria-hidden="true">
+                <label>
+                  Leave this field empty
+                  <input
+                    autoComplete="off"
+                    name="company"
+                    tabIndex={-1}
+                    type="text"
+                  />
+                </label>
+              </div>
               <Heading
                 className={styles.title}
                 data-status={status}
@@ -78,7 +85,9 @@ export const Contact = () => {
                 type="email"
                 name="email"
                 maxLength={MAX_EMAIL_LENGTH}
-                {...email}
+                value={email}
+                onChange={event => setEmail(event.target.value)}
+                error={actionData?.fieldErrors?.email}
               />
               <Input
                 required
@@ -90,24 +99,36 @@ export const Contact = () => {
                 label="Message"
                 name="message"
                 maxLength={MAX_MESSAGE_LENGTH}
-                {...message}
+                value={message}
+                onChange={event => setMessage(event.target.value)}
+                error={actionData?.fieldErrors?.message}
               />
               <Button
                 className={styles.button}
                 data-status={status}
+                disabled={isSubmitting}
+                loading={isSubmitting}
+                loadingText="Sending"
                 style={getDelay(tokens.base.durationM, initDelay)}
                 icon="send"
                 type="submit"
               >
-                Open email app
+                Send message
               </Button>
-              {draftNotice && (
-                <Text className={styles.mailtoNotice} role="status" size="s" as="p">
-                  Your email app should open with a draft. Review it and send it to
-                  complete delivery.
+              {actionData && (actionData.error || actionData.success) && (
+                <Text
+                  className={styles.formNotice}
+                  data-error={Boolean(actionData.error)}
+                  role={actionData.success ? 'status' : 'alert'}
+                  size="s"
+                  as="p"
+                >
+                  {actionData.success
+                    ? 'Thanks for reaching out. Your message has been sent.'
+                    : actionData.error}
                 </Text>
               )}
-            </form>
+            </Form>
           )}
         </Transition>
 

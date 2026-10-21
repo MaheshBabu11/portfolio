@@ -398,7 +398,12 @@ const Device = ({
 
       gltf.scene.traverse(async node => {
         if (node.material) {
-          node.material.color = new Color(0x1f2025);
+          const baseColor = model.materialColor ?? 0x1f2025;
+          const materialColor =
+            node.name === MeshType.Logo
+              ? model.accentMaterialColor ?? baseColor
+              : baseColor;
+          node.material.color = new Color(materialColor);
         }
 
         if (node.name === MeshType.Screen) {
@@ -475,7 +480,7 @@ const Device = ({
           return animate(startRotation.x, endRotation.x, {
             type: 'spring',
             delay: (300 * index + showDelay + 300) / 1000,
-            stiffness: 80,
+            stiffness: 100,
             damping: 20,
             restSpeed: 0.0001,
             restDelta: 0.0001,

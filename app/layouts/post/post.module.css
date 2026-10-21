@@ -61,9 +61,35 @@
     justify-content: center;
     flex-direction: column;
     padding-top: var(--space5XL);
+    padding-left: var(--spaceL);
+    border-left: 2px solid color-mix(in oklab, var(--accent) 58%, transparent);
     gap: var(--space2XL);
     max-width: 800px;
     grid-column: 3;
+
+    :global(body[data-design='classic']) & {
+      padding-left: 0;
+      border-left: 0;
+    }
+
+    &::before {
+      content: 'MURIM ARCHIVE  /  CHRONICLE';
+      position: absolute;
+      top: var(--spaceXL);
+      left: var(--spaceL);
+      color: var(--primary);
+      font-family: var(--monoFontStack);
+      font-size: 10px;
+      letter-spacing: 0.16em;
+    }
+
+    :global(body[data-design='nano']) &::before {
+      content: 'NANO SYSTEM  /  CHRONICLE';
+    }
+
+    :global(body[data-design='classic']) &::before {
+      display: none;
+    }
 
     @media (--mediaTablet) {
       grid-column: 1;
@@ -163,6 +189,31 @@
       transition: var(--durationM) ease;
       transition-property: --background1, --background2, --background3;
 
+      background: linear-gradient(
+        var(--background1),
+        var(--background2),
+        var(--background3)
+      ), radial-gradient(
+        circle at 78% 36%,
+        color-mix(in oklab, var(--accent) 18%, transparent),
+        transparent 30rem
+      );
+
+      @supports (background: linear-gradient(in lab, red, red)) {
+        background: linear-gradient(
+          in lab,
+          var(--background1),
+          var(--background2),
+          var(--background3)
+        ), radial-gradient(
+          circle at 78% 36%,
+          color-mix(in oklab, var(--accent) 18%, transparent),
+          transparent 30rem
+        );
+      }
+    }
+
+    :global(body[data-design='classic']) &::after {
       background: linear-gradient(
         var(--background1),
         var(--background2),
@@ -269,6 +320,13 @@
     opacity: 0;
     display: grid;
     grid-template-columns: 1fr var(--gutterWidth) var(--contentWidth) var(--gutterWidth) 1fr;
+    border-top: 1px solid color-mix(in oklab, var(--accent) 18%, transparent);
+    padding-top: var(--spaceXL);
+
+    :global(body[data-design='classic']) & {
+      border-top: 0;
+      padding-top: 0;
+    }
 
     &:global {
       animation: fade-in 1.2s var(--bezierFastoutSlowin) 1s forwards;

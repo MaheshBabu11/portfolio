@@ -18,7 +18,7 @@ export const Navbar = () => {
   const [current, setCurrent] = useState();
   const [menuOpen, setMenuOpen] = useState(false);
   const [target, setTarget] = useState();
-  const { theme } = useTheme();
+  const { theme, design } = useTheme();
   const location = useLocation();
   const windowSize = useWindowSize();
   const headerRef = useRef();
@@ -36,6 +36,37 @@ export const Navbar = () => {
     setCurrent(`${location.pathname}${target}`);
     scrollToHash(target, () => setTarget(null));
   }, [location.pathname, scrollToHash, target]);
+
+  useEffect(() => {
+    if (location.pathname !== '/') return;
+
+    const sections = document.querySelectorAll(
+      '#project-1, #project-2, #project-3, #project-4, #project-5, #details'
+    );
+    const observer = new IntersectionObserver(
+      entries => {
+        const visibleSections = entries.filter(entry => entry.isIntersecting);
+        if (!visibleSections.length) return;
+
+        const focusLine = window.innerHeight * 0.45;
+        const activeSection = visibleSections.reduce((closest, entry) =>
+          Math.abs(entry.boundingClientRect.top - focusLine) <
+          Math.abs(closest.boundingClientRect.top - focusLine)
+            ? entry
+            : closest
+        );
+        const activeLink =
+          activeSection.target.id === 'details' ? '/#details' : '/#project-1';
+
+        setCurrent(activeLink);
+      },
+      { rootMargin: '-40% 0px -50% 0px', threshold: 0 }
+    );
+
+    sections.forEach(section => observer.observe(section));
+
+    return () => observer.disconnect();
+  }, [location.pathname]);
 
   // Handle swapping the theme when intersecting with inverse themed elements
   useEffect(() => {
@@ -117,7 +148,13 @@ export const Navbar = () => {
   const getCurrent = (url = '') => {
     const nonTrailing = current?.endsWith('/') ? current?.slice(0, -1) : current;
 
-    if (url === nonTrailing) {
+    if (url.startsWith('/#')) {
+      return url === nonTrailing ? 'page' : '';
+    }
+
+    const currentPath = nonTrailing?.split('#')[0];
+
+    if (currentPath === url || currentPath?.startsWith(`${url}/`)) {
       return 'page';
     }
 
@@ -196,12 +233,14 @@ export const Navbar = () => {
               </RouterLink>
             ))}
             <NavbarIcons />
-            {location.pathname === '/' && <BackgroundAnimationToggle isMobile />}
+            {location.pathname === '/' && design === 'classic' && (
+              <BackgroundAnimationToggle isMobile />
+            )}
             <ThemeToggle isMobile />
           </nav>
         )}
       </Transition>
-      {location.pathname === '/' && !isMobile && (
+      {location.pathname === '/' && design === 'classic' && !isMobile && (
         <BackgroundAnimationToggle data-navbar-item />
       )}
       {!isMobile && <ThemeToggle data-navbar-item />}
