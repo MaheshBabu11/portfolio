@@ -704,7 +704,7 @@ export const About = () => (
         <ProjectSectionContent width="xl">
           <ProjectTextRow stretch width="xl">
             <AboutSectionTitle label="05 / Skill badges">
-              Selected badges
+             Badges
             </AboutSectionTitle>
             <BadgeCarousel />
           </ProjectTextRow>
