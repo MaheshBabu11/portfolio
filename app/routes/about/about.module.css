@@ -421,6 +421,115 @@
   align-self: center;
 }
 
+.badgeCarousel {
+  --badge-size: clamp(76px, 8vw, 120px);
+  --badge-gap: clamp(18px, 2.6vw, 32px);
+
+  display: grid;
+  gap: var(--spaceS);
+  width: 100%;
+}
+
+.badgeViewport {
+  width: 100%;
+  padding: var(--spaceM) 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  cursor: grab;
+  user-select: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  &[data-dragging='true'] {
+    cursor: grabbing;
+    scroll-snap-type: none;
+  }
+}
+
+.badgeTrack {
+  display: flex;
+  align-items: center;
+  gap: var(--badge-gap);
+  width: max-content;
+  padding-inline: calc((100% - var(--badge-size)) / 2);
+}
+
+.badgeSlide {
+  flex: 0 0 var(--badge-size);
+  aspect-ratio: 1;
+  scroll-snap-align: center;
+  opacity: 0.7;
+  transform: scale(0.88);
+  transition:
+    opacity var(--durationM) ease,
+    transform var(--durationM) var(--bezierFastoutSlowin);
+}
+
+.badgeSlide[data-active='true'] {
+  z-index: 1;
+  opacity: 1;
+  transform: scale(1);
+}
+
+.badgeSlide[data-active='false'] {
+  opacity: 0.9;
+  transform: scale(0.95);
+}
+
+.badgeImage {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 10px 16px color-mix(in oklab, #000 32%, transparent));
+}
+
+.badgeImage[data-shape='circle'] {
+  border-radius: 50%;
+  background: var(--white);
+}
+
+.badgeImage[data-shape='ribbon'] {
+  border-radius: 8px;
+  background: var(--white);
+}
+
+.badgePagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spaceS);
+}
+
+.badgeDot {
+  width: 10px;
+  height: 10px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: color-mix(in oklab, var(--text) 24%, transparent);
+  cursor: pointer;
+  transition:
+    background-color var(--durationM) ease,
+    transform var(--durationM) ease;
+
+  &[data-active='true'] {
+    transform: scale(1.25);
+    background: var(--primary);
+    box-shadow: 0 0 10px color-mix(in oklab, var(--primary) 54%, transparent);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 3px;
+  }
+}
+
 .actions a {
   border-color: color-mix(in oklab, var(--accent) 35%, transparent);
 
@@ -483,6 +592,22 @@
   .skills,
   .certificationList {
     grid-template-columns: 1fr;
+  }
+
+  .badgeCarousel {
+    --badge-size: clamp(48px, 14vw, 72px);
+    --badge-gap: clamp(10px, 3vw, 18px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .badgeViewport {
+    scroll-behavior: auto;
+  }
+
+  .badgeSlide,
+  .badgeDot {
+    transition: none;
   }
 }
 
