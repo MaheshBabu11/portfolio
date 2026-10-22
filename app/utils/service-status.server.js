@@ -23,6 +23,12 @@ const services = [
     url: 'https://vw.maheshbabu11.dev',
     endpoint: '/alive',
   },
+  {
+    name: 'Homarr',
+    icon: 'homarr',
+    url: 'https://homarr.maheshbabu11.dev',
+    endpoint: '/',
+  },
 ];
 
 const signInResponses = new Set([301, 302, 303, 307, 308, 401, 403]);

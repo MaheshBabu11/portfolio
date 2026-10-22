@@ -23,9 +23,9 @@ const refreshInterval = 30_000;
 
 export const meta = () =>
   baseMeta({
-    title: 'Homelab',
-    description: 'Live CPU, memory, storage, and network metrics from my homelab.',
-    pageUrl: `${config.url}/homelab`,
+    title: 'Homelab dashboard',
+    description: 'Private live system metrics and service status from my homelab.',
+    pageUrl: `${config.url}/homelab/dashboard`,
   });
 
 const formatBytes = bytes => {
@@ -192,7 +192,7 @@ export const Homelab = () => {
       <>
         <ProjectContainer className={styles.homelab}>
           <ProjectHeader
-            title="Homelab"
+            title="Homelab dashboard"
             description="Sign in to view private homelab metrics and service status."
           />
           <ProjectSection padding="none">
@@ -244,7 +244,7 @@ export const Homelab = () => {
     <>
       <ProjectContainer className={styles.homelab}>
         <ProjectHeader
-          title="Homelab"
+        title="Homelab dashboard"
           description="Live system telemetry from my Dashdot dashboard."
         />
         <ProjectSection padding="none">

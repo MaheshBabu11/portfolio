@@ -96,7 +96,9 @@ export const action = async ({ request }) => {
   }
 
   if (auth.isAuthenticated) {
-    return redirect('/homelab', { headers: { 'Cache-Control': 'no-store' } });
+    return redirect('/homelab/dashboard', {
+      headers: { 'Cache-Control': 'no-store' },
+    });
   }
 
   const password = formData.get('password');
@@ -116,7 +118,7 @@ export const action = async ({ request }) => {
 
   auth.session.set('homelabAuthenticated', true);
 
-  return redirect('/homelab', {
+  return redirect('/homelab/dashboard', {
     headers: {
       'Cache-Control': 'no-store',
       'Set-Cookie': await auth.storage.commitSession(auth.session),

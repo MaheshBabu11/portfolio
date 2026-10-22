@@ -25,7 +25,7 @@ This repository contains the source code for [maheshbabu11.dev](https://maheshba
 - Interactive 3D project previews, animated backgrounds, and a photo gallery.
 - Contact form powered by EmailJS.
 - Searchable command palette for pages, articles, and site controls.
-- Password-protected `/homelab` dashboard with Dashdot system metrics and live HTTP checks for Paperless-ngx, Portainer, Immich, and Vaultwarden.
+- Public `/homelab` overview of the self-hosted services and monitoring setup, alongside the password-protected `/homelab/dashboard` with Dashdot metrics and live HTTP checks for Paperless-ngx, Portainer, Immich, Vaultwarden, and Homarr.
 
 ## Featured projects
 
@@ -81,7 +81,7 @@ npm run build
 | `SESSION_SECRET` | Signs the visitor’s preferred light/dark theme cookie. |
 | `DATABASE_URL` | Neon PostgreSQL connection used for global design settings and the homepage view counter. |
 | `DEFAULT_DESIGN` | Initial site design: `murim`, `nano`, or `classic`. |
-| `ADMIN_PASSWORD` | Initial password for `/admin` and `/homelab`; its scrypt hash is stored in Neon. |
+| `ADMIN_PASSWORD` | Initial password for `/admin` and `/homelab/dashboard`; its scrypt hash is stored in Neon. |
 | `ADMIN_SESSION_SECRET` | Optional initial admin/homelab session signing secret. If omitted, one is generated and stored in Neon. |
 | `EMAILJS_SERVICE_ID` | EmailJS service used by the contact form. |
 | `EMAILJS_TEMPLATE_ID` | EmailJS template used by the contact form. |
@@ -96,7 +96,7 @@ The contact form sends messages through EmailJS. Configure the template with `to
 
 ### Homelab dashboard
 
-The `/homelab` page uses the admin password to create a separate HTTP-only session cookie that expires after one hour. The page and its data endpoints require this session.
+The public `/homelab` page describes the monitored services and monitoring flow without exposing their addresses or live system data; Homarr is intentionally linked as a public service. The `/homelab/dashboard` page uses the admin password to create a separate HTTP-only session cookie that expires after one hour. The dashboard and its data endpoints require this session.
 
 System metrics are fetched server-side from Dashdot’s documented `/info` and `/load/*` endpoints every 30 seconds. Service availability checks for Paperless-ngx, Portainer, Immich, and Vaultwarden also run server-side every 30 seconds. The page is private to authenticated visitors; no service API credentials are required.
 
