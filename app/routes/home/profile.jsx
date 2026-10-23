@@ -1,6 +1,6 @@
-import profileImgLarge from '~/assets/profile-large.jpeg';
+import profileImgLarge from '~/assets/profile-large.png';
 import profileImgPlaceholder from '~/assets/profile-placeholder.png';
-import profileImg from '~/assets/profile.jpeg';
+import profileImg from '~/assets/profile.png';
 import { Button } from '~/components/button';
 import { DecoderText } from '~/components/decoder-text';
 import { Divider } from '~/components/divider';
@@ -99,7 +99,7 @@ export const Profile = ({ id, visible, sectionRef }) => {
               width={960}
               height={1280}
               sizes={`(max-width: ${media.mobile}px) 100vw, 480px`}
-              alt="Me smiling like a goofball at the Qwilr office in Sydney"
+              alt="Me casually chilling behing home"
             />
             <svg className={styles.svg} data-visible={visible} viewBox="0 0 136 766">
               <use href={`${katakana}#katakana-profile`} />

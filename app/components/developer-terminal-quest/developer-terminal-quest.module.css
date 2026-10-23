@@ -35,6 +35,11 @@
   }
 }
 
+:global(body[data-mobile-nav-open='true']) .questTrigger {
+  visibility: hidden;
+  pointer-events: none;
+}
+
 .questDialog {
   width: min(1000px, calc(100vw - 32px));
   max-width: none;

@@ -11,9 +11,10 @@ export const Icon = forwardRef(({ icon, className, size, ...rest }, ref) => {
       className={classes(styles.icon, className)}
       width={size || 24}
       height={size || 24}
+      viewBox="0 0 24 24"
       {...rest}
     >
-      <use href={`${sprites}#${icon}`} />
+      <use href={`${sprites}#${icon}`} x="0" y="0" width="24" height="24" />
     </svg>
   );
 });

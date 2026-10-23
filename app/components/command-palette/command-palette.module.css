@@ -39,6 +39,11 @@
     }
   }
 
+  :global(body[data-mobile-nav-open='true']) .trigger {
+    visibility: hidden;
+    pointer-events: none;
+  }
+
   .triggerIcon {
     transform: translate(-1px, -1px);
   }

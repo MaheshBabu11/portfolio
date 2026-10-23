@@ -26,6 +26,13 @@ export const Navbar = () => {
   const scrollToHash = useScrollToHash();
 
   useEffect(() => {
+    document.body.dataset.mobileNavOpen = String(menuOpen);
+    return () => {
+      delete document.body.dataset.mobileNavOpen;
+    };
+  }, [menuOpen]);
+
+  useEffect(() => {
     // Prevent ssr mismatch by storing this in state
     setCurrent(`${location.pathname}${location.hash}`);
   }, [location]);

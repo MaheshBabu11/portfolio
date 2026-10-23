@@ -282,7 +282,7 @@ export function DeveloperTerminalQuest() {
         aria-label="Open Developer Terminal Quest"
         aria-haspopup="dialog"
         aria-expanded={isOpen}
-        title="Developer Terminal Quest"
+        title="Play a game"
         onClick={() => setIsOpen(true)}
       >
         <Icon icon="gamepad" size={21} />
