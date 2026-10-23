@@ -18,6 +18,7 @@ import { Intro } from './intro';
 import { Profile } from './profile';
 import { ProjectSummary } from './project-summary';
 import { Recommendations } from './recommendations';
+import { DeveloperTerminalQuest } from '~/components/developer-terminal-quest';
 import { useLoaderData } from '@remix-run/react';
 import { useEffect, useRef, useState } from 'react';
 import { Button } from '~/components/button';
@@ -255,6 +256,7 @@ export const Home = () => {
         <Recommendations />
         <Footer />
       </div>
+      <DeveloperTerminalQuest />
       {showScrollToTop && (
         <Button
           className={styles.scrollToTop}
